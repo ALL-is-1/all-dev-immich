@@ -1,0 +1,137 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 191,
+      "category": "port",
+      "source_file": "server/Dockerfile",
+      "value": "2283",
+      "confidence": 0.9,
+      "notes": "Port exposed for the server to listen on"
+    },
+    {
+      "id": 1328,
+      "category": "port",
+      "source_file": "packages/e2e-auth-server/Dockerfile",
+      "value": "2286",
+      "confidence": 0.9,
+      "notes": "Exposed port in the Dockerfile, indicating the service listens on port 2286, which should be exposed in snap's port configuration if running as a service"
+    },
+    {
+      "id": 219,
+      "category": "port",
+      "source_file": "server/package.json",
+      "value": "9230",
+      "confidence": 0.85,
+      "notes": "Port used in debug mode for socket.io debugging as specified in the 'start:debug' script."
+    },
+    {
+      "id": 220,
+      "category": "port",
+      "source_file": "server/package.json",
+      "value": "5432",
+      "confidence": 0.85,
+      "notes": "Default PostgreSQL port used in database connection strings (e.g., in migration scripts)."
+    },
+    {
+      "id": 313,
+      "category": "port",
+      "source_file": "web/package.json",
+      "value": "3000",
+      "confidence": 0.85,
+      "notes": "Development server listens on port 3000, which may need to be exposed in Snap's port configuration for accessibility."
+    },
+    {
+      "id": 162,
+      "category": "port",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "no port defined",
+      "confidence": 0.75,
+      "notes": "No ports exposed or bound in the configuration"
+    },
+    {
+      "id": 962,
+      "category": "port",
+      "source_file": ".vscode/launch.json",
+      "value": "9231",
+      "confidence": 0.75,
+      "notes": "Port used for attaching to Immich API Server in debug configuration"
+    },
+    {
+      "id": 991,
+      "category": "port",
+      "source_file": ".devcontainer/server/container-start-frontend.sh",
+      "value": "${DEV_PORT}",
+      "confidence": 0.75,
+      "notes": "The development port for the Immich web frontend is dynamically set via environment variable DEV_PORT."
+    },
+    {
+      "id": 1043,
+      "category": "port",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No port configurations or exposure settings found in the file."
+    },
+    {
+      "id": 1220,
+      "category": "port",
+      "source_file": "docker/prometheus.yml",
+      "value": "8081",
+      "confidence": 0.75,
+      "notes": "Port where the immich API service is exposed for Prometheus scraping"
+    },
+    {
+      "id": 1221,
+      "category": "port",
+      "source_file": "docker/prometheus.yml",
+      "value": "8082",
+      "confidence": 0.75,
+      "notes": "Port where the immich microservices are exposed for Prometheus scraping"
+    },
+    {
+      "id": 67,
+      "category": "port",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "8080",
+      "confidence": 0.5,
+      "notes": "Default port used for Immich web interface (inferred from config structure)"
+    },
+    {
+      "id": 90,
+      "category": "port",
+      "source_file": "server/src/config.ts",
+      "value": "3003",
+      "confidence": 0.5,
+      "notes": "Default port used in machine learning URL if environment variable is not set"
+    },
+    {
+      "id": 547,
+      "category": "port",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "6379",
+      "confidence": 0.5,
+      "notes": "Redis port configured for the application"
+    },
+    {
+      "id": 572,
+      "category": "port",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "immich_port",
+      "confidence": 0.5,
+      "notes": "Configuration for the port used by Immich ML, dynamically resolved from non_prefixed_settings.immich_port."
+    },
+    {
+      "id": 599,
+      "category": "port",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "2285",
+      "confidence": 0.5,
+      "notes": "Port on which the local dev server is accessible via http://127.0.0.1:2285."
+    }
+  ]
+}

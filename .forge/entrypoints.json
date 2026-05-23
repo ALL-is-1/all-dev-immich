@@ -1,0 +1,793 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 166,
+      "category": "entrypoint",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "run.py",
+      "confidence": 0.95,
+      "notes": "The main entrypoint script for the machine learning model export pipeline, responsible for converting ONNX and PyTorch models to TFLite and ARMNN formats."
+    },
+    {
+      "id": 694,
+      "category": "entrypoint",
+      "source_file": "server/bin/start.sh",
+      "value": "server/bin/start.sh",
+      "confidence": 0.95,
+      "notes": "The main entrypoint script for the Immich server, responsible for initializing environment variables, loading credentials from files, and launching the Node.js server."
+    },
+    {
+      "id": 1056,
+      "category": "entrypoint",
+      "source_file": "mobile/ios/Runner/Runner.entitlements",
+      "value": "mobile/ios/Runner/Runner.entitlements",
+      "confidence": 0.95,
+      "notes": "An iOS entitlement file used to configure app-specific permissions like associated domains and network access."
+    },
+    {
+      "id": 1162,
+      "category": "entrypoint",
+      "source_file": "mobile/ios/Runner/RunnerProfile.entitlements",
+      "value": "mobile/ios/Runner/RunnerProfile.entitlements",
+      "confidence": 0.95,
+      "notes": "An iOS entitlement file used by Flutter/React Native apps to define app-specific permissions and capabilities, such as associated domains and network access."
+    },
+    {
+      "id": 1257,
+      "category": "entrypoint",
+      "source_file": "packages/e2e-auth-server/startup.ts",
+      "value": "startup.ts",
+      "confidence": 0.95,
+      "notes": "The entrypoint script for the e2e-auth-server service, responsible for initializing the authentication server and managing lifecycle via teardown on exit."
+    },
+    {
+      "id": 1338,
+      "category": "entrypoint",
+      "source_file": "mobile/ios/Runner/Runner-Bridging-Header.h",
+      "value": "mobile/ios/Runner/Runner-Bridging-Header.h",
+      "confidence": 0.95,
+      "notes": "This file is a bridging header used in iOS Flutter apps to integrate platform-specific code, and may be relevant during build-time configuration for iOS apps in a snap package."
+    },
+    {
+      "id": 177,
+      "category": "entrypoint",
+      "source_file": "server/Dockerfile",
+      "value": "tini",
+      "confidence": 0.9,
+      "notes": "Used as a wrapper for the entrypoint to ensure proper process management"
+    },
+    {
+      "id": 178,
+      "category": "entrypoint",
+      "source_file": "server/Dockerfile",
+      "value": "/bin/bash -c",
+      "confidence": 0.9,
+      "notes": "The entrypoint invokes a shell command to start the application"
+    },
+    {
+      "id": 179,
+      "category": "entrypoint",
+      "source_file": "server/Dockerfile",
+      "value": "start.sh",
+      "confidence": 0.9,
+      "notes": "The actual script to start the application is defined in start.sh"
+    },
+    {
+      "id": 1134,
+      "category": "entrypoint",
+      "source_file": "packages/cli/Dockerfile",
+      "value": "node",
+      "confidence": 0.9,
+      "notes": "The entrypoint command specified in the Dockerfile, indicating the runtime command to start the application."
+    },
+    {
+      "id": 1135,
+      "category": "entrypoint",
+      "source_file": "packages/cli/Dockerfile",
+      "value": "/usr/src/app/packages/cli/dist",
+      "confidence": 0.9,
+      "notes": "The path to the compiled CLI application distribution, likely the entry point for the application execution."
+    },
+    {
+      "id": 1327,
+      "category": "entrypoint",
+      "source_file": "packages/e2e-auth-server/Dockerfile",
+      "value": "pnpm run start",
+      "confidence": 0.9,
+      "notes": "The command to start the application as the entrypoint in the Dockerfile, which may be mirrored in snap's entrypoint configuration"
+    },
+    {
+      "id": 217,
+      "category": "entrypoint",
+      "source_file": "server/package.json",
+      "value": "start:dev",
+      "confidence": 0.85,
+      "notes": "Development script that starts the application in watch mode with debugging capabilities."
+    },
+    {
+      "id": 218,
+      "category": "entrypoint",
+      "source_file": "server/package.json",
+      "value": "start:debug",
+      "confidence": 0.85,
+      "notes": "Debug mode entrypoint with specific port binding (9230) for debugging via socket.io."
+    },
+    {
+      "id": 303,
+      "category": "entrypoint",
+      "source_file": "web/package.json",
+      "value": "vite dev --host 0.0.0.0 --port 3000",
+      "confidence": 0.85,
+      "notes": "Development server entrypoint configured in package.json scripts, indicating a Vite-based development server with host and port settings."
+    },
+    {
+      "id": 648,
+      "category": "entrypoint",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "immich_ml",
+      "confidence": 0.85,
+      "notes": "Module entry point for the package"
+    },
+    {
+      "id": 664,
+      "category": "entrypoint",
+      "source_file": "packages/cli/package.json",
+      "value": "immich",
+      "confidence": 0.85,
+      "notes": "CLI entry point defined in the bin field, points to './bin/immich' for execution"
+    },
+    {
+      "id": 824,
+      "category": "entrypoint",
+      "source_file": "docs/package.json",
+      "value": "docusaurus start --port 3005",
+      "confidence": 0.85,
+      "notes": "The start script defines a command to launch the Docusaurus development server on port 3005."
+    },
+    {
+      "id": 1035,
+      "category": "entrypoint",
+      "source_file": "packages/plugin-sdk/package.json",
+      "value": "index.js",
+      "confidence": 0.85,
+      "notes": "Main entry point for the plugin SDK, exported as the primary module"
+    },
+    {
+      "id": 1036,
+      "category": "entrypoint",
+      "source_file": "packages/plugin-sdk/package.json",
+      "value": "host-functions.js",
+      "confidence": 0.85,
+      "notes": "Host functions exposed to the runtime via the SDK, used for plugin communication"
+    },
+    {
+      "id": 1083,
+      "category": "entrypoint",
+      "source_file": "package.json",
+      "value": "format",
+      "confidence": 0.85,
+      "notes": "Script for formatting code in the i18n directory using Prettier"
+    },
+    {
+      "id": 1084,
+      "category": "entrypoint",
+      "source_file": "package.json",
+      "value": "format:fix",
+      "confidence": 0.85,
+      "notes": "Script for fixing formatting issues in the i18n directory using Prettier"
+    },
+    {
+      "id": 1108,
+      "category": "entrypoint",
+      "source_file": "packages/e2e-auth-server/package.json",
+      "value": "tsx startup.ts",
+      "confidence": 0.85,
+      "notes": "The start script defines the entrypoint for the application, using tsx to execute the startup file."
+    },
+    {
+      "id": 1117,
+      "category": "entrypoint",
+      "source_file": "packages/sdk/package.json",
+      "value": "./build/index.js",
+      "confidence": 0.85,
+      "notes": "Main entry point for the SDK module"
+    },
+    {
+      "id": 1118,
+      "category": "entrypoint",
+      "source_file": "packages/sdk/package.json",
+      "value": "./build/index.d.ts",
+      "confidence": 0.85,
+      "notes": "Type definition file for the SDK"
+    },
+    {
+      "id": 1183,
+      "category": "entrypoint",
+      "source_file": "packages/plugin-core/package.json",
+      "value": "src/index.ts",
+      "confidence": 0.85,
+      "notes": "The main entry point for the plugin, indicating the TypeScript file that serves as the primary module entry."
+    },
+    {
+      "id": 1,
+      "category": "entrypoint",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "mobile/drift_schemas",
+      "confidence": 0.75,
+      "notes": "Indicates the package or module location for drift schema definitions, likely used in a mobile application's data model layer."
+    },
+    {
+      "id": 83,
+      "category": "entrypoint",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "wasmPath",
+      "confidence": 0.75,
+      "notes": "The entrypoint for the plugin is the WebAssembly file"
+    },
+    {
+      "id": 161,
+      "category": "entrypoint",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "no entrypoint defined",
+      "confidence": 0.75,
+      "notes": "No command or entrypoint specified in the config"
+    },
+    {
+      "id": 408,
+      "category": "entrypoint",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "main.dart",
+      "confidence": 0.75,
+      "notes": "Primary entry point for Flutter app (implied by Flutter structure)"
+    },
+    {
+      "id": 501,
+      "category": "entrypoint",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "./bin/generate-dart-sdk.sh",
+      "confidence": 0.75,
+      "notes": "Script entrypoint for generating Dart SDK code from OpenAPI specs"
+    },
+    {
+      "id": 591,
+      "category": "entrypoint",
+      "source_file": "server/bin/get-cpus.sh",
+      "value": "get-cpus.sh",
+      "confidence": 0.75,
+      "notes": "A shell script used to detect CPU core count based on cgroup configuration or fallback to /proc/cpuinfo"
+    },
+    {
+      "id": 719,
+      "category": "entrypoint",
+      "source_file": "packages/plugin-core/tsconfig.json",
+      "value": "src/index.d.ts",
+      "confidence": 0.75,
+      "notes": "Type definitions from src/index.d.ts are included in the compilation, suggesting it may serve as a primary entry point or interface"
+    },
+    {
+      "id": 722,
+      "category": "entrypoint",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "/bin/sh ./git_push.sh",
+      "confidence": 0.75,
+      "notes": "Script is executed as entrypoint; could be part of a snap's post-install or deployment workflow"
+    },
+    {
+      "id": 815,
+      "category": "entrypoint",
+      "source_file": "packages/cli/mise.toml",
+      "value": "pnpm install --filter @immich/cli --frozen-lockfile",
+      "confidence": 0.75,
+      "notes": "Installation task that installs a specific package filter with frozen lockfile"
+    },
+    {
+      "id": 851,
+      "category": "entrypoint",
+      "source_file": "e2e/mise.toml",
+      "value": "pnpm install --filter immich-e2e --frozen-lockfile",
+      "confidence": 0.75,
+      "notes": "Configured installation task for immich-e2e package via pnpm"
+    },
+    {
+      "id": 870,
+      "category": "entrypoint",
+      "source_file": "mobile/packages/ui/showcase/pubspec.yaml",
+      "value": "flutter",
+      "confidence": 0.75,
+      "notes": "The app is a Flutter application, so the entrypoint is determined by Flutter's app lifecycle"
+    },
+    {
+      "id": 894,
+      "category": "entrypoint",
+      "source_file": "mobile/ios/ci_scripts/ci_post_clone.sh",
+      "value": "ci_post_clone.sh",
+      "confidence": 0.75,
+      "notes": "The script serves as an entrypoint for post-clone operations in the CI pipeline, setting up Flutter and CocoaPods dependencies for iOS development."
+    },
+    {
+      "id": 964,
+      "category": "entrypoint",
+      "source_file": ".vscode/launch.json",
+      "value": "${workspaceFolder}/packages/cli/dist/index.js",
+      "confidence": 0.75,
+      "notes": "Launch entrypoint for Immich CLI command in debug mode"
+    },
+    {
+      "id": 971,
+      "category": "entrypoint",
+      "source_file": "mobile/scripts/check_i18n_keys.py",
+      "value": "/usr/bin/env python3",
+      "confidence": 0.75,
+      "notes": "Script starts with a Python 3 interpreter invocation, indicating it runs as a Python script during build or runtime."
+    },
+    {
+      "id": 980,
+      "category": "entrypoint",
+      "source_file": "server/tsconfig.json",
+      "value": "src",
+      "confidence": 0.75,
+      "notes": "Includes the 'src' directory in TypeScript compilation, indicating the source code location for the application."
+    },
+    {
+      "id": 981,
+      "category": "entrypoint",
+      "source_file": "server/tsconfig.json",
+      "value": "test",
+      "confidence": 0.75,
+      "notes": "Includes the 'test' directory in TypeScript compilation, indicating test code is part of the build process."
+    },
+    {
+      "id": 989,
+      "category": "entrypoint",
+      "source_file": ".devcontainer/server/container-start-frontend.sh",
+      "value": "pnpm --filter immich-web exec vite dev --host 0.0.0.0 --port \"${DEV_PORT}\"",
+      "confidence": 0.75,
+      "notes": "The entrypoint script starts the Vite development server for the Immich web frontend with host and port configuration."
+    },
+    {
+      "id": 1004,
+      "category": "entrypoint",
+      "source_file": "mobile/build.yaml",
+      "value": "$default",
+      "confidence": 0.75,
+      "notes": "Default target configuration for the build process, using modular and analyzer builders"
+    },
+    {
+      "id": 1015,
+      "category": "entrypoint",
+      "source_file": ".devcontainer/server/container-start-backend.sh",
+      "value": "pnpm --filter immich exec nest start --debug \"0.0.0.0:9230\" --watch",
+      "confidence": 0.75,
+      "notes": "The command executed by the Nest API Server to start the application, including debug and watch modes"
+    },
+    {
+      "id": 1023,
+      "category": "entrypoint",
+      "source_file": ".github/labeler.yml",
+      "value": "cli",
+      "confidence": 0.75,
+      "notes": "Configures handling of changed files in the CLI component, targeting files in packages/cli/src/**"
+    },
+    {
+      "id": 1024,
+      "category": "entrypoint",
+      "source_file": ".github/labeler.yml",
+      "value": "documentation",
+      "confidence": 0.75,
+      "notes": "Configures handling of changed files in documentation, targeting files in docs/docs/** and docs/src/** and docs/static/**"
+    },
+    {
+      "id": 1025,
+      "category": "entrypoint",
+      "source_file": ".github/labeler.yml",
+      "value": "web",
+      "confidence": 0.75,
+      "notes": "Configures handling of changed files in the web component, targeting files in web/src/** and web/static/**"
+    },
+    {
+      "id": 1026,
+      "category": "entrypoint",
+      "source_file": ".github/labeler.yml",
+      "value": "mobile",
+      "confidence": 0.75,
+      "notes": "Configures handling of changed files in the mobile component, targeting files in mobile/lib/** and mobile/test/**"
+    },
+    {
+      "id": 1027,
+      "category": "entrypoint",
+      "source_file": ".github/labeler.yml",
+      "value": "server",
+      "confidence": 0.75,
+      "notes": "Configures handling of changed files in the server component, targeting files in server/src/** and server/test/**"
+    },
+    {
+      "id": 1028,
+      "category": "entrypoint",
+      "source_file": ".github/labeler.yml",
+      "value": "machine-learning",
+      "confidence": 0.75,
+      "notes": "Configures handling of changed files in the machine learning component, targeting files in machine-learning/**"
+    },
+    {
+      "id": 1039,
+      "category": "entrypoint",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No entrypoint configuration found in the file."
+    },
+    {
+      "id": 1048,
+      "category": "entrypoint",
+      "source_file": "web/tsconfig.json",
+      "value": "vite.config.ts",
+      "confidence": 0.75,
+      "notes": "Excluded from compilation, indicating a Vite configuration file that may be used as a build-time entrypoint"
+    },
+    {
+      "id": 1061,
+      "category": "entrypoint",
+      "source_file": "machine-learning/mise.toml",
+      "value": "uv run ruff check immich_ml",
+      "confidence": 0.75,
+      "notes": "Command used in linting task to validate Python code style and correctness"
+    },
+    {
+      "id": 1062,
+      "category": "entrypoint",
+      "source_file": "machine-learning/mise.toml",
+      "value": "uv run pytest --cov=immich_ml --cov-report term-missing",
+      "confidence": 0.75,
+      "notes": "Command used in testing task to run unit tests with coverage reporting"
+    },
+    {
+      "id": 1063,
+      "category": "entrypoint",
+      "source_file": "machine-learning/mise.toml",
+      "value": "uv run ruff format immich_ml",
+      "confidence": 0.75,
+      "notes": "Command used in formatting task to automatically format Python code"
+    },
+    {
+      "id": 1064,
+      "category": "entrypoint",
+      "source_file": "machine-learning/mise.toml",
+      "value": "uv run mypy --strict immich_ml/",
+      "confidence": 0.75,
+      "notes": "Command used in type checking task to validate Python type annotations"
+    },
+    {
+      "id": 1098,
+      "category": "entrypoint",
+      "source_file": "docs/mise.toml",
+      "value": "docusaurus --port 3005",
+      "confidence": 0.75,
+      "notes": "Defined as the start command for the service, running Docusaurus on port 3005"
+    },
+    {
+      "id": 1222,
+      "category": "entrypoint",
+      "source_file": "docker/prometheus.yml",
+      "value": "prometheus.yml",
+      "confidence": 0.75,
+      "notes": "Configuration file used to define scrape targets for Prometheus monitoring"
+    },
+    {
+      "id": 1233,
+      "category": "entrypoint",
+      "source_file": "mobile/openapi/.travis.yml",
+      "value": "pub run test",
+      "confidence": 0.75,
+      "notes": "The command executed during the Travis CI build to run tests using Dart's pub"
+    },
+    {
+      "id": 1271,
+      "category": "entrypoint",
+      "source_file": "i18n/kmr.json",
+      "value": "about",
+      "confidence": 0.75,
+      "notes": "Translates the 'about' string to '\u062f\u06d5\u0631\u0628\u0627\u0631\u06d5' in Khowar, indicating language support for user interface elements."
+    },
+    {
+      "id": 1272,
+      "category": "entrypoint",
+      "source_file": "i18n/kmr.json",
+      "value": "account",
+      "confidence": 0.75,
+      "notes": "Translates the 'account' string to '\u0647\u06d5\u0698\u0645\u0627\u0631' in Khowar, indicating language support for user account-related UI components."
+    },
+    {
+      "id": 1273,
+      "category": "entrypoint",
+      "source_file": "i18n/kmr.json",
+      "value": "account_settings",
+      "confidence": 0.75,
+      "notes": "Translates the 'account_settings' string to '\u0695\u06ce\u06a9\u062e\u0633\u062a\u0646\u06cc \u0647\u06d5\u0698\u0645\u0627\u0631' in Khowar, indicating language support for account configuration UI."
+    },
+    {
+      "id": 1274,
+      "category": "entrypoint",
+      "source_file": "i18n/kmr.json",
+      "value": "acknowledge",
+      "confidence": 0.75,
+      "notes": "Translates the 'acknowledge' string to '\u062f\u0627\u0646\u067e\u06ce\u062f\u0627\u0646\u0627\u0646' in Khowar, indicating language support for acknowledgment UI elements."
+    },
+    {
+      "id": 1296,
+      "category": "entrypoint",
+      "source_file": "machine-learning/immich_ml/log_conf.json",
+      "value": "gunicorn.error",
+      "confidence": 0.75,
+      "notes": "Indicates a logging configuration targeting Gunicorn's error logger, suggesting the application uses Gunicorn as a WSGI server and logs errors to console via a custom handler."
+    },
+    {
+      "id": 1049,
+      "category": "entrypoint",
+      "source_file": "packages/cli/README.md",
+      "value": "node dist/index.js",
+      "confidence": 0.6,
+      "notes": "The command to run the Immich CLI after building the application"
+    },
+    {
+      "id": 1258,
+      "category": "entrypoint",
+      "source_file": "docs/mise.lock",
+      "value": "wrangler",
+      "confidence": 0.6,
+      "notes": "The tool 'wrangler' is specified as the backend for the Mise configuration, indicating it may be used as an entrypoint for runtime operations."
+    },
+    {
+      "id": 1260,
+      "category": "entrypoint",
+      "source_file": "mobile/android/metadata/en-US/full_description.txt",
+      "value": "client app for Immich Server",
+      "confidence": 0.6,
+      "notes": "The app is a client that requires a separate Immich Server to be running and managed."
+    },
+    {
+      "id": 1333,
+      "category": "entrypoint",
+      "source_file": "web/static/robots.txt",
+      "value": "robots.txt",
+      "confidence": 0.6,
+      "notes": "A static file serving robots.txt for web crawling rules, indicating public access to specific paths like /share/, /s/, and /api/assets/ while disallowing all other paths."
+    },
+    {
+      "id": 12,
+      "category": "entrypoint",
+      "source_file": "mise.lock",
+      "value": "extism-cli",
+      "confidence": 0.5,
+      "notes": "Inferred from tool 'github:extism/cli' usage, likely used as entrypoint for invoking the Extism CLI tool"
+    },
+    {
+      "id": 103,
+      "category": "entrypoint",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "main.py",
+      "confidence": 0.5,
+      "notes": "The main entrypoint for the application, which initializes FastAPI and defines routing for inference tasks."
+    },
+    {
+      "id": 121,
+      "category": "entrypoint",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "immich_ml.config.log",
+      "confidence": 0.5,
+      "notes": "Logging system initialized and used for debugging during shared library loading and model operations"
+    },
+    {
+      "id": 230,
+      "category": "entrypoint",
+      "source_file": "server/src/main.ts",
+      "value": "main",
+      "confidence": 0.5,
+      "notes": "The entrypoint for the application is defined as 'main', which initializes the Workers class and starts the server lifecycle."
+    },
+    {
+      "id": 279,
+      "category": "entrypoint",
+      "source_file": "packages/e2e-auth-server/auth-server.ts",
+      "value": "setup",
+      "confidence": 0.5,
+      "notes": "The exported `setup` function is the entrypoint for the authentication server, likely used as the snap entrypoint"
+    },
+    {
+      "id": 490,
+      "category": "entrypoint",
+      "source_file": "deployment/mise.lock",
+      "value": "backend",
+      "confidence": 0.5,
+      "notes": "Configures backend services for opentofu and terragrunt using aqua:backend format (e.g., aqua:opentofu/opentofu, aqua:gruntwork-io/terragrunt)"
+    },
+    {
+      "id": 570,
+      "category": "entrypoint",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "python -m gunicorn immich_ml.main:app",
+      "confidence": 0.5,
+      "notes": "The entrypoint command launched by the application, using Gunicorn to serve the Immich ML application."
+    },
+    {
+      "id": 581,
+      "category": "entrypoint",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "com.apple.share-services",
+      "confidence": 0.5,
+      "notes": "Specifies the extension point identifier for the share extension, indicating integration with Apple's share services."
+    },
+    {
+      "id": 597,
+      "category": "entrypoint",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "playwright.config.ts",
+      "confidence": 0.5,
+      "notes": "The configuration file for Playwright test setup, used to define test execution environment and server behavior."
+    },
+    {
+      "id": 769,
+      "category": "entrypoint",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "login",
+      "confidence": 0.5,
+      "notes": "Defined as an async function that handles authentication login flow using provided URL, key, and options"
+    },
+    {
+      "id": 770,
+      "category": "entrypoint",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "logout",
+      "confidence": 0.5,
+      "notes": "Defined as an async function that handles logout by removing the authentication file"
+    },
+    {
+      "id": 835,
+      "category": "entrypoint",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "flutterSdkPath",
+      "confidence": 0.5,
+      "notes": "Configures the Flutter SDK path dynamically from local.properties file"
+    },
+    {
+      "id": 886,
+      "category": "entrypoint",
+      "source_file": "server/src/middleware/websocket.adapter.ts",
+      "value": "WebSocketAdapter",
+      "confidence": 0.5,
+      "notes": "Custom adapter class extending IoAdapter for socket.io with Redis"
+    },
+    {
+      "id": 893,
+      "category": "entrypoint",
+      "source_file": "server/src/queries/api.key.repository.sql",
+      "value": "api.key.repository.sql",
+      "confidence": 0.5,
+      "notes": "This file may be referenced during the application's data access layer, potentially loaded at runtime by a database query handler or ORM layer."
+    },
+    {
+      "id": 946,
+      "category": "entrypoint",
+      "source_file": "server/test/vitest.config.medium.mjs",
+      "value": "test/medium/**/*.spec.ts",
+      "confidence": 0.5,
+      "notes": "Test file pattern included in the Vitest configuration for medium test suite"
+    },
+    {
+      "id": 947,
+      "category": "entrypoint",
+      "source_file": "server/test/vitest.config.medium.mjs",
+      "value": "test/medium/globalSetup.ts",
+      "confidence": 0.5,
+      "notes": "Global setup file specified for test environment initialization"
+    },
+    {
+      "id": 954,
+      "category": "entrypoint",
+      "source_file": "server/bin/immich-healthcheck",
+      "value": "server/bin/immich-healthcheck",
+      "confidence": 0.5,
+      "notes": "A healthcheck script that verifies the Immich server is running by pinging the API endpoint"
+    },
+    {
+      "id": 1054,
+      "category": "entrypoint",
+      "source_file": "server/src/commands/version.command.ts",
+      "value": "version",
+      "confidence": 0.5,
+      "notes": "The command 'version' is defined in the NestJS application to print the Immich version, which may be used as an entrypoint in snap packaging for version checking."
+    },
+    {
+      "id": 1089,
+      "category": "entrypoint",
+      "source_file": "web/bin/immich-web",
+      "value": "web/bin/immich-web",
+      "confidence": 0.5,
+      "notes": "The entrypoint script for the Immich Web application, responsible for building the SDK and starting the Vite development server."
+    },
+    {
+      "id": 1120,
+      "category": "entrypoint",
+      "source_file": "mobile/android/app/src/debug/AndroidManifest.xml",
+      "value": "Immich-Debug",
+      "confidence": 0.5,
+      "notes": "Application label set to 'Immich-Debug' in the AndroidManifest.xml, indicating a debug build configuration."
+    },
+    {
+      "id": 1122,
+      "category": "entrypoint",
+      "source_file": "mobile/ios/WidgetExtension/Info.plist",
+      "value": "com.apple.widgetkit-extension",
+      "confidence": 0.5,
+      "notes": "Specifies the extension point identifier for the widget extension, indicating integration with Apple's WidgetKit framework."
+    },
+    {
+      "id": 1195,
+      "category": "entrypoint",
+      "source_file": "mobile/android/app/src/profile/AndroidManifest.xml",
+      "value": "android.permission.INTERNET",
+      "confidence": 0.5,
+      "notes": "The AndroidManifest.xml declares an internet permission, which may be required for Flutter app communication, such as hot reload or remote debugging. This permission is relevant for runtime behavior but does not directly affect snap packaging configuration."
+    },
+    {
+      "id": 1198,
+      "category": "entrypoint",
+      "source_file": "mobile/android/gradle/wrapper/gradle-wrapper.properties",
+      "value": "gradle-wrapper.properties",
+      "confidence": 0.5,
+      "notes": "Configures Gradle wrapper behavior, including URL and timeout settings for build execution"
+    },
+    {
+      "id": 1285,
+      "category": "entrypoint",
+      "source_file": "server/src/queries/database.repository.sql",
+      "value": "database.repository.sql",
+      "confidence": 0.5,
+      "notes": "Auto-generated SQL file may be loaded during service startup or query execution, indicating integration with database layer"
+    },
+    {
+      "id": 1287,
+      "category": "entrypoint",
+      "source_file": "web/.browserslistrc",
+      "value": "0.2% and last 4 major versions",
+      "confidence": 0.5,
+      "notes": "This configuration suggests a target audience of 0.2% of users and the latest 4 major browser versions, which may influence the web application's build and runtime environment."
+    },
+    {
+      "id": 1302,
+      "category": "entrypoint",
+      "source_file": "server/bin/immich-admin",
+      "value": "start.sh immich-admin \"$@\"",
+      "confidence": 0.5,
+      "notes": "The script invokes a startup script to launch the immich-admin service, indicating the entrypoint for the snap application."
+    },
+    {
+      "id": 1317,
+      "category": "entrypoint",
+      "source_file": "server/bin/immich-dev",
+      "value": "server/bin/immich-dev",
+      "confidence": 0.5,
+      "notes": "The development entrypoint script that starts the Immich application in development mode"
+    },
+    {
+      "id": 1323,
+      "category": "entrypoint",
+      "source_file": "server/src/queries/system.metadata.repository.sql",
+      "value": "system.metadata.repository.sql",
+      "confidence": 0.5,
+      "notes": "A SQL file used for system metadata operations, likely part of a database interaction layer in the application."
+    },
+    {
+      "id": 1341,
+      "category": "entrypoint",
+      "source_file": "machine-learning/.python-version",
+      "value": "3.13",
+      "confidence": 0.5,
+      "notes": "Specifies the Python version required by the application, likely used to configure the Python environment in a snap package."
+    }
+  ]
+}

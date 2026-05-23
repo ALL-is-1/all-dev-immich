@@ -1,0 +1,2801 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 167,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "torch",
+      "confidence": 0.95,
+      "notes": "Required for PyTorch-based model operations, including model loading, tracing, and conversion."
+    },
+    {
+      "id": 168,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "onnx",
+      "confidence": 0.95,
+      "notes": "Needed for loading and manipulating ONNX model files during the export process."
+    },
+    {
+      "id": 169,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "open_clip",
+      "confidence": 0.95,
+      "notes": "Used for CLIP vision model initialization and image encoding operations."
+    },
+    {
+      "id": 170,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "onnx2torch",
+      "confidence": 0.95,
+      "notes": "Required to convert ONNX models to PyTorch for further processing and export."
+    },
+    {
+      "id": 171,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "tinynn.converter",
+      "confidence": 0.95,
+      "notes": "Used for TFLite model conversion from PyTorch JIT-compiled models."
+    },
+    {
+      "id": 1139,
+      "category": "dependency",
+      "source_file": "packages/cli/Dockerfile",
+      "value": "@immich/sdk",
+      "confidence": 0.9,
+      "notes": "A dependency explicitly installed and built via pnpm, indicating it is a core component of the CLI functionality."
+    },
+    {
+      "id": 1140,
+      "category": "dependency",
+      "source_file": "packages/cli/Dockerfile",
+      "value": "@immich/cli",
+      "confidence": 0.9,
+      "notes": "A dependency explicitly installed and built via pnpm, indicating it is the main CLI tool being packaged."
+    },
+    {
+      "id": 1331,
+      "category": "dependency",
+      "source_file": "packages/e2e-auth-server/Dockerfile",
+      "value": "package.json",
+      "confidence": 0.9,
+      "notes": "The application's dependencies are defined in package.json, which must be included in the snap's metadata and build configuration"
+    },
+    {
+      "id": 204,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "postgres",
+      "confidence": 0.85,
+      "notes": "Indicated as a dependency in the package.json, likely for database connectivity in the Immich application."
+    },
+    {
+      "id": 205,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "pg",
+      "confidence": 0.85,
+      "notes": "PostgreSQL client library used for database interactions, likely for managing PostgreSQL connections."
+    },
+    {
+      "id": 206,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "kysely",
+      "confidence": 0.85,
+      "notes": "A SQL query builder and database abstraction layer used for type-safe database operations."
+    },
+    {
+      "id": 207,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "nestjs-otel",
+      "confidence": 0.85,
+      "notes": "OpenTelemetry integration for observability and tracing in the NestJS application."
+    },
+    {
+      "id": 208,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "socket.io",
+      "confidence": 0.85,
+      "notes": "Real-time communication library used for WebSocket-based features in the application."
+    },
+    {
+      "id": 209,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "react",
+      "confidence": 0.85,
+      "notes": "React framework used for rendering email templates and UI components."
+    },
+    {
+      "id": 210,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "sharp",
+      "confidence": 0.85,
+      "notes": "Image processing library used for handling and resizing images in the media processing pipeline."
+    },
+    {
+      "id": 211,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "exiftool-vendored",
+      "confidence": 0.85,
+      "notes": "Used for reading and writing EXIF metadata from images, likely for metadata handling in media files."
+    },
+    {
+      "id": 212,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "nodemailer",
+      "confidence": 0.85,
+      "notes": "Email sending library used for sending notifications and emails via SMTP."
+    },
+    {
+      "id": 213,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "bcrypt",
+      "confidence": 0.85,
+      "notes": "Password hashing library used for securely storing user passwords."
+    },
+    {
+      "id": 214,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "jsonwebtoken",
+      "confidence": 0.85,
+      "notes": "Used for generating and verifying JWT tokens for authentication and authorization."
+    },
+    {
+      "id": 215,
+      "category": "dependency",
+      "source_file": "server/package.json",
+      "value": "redis",
+      "confidence": 0.85,
+      "notes": "Inferred from 'socket.io-redis-adapter' and 'ioredis' usage; used for message queuing and session persistence."
+    },
+    {
+      "id": 306,
+      "category": "dependency",
+      "source_file": "web/package.json",
+      "value": "svelte",
+      "confidence": 0.85,
+      "notes": "Svelte 5.55.8 is used as the core UI framework, indicating a modern, performant frontend architecture."
+    },
+    {
+      "id": 307,
+      "category": "dependency",
+      "source_file": "web/package.json",
+      "value": "vite",
+      "confidence": 0.85,
+      "notes": "Vite is used for development and build processes, which may require integration with Snap's build system for static asset handling."
+    },
+    {
+      "id": 308,
+      "category": "dependency",
+      "source_file": "web/package.json",
+      "value": "svelte-kit",
+      "confidence": 0.85,
+      "notes": "SvelteKit is used for routing and SSR, suggesting the application may require a static or dynamic build step in Snap."
+    },
+    {
+      "id": 612,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "aiocache>=0.12.1,<1.0",
+      "confidence": 0.85,
+      "notes": "Caching library for asynchronous operations"
+    },
+    {
+      "id": 613,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "fastapi>=0.95.2,<1.0",
+      "confidence": 0.85,
+      "notes": "ASGI web framework for building APIs"
+    },
+    {
+      "id": 614,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "gunicorn>=21.1.0",
+      "confidence": 0.85,
+      "notes": "WSGI server for running FastAPI applications"
+    },
+    {
+      "id": 615,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "huggingface-hub>=1.0,<2.0",
+      "confidence": 0.85,
+      "notes": "Library for accessing Hugging Face model repositories"
+    },
+    {
+      "id": 616,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "insightface>=0.7.3,<1.0",
+      "confidence": 0.85,
+      "notes": "Face recognition and detection model library"
+    },
+    {
+      "id": 617,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "numpy>=2.4.0,<3.0",
+      "confidence": 0.85,
+      "notes": "Numerical computing library for array operations"
+    },
+    {
+      "id": 618,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "opencv-python-headless>=4.7.0.72,<5.0",
+      "confidence": 0.85,
+      "notes": "Computer vision library with headless support for background processing"
+    },
+    {
+      "id": 619,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "orjson>=3.9.5",
+      "confidence": 0.85,
+      "notes": "High-performance JSON encoder/decoder"
+    },
+    {
+      "id": 620,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pillow>=12.2,<13",
+      "confidence": 0.85,
+      "notes": "Python Imaging Library for image processing"
+    },
+    {
+      "id": 621,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pydantic>=2.0.0,<3",
+      "confidence": 0.85,
+      "notes": "Data validation and settings management"
+    },
+    {
+      "id": 622,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pydantic-settings>=2.5.2,<3",
+      "confidence": 0.85,
+      "notes": "Settings loading and configuration for Pydantic models"
+    },
+    {
+      "id": 623,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "python-multipart>=0.0.6,<1.0",
+      "confidence": 0.85,
+      "notes": "Support for handling multipart/form-data in HTTP requests"
+    },
+    {
+      "id": 624,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "rich>=13.4.2",
+      "confidence": 0.85,
+      "notes": "Rich text formatting and console output enhancements"
+    },
+    {
+      "id": 625,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "tokenizers>=0.15.0,<1.0",
+      "confidence": 0.85,
+      "notes": "Tokenizer for natural language processing models"
+    },
+    {
+      "id": 626,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "uvicorn[standard]>=0.22.0,<1.0",
+      "confidence": 0.85,
+      "notes": "ASGI server for FastAPI applications"
+    },
+    {
+      "id": 627,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "rapidocr>=3.1.0",
+      "confidence": 0.85,
+      "notes": "OCR engine for document and text recognition"
+    },
+    {
+      "id": 628,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "httpx>=0.24.1",
+      "confidence": 0.85,
+      "notes": "HTTP client for testing and API interactions"
+    },
+    {
+      "id": 629,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pytest>=7.3.1",
+      "confidence": 0.85,
+      "notes": "Testing framework for unit and integration tests"
+    },
+    {
+      "id": 630,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pytest-asyncio>=0.21.0",
+      "confidence": 0.85,
+      "notes": "Support for asynchronous testing"
+    },
+    {
+      "id": 631,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pytest-cov>=4.1.0",
+      "confidence": 0.85,
+      "notes": "Coverage reporting for tests"
+    },
+    {
+      "id": 632,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pytest-mock>=3.11.1",
+      "confidence": 0.85,
+      "notes": "Mocking support for testing"
+    },
+    {
+      "id": 633,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "types-pyyaml>=6.0.12.20241230",
+      "confidence": 0.85,
+      "notes": "Type stubs for PyYAML"
+    },
+    {
+      "id": 634,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "types-requests>=2.32.0.20250306",
+      "confidence": 0.85,
+      "notes": "Type stubs for the requests library"
+    },
+    {
+      "id": 635,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "types-setuptools>=75.8.2.20250305",
+      "confidence": 0.85,
+      "notes": "Type stubs for setuptools"
+    },
+    {
+      "id": 636,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "types-simplejson>=3.20.0.20250218",
+      "confidence": 0.85,
+      "notes": "Type stubs for simplejson"
+    },
+    {
+      "id": 637,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "types-ujson>=5.10.0.20240515",
+      "confidence": 0.85,
+      "notes": "Type stubs for ujson"
+    },
+    {
+      "id": 638,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "mypy>=1.3.0",
+      "confidence": 0.85,
+      "notes": "Static type checker for Python"
+    },
+    {
+      "id": 639,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "ruff>=0.0.272",
+      "confidence": 0.85,
+      "notes": "Python linter and formatter"
+    },
+    {
+      "id": 640,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "locust>=2.15.1",
+      "confidence": 0.85,
+      "notes": "Load testing tool for performance evaluation"
+    },
+    {
+      "id": 641,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "onnxruntime>=1.23.2,<2",
+      "confidence": 0.85,
+      "notes": "Model execution runtime for ONNX models"
+    },
+    {
+      "id": 642,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "onnxruntime-gpu>=1.23.2,<2",
+      "confidence": 0.85,
+      "notes": "GPU-accelerated ONNX runtime"
+    },
+    {
+      "id": 643,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "onnxruntime-openvino>=1.24.1,<2",
+      "confidence": 0.85,
+      "notes": "ONNX runtime with OpenVINO backend"
+    },
+    {
+      "id": 644,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "onnxruntime-migraphx>=1.23.2,<2",
+      "confidence": 0.85,
+      "notes": "ONNX runtime with MIGRAPHX backend (ROCm support)"
+    },
+    {
+      "id": 645,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "rknn-toolkit-lite2>=2.3.0,<3",
+      "confidence": 0.85,
+      "notes": "RKNN model inference toolkit for edge devices"
+    },
+    {
+      "id": 646,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "pydantic.mypy",
+      "confidence": 0.85,
+      "notes": "Mypy plugin for Pydantic model validation"
+    },
+    {
+      "id": 647,
+      "category": "dependency",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "py311",
+      "confidence": 0.85,
+      "notes": "Target Python version for Ruff linter"
+    },
+    {
+      "id": 666,
+      "category": "dependency",
+      "source_file": "packages/cli/package.json",
+      "value": "chokidar",
+      "confidence": 0.85,
+      "notes": "Dependency on chokidar for file system monitoring, likely used in development or watch-based features"
+    },
+    {
+      "id": 667,
+      "category": "dependency",
+      "source_file": "packages/cli/package.json",
+      "value": "fast-glob",
+      "confidence": 0.85,
+      "notes": "Dependency on fast-glob for glob pattern matching, possibly used in file discovery or build processes"
+    },
+    {
+      "id": 668,
+      "category": "dependency",
+      "source_file": "packages/cli/package.json",
+      "value": "lodash-es",
+      "confidence": 0.85,
+      "notes": "Dependency on lodash-es for utility functions, version 4.17.21 indicates use of utility functions in CLI logic"
+    },
+    {
+      "id": 669,
+      "category": "dependency",
+      "source_file": "packages/cli/package.json",
+      "value": "micromatch",
+      "confidence": 0.85,
+      "notes": "Dependency on micromatch for pattern matching, used in CLI argument parsing or file filtering"
+    },
+    {
+      "id": 674,
+      "category": "dependency",
+      "source_file": "packages/cli/package.json",
+      "value": "typescript",
+      "confidence": 0.85,
+      "notes": "TypeScript dependency (version 6.0.0) indicates the CLI is written in TypeScript and compiled at build time"
+    },
+    {
+      "id": 675,
+      "category": "dependency",
+      "source_file": "packages/cli/package.json",
+      "value": "prettier",
+      "confidence": 0.85,
+      "notes": "Prettier used for code formatting, with 'format' and 'format:fix' scripts indicating code style enforcement"
+    },
+    {
+      "id": 827,
+      "category": "dependency",
+      "source_file": "docs/package.json",
+      "value": "@docusaurus/core",
+      "confidence": 0.85,
+      "notes": "Core Docusaurus package required for the documentation system."
+    },
+    {
+      "id": 828,
+      "category": "dependency",
+      "source_file": "docs/package.json",
+      "value": "@docusaurus/preset-classic",
+      "confidence": 0.85,
+      "notes": "Classic theme preset used for styling and layout configuration in Docusaurus."
+    },
+    {
+      "id": 829,
+      "category": "dependency",
+      "source_file": "docs/package.json",
+      "value": "@docusaurus/theme-mermaid",
+      "confidence": 0.85,
+      "notes": "Theme for rendering Mermaid diagrams in documentation."
+    },
+    {
+      "id": 830,
+      "category": "dependency",
+      "source_file": "docs/package.json",
+      "value": "@mdi/js",
+      "confidence": 0.85,
+      "notes": "JavaScript library for Material Design Icons used in documentation UI."
+    },
+    {
+      "id": 832,
+      "category": "dependency",
+      "source_file": "docs/package.json",
+      "value": "tailwindcss",
+      "confidence": 0.85,
+      "notes": "CSS framework for styling the documentation interface."
+    },
+    {
+      "id": 1030,
+      "category": "dependency",
+      "source_file": "packages/plugin-sdk/package.json",
+      "value": "@extism/js-pdk",
+      "confidence": 0.85,
+      "notes": "Required peer dependency for the plugin SDK, indicating integration with Extism's JavaScript PDK for plugin functionality"
+    },
+    {
+      "id": 1032,
+      "category": "dependency",
+      "source_file": "packages/plugin-sdk/package.json",
+      "value": "esbuild",
+      "confidence": 0.85,
+      "notes": "Used in the build script to build JavaScript files from TypeScript sources"
+    },
+    {
+      "id": 1033,
+      "category": "dependency",
+      "source_file": "packages/plugin-sdk/package.json",
+      "value": "tsc-alias",
+      "confidence": 0.85,
+      "notes": "Used in the build script to alias TypeScript imports during compilation"
+    },
+    {
+      "id": 1034,
+      "category": "dependency",
+      "source_file": "packages/plugin-sdk/package.json",
+      "value": "@types/node",
+      "confidence": 0.85,
+      "notes": "Type definitions for Node.js to support type safety in the project"
+    },
+    {
+      "id": 1085,
+      "category": "dependency",
+      "source_file": "package.json",
+      "value": "prettier@^3.8.3",
+      "confidence": 0.85,
+      "notes": "Development dependency for code formatting"
+    },
+    {
+      "id": 1086,
+      "category": "dependency",
+      "source_file": "package.json",
+      "value": "prettier-plugin-sort-json@^4.2.0",
+      "confidence": 0.85,
+      "notes": "Development dependency for sorting JSON files"
+    },
+    {
+      "id": 1087,
+      "category": "dependency",
+      "source_file": "package.json",
+      "value": "pnpm@10.33.4+sha512.1c67b3b359b2d408119ba1ed289f34b8fc3c6873412bec6fd264fbdc82489e510fcbecb9ce9d22dae7f3b76269d8441046014bdca53b9979cd7a561ad631b800",
+      "confidence": 0.85,
+      "notes": "Package manager version required by the project"
+    },
+    {
+      "id": 1109,
+      "category": "dependency",
+      "source_file": "packages/e2e-auth-server/package.json",
+      "value": "jose@^6.0.0",
+      "confidence": 0.85,
+      "notes": "A dependency on the JOSE library for JSON Web Signature and Encryption operations."
+    },
+    {
+      "id": 1110,
+      "category": "dependency",
+      "source_file": "packages/e2e-auth-server/package.json",
+      "value": "@types/oidc-provider@^9.0.0",
+      "confidence": 0.85,
+      "notes": "Type definitions for the oidc-provider library to support TypeScript."
+    },
+    {
+      "id": 1111,
+      "category": "dependency",
+      "source_file": "packages/e2e-auth-server/package.json",
+      "value": "oidc-provider@^9.0.0",
+      "confidence": 0.85,
+      "notes": "Core dependency for OpenID Connect provider functionality."
+    },
+    {
+      "id": 1112,
+      "category": "dependency",
+      "source_file": "packages/e2e-auth-server/package.json",
+      "value": "tsx@^4.20.6",
+      "confidence": 0.85,
+      "notes": "Transpilation tool for TypeScript files to be executed as JavaScript."
+    },
+    {
+      "id": 1114,
+      "category": "dependency",
+      "source_file": "packages/sdk/package.json",
+      "value": "@oazapfts/runtime",
+      "confidence": 0.85,
+      "notes": "Runtime dependency required by the SDK package"
+    },
+    {
+      "id": 1188,
+      "category": "dependency",
+      "source_file": "packages/plugin-core/package.json",
+      "value": "@immich/plugin-sdk",
+      "confidence": 0.85,
+      "notes": "Workspace dependency indicating integration with the Immich plugin SDK for plugin functionality."
+    },
+    {
+      "id": 1254,
+      "category": "dependency",
+      "source_file": ".github/package.json",
+      "value": "prettier@^3.7.4",
+      "confidence": 0.85,
+      "notes": "Specifies Prettier version as a dev dependency for code formatting"
+    },
+    {
+      "id": 5,
+      "category": "dependency",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "moor",
+      "confidence": 0.75,
+      "notes": "Implied dependency from 'moor_type' and 'getter_name' fields, indicating integration with the Moora (Moor) database library for Flutter apps."
+    },
+    {
+      "id": 6,
+      "category": "dependency",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "sqlite",
+      "confidence": 0.75,
+      "notes": "SQLite is referenced via 'dialectAwareDefaultConstraints' and 'CHECK' clauses, indicating the schema is designed for SQLite-based databases."
+    },
+    {
+      "id": 84,
+      "category": "dependency",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "wasm",
+      "confidence": 0.75,
+      "notes": "Implied dependency on WebAssembly runtime for plugin execution"
+    },
+    {
+      "id": 129,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "pytorch",
+      "confidence": 0.75,
+      "notes": "Core deep learning framework required for the machine learning model"
+    },
+    {
+      "id": 130,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "pytorch-cuda=11.7",
+      "confidence": 0.75,
+      "notes": "CUDA-enabled PyTorch version indicating GPU support is required"
+    },
+    {
+      "id": 131,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "torchvision",
+      "confidence": 0.75,
+      "notes": "Vision-related modules for image processing and model training"
+    },
+    {
+      "id": 132,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "transformers",
+      "confidence": 0.75,
+      "notes": "Hugging Face library for natural language processing and model loading"
+    },
+    {
+      "id": 133,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "datasets",
+      "confidence": 0.75,
+      "notes": "Library for loading and preprocessing datasets"
+    },
+    {
+      "id": 134,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "accelerate",
+      "confidence": 0.75,
+      "notes": "Not present in file, but inferred from common use with PyTorch; may be missing"
+    },
+    {
+      "id": 135,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "onnxruntime",
+      "confidence": 0.75,
+      "notes": "ONNX runtime for model export and inference"
+    },
+    {
+      "id": 136,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "open-clip-torch",
+      "confidence": 0.75,
+      "notes": "Model-specific library for CLIP-based vision models"
+    },
+    {
+      "id": 137,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "sentencepiece",
+      "confidence": 0.75,
+      "notes": "Tokenization library for NLP models"
+    },
+    {
+      "id": 138,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "huggingface_hub",
+      "confidence": 0.75,
+      "notes": "For downloading and accessing Hugging Face model repositories"
+    },
+    {
+      "id": 140,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "numpy",
+      "confidence": 0.75,
+      "notes": "Numerical computing library for data manipulation"
+    },
+    {
+      "id": 141,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "pandas",
+      "confidence": 0.75,
+      "notes": "Data manipulation and analysis library"
+    },
+    {
+      "id": 143,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "timm",
+      "confidence": 0.75,
+      "notes": "Image model zoo for transfer learning and model evaluation"
+    },
+    {
+      "id": 144,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "pyarrow",
+      "confidence": 0.75,
+      "notes": "For efficient data I/O and handling large datasets"
+    },
+    {
+      "id": 145,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "fsspec",
+      "confidence": 0.75,
+      "notes": "File system specification for accessing various file systems"
+    },
+    {
+      "id": 146,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "safetensors",
+      "confidence": 0.75,
+      "notes": "Safe tensor loading for model weights"
+    },
+    {
+      "id": 147,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "protobuf",
+      "confidence": 0.75,
+      "notes": "For communication and model serialization"
+    },
+    {
+      "id": 148,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "pyyaml",
+      "confidence": 0.75,
+      "notes": "For configuration file parsing and model configuration"
+    },
+    {
+      "id": 149,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "click",
+      "confidence": 0.75,
+      "notes": "CLI interface for command-line tools"
+    },
+    {
+      "id": 150,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "python=3.10.13",
+      "confidence": 0.75,
+      "notes": "Python version specified for compatibility with PyTorch and other libraries"
+    },
+    {
+      "id": 347,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "async: ^2.13.1",
+      "confidence": 0.75,
+      "notes": "Core dependency for asynchronous operations in Flutter app"
+    },
+    {
+      "id": 348,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "auto_route: ^11.1.0",
+      "confidence": 0.75,
+      "notes": "Route management and navigation in Flutter"
+    },
+    {
+      "id": 349,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "background_downloader: ^9.5.4",
+      "confidence": 0.75,
+      "notes": "Handles background file downloads on mobile"
+    },
+    {
+      "id": 350,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "cast: ^2.1.0",
+      "confidence": 0.75,
+      "notes": "Supports Chromecast functionality"
+    },
+    {
+      "id": 351,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "collection: ^1.19.1",
+      "confidence": 0.75,
+      "notes": "Provides utilities for data structures"
+    },
+    {
+      "id": 352,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "connectivity_plus: ^7.0.0",
+      "confidence": 0.75,
+      "notes": "Detects network connectivity status"
+    },
+    {
+      "id": 353,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "crop_image: ^1.0.17",
+      "confidence": 0.75,
+      "notes": "Image cropping functionality"
+    },
+    {
+      "id": 354,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "crypto: ^3.0.7",
+      "confidence": 0.75,
+      "notes": "Provides cryptographic operations"
+    },
+    {
+      "id": 355,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "device_info_plus: ^12.4.0",
+      "confidence": 0.75,
+      "notes": "Retrieves device information"
+    },
+    {
+      "id": 356,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "drift: ^2.32.1",
+      "confidence": 0.75,
+      "notes": "SQLite database library for Flutter"
+    },
+    {
+      "id": 357,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "drift_flutter: ^0.3.0",
+      "confidence": 0.75,
+      "notes": "Flutter integration for Drift ORM"
+    },
+    {
+      "id": 358,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "dynamic_color: ^1.8.1",
+      "confidence": 0.75,
+      "notes": "Supports dynamic color themes"
+    },
+    {
+      "id": 359,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "easy_localization: ^3.0.8",
+      "confidence": 0.75,
+      "notes": "Internationalization and localization"
+    },
+    {
+      "id": 360,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "ffi: ^2.2.0",
+      "confidence": 0.75,
+      "notes": "Foreign Function Interface for calling native code"
+    },
+    {
+      "id": 361,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter: sdk: flutter",
+      "confidence": 0.75,
+      "notes": "Flutter SDK dependency"
+    },
+    {
+      "id": 362,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter_displaymode: ^0.7.0",
+      "confidence": 0.75,
+      "notes": "Supports display mode configuration"
+    },
+    {
+      "id": 363,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter_hooks: ^0.21.3+1",
+      "confidence": 0.75,
+      "notes": "State management and hooks for Flutter widgets"
+    },
+    {
+      "id": 364,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter_local_notifications: ^17.2.4",
+      "confidence": 0.75,
+      "notes": "Push notification handling"
+    },
+    {
+      "id": 365,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter_secure_storage: ^9.2.4",
+      "confidence": 0.75,
+      "notes": "Secure storage for sensitive data"
+    },
+    {
+      "id": 366,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter_svg: ^2.2.4",
+      "confidence": 0.75,
+      "notes": "SVG image rendering"
+    },
+    {
+      "id": 367,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter_udid: ^4.1.2",
+      "confidence": 0.75,
+      "notes": "Retrieves device unique identifier"
+    },
+    {
+      "id": 368,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "flutter_web_auth_2: ^5.0.2",
+      "confidence": 0.75,
+      "notes": "Web authentication flow support"
+    },
+    {
+      "id": 369,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "fluttertoast: ^8.2.14",
+      "confidence": 0.75,
+      "notes": "Simple toast notifications"
+    },
+    {
+      "id": 370,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "geolocator: ^14.0.2",
+      "confidence": 0.75,
+      "notes": "Geolocation and location services"
+    },
+    {
+      "id": 371,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "home_widget: ^0.8.1",
+      "confidence": 0.75,
+      "notes": "Custom widget for home screen"
+    },
+    {
+      "id": 372,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "hooks_riverpod: ^2.6.1",
+      "confidence": 0.75,
+      "notes": "State management using Riverpod"
+    },
+    {
+      "id": 373,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "http: ^1.6.0",
+      "confidence": 0.75,
+      "notes": "HTTP client for network requests"
+    },
+    {
+      "id": 374,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "image_picker: ^1.2.1",
+      "confidence": 0.75,
+      "notes": "Image selection from device"
+    },
+    {
+      "id": 375,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "immich_ui: path: './packages/ui'",
+      "confidence": 0.75,
+      "notes": "Local dependency on UI package"
+    },
+    {
+      "id": 376,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "intl: ^0.20.2",
+      "confidence": 0.75,
+      "notes": "Internationalization utilities"
+    },
+    {
+      "id": 377,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "local_auth: ^2.3.0",
+      "confidence": 0.75,
+      "notes": "Biometric authentication support"
+    },
+    {
+      "id": 378,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "logging: ^1.3.0",
+      "confidence": 0.75,
+      "notes": "Logging utilities"
+    },
+    {
+      "id": 379,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "maplibre_gl: ^0.22.0",
+      "confidence": 0.75,
+      "notes": "Map rendering with Maplibre GL"
+    },
+    {
+      "id": 380,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "native_video_player: git: url: https://github.com/immich-app/native_video_player",
+      "confidence": 0.75,
+      "notes": "Custom video player from Git repository"
+    },
+    {
+      "id": 381,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "network_info_plus: ^6.1.4",
+      "confidence": 0.75,
+      "notes": "Network information and connectivity"
+    },
+    {
+      "id": 382,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "octo_image: ^2.1.0",
+      "confidence": 0.75,
+      "notes": "Image loading and caching"
+    },
+    {
+      "id": 383,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "package_info_plus: ^8.3.1",
+      "confidence": 0.75,
+      "notes": "Retrieves app version and build info"
+    },
+    {
+      "id": 384,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "path: ^1.9.1",
+      "confidence": 0.75,
+      "notes": "Path manipulation utilities"
+    },
+    {
+      "id": 385,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "path_provider: ^2.1.5",
+      "confidence": 0.75,
+      "notes": "Retrieves app-specific directories"
+    },
+    {
+      "id": 386,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "path_provider_foundation: ^2.6.0",
+      "confidence": 0.75,
+      "notes": "Foundation for path provider"
+    },
+    {
+      "id": 387,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "permission_handler: ^11.4.0",
+      "confidence": 0.75,
+      "notes": "Requesting and managing app permissions"
+    },
+    {
+      "id": 388,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "photo_manager: ^3.9.0",
+      "confidence": 0.75,
+      "notes": "Photo management and access"
+    },
+    {
+      "id": 389,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "pinput: ^5.0.2",
+      "confidence": 0.75,
+      "notes": "Phone number input field with validation"
+    },
+    {
+      "id": 390,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "punycode: ^1.0.0",
+      "confidence": 0.75,
+      "notes": "Punycode encoding for domain names"
+    },
+    {
+      "id": 391,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "scroll_date_picker: ^3.8.0",
+      "confidence": 0.75,
+      "notes": "Date picker with scrollable interface"
+    },
+    {
+      "id": 392,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "scrollable_positioned_list: ^0.3.8",
+      "confidence": 0.75,
+      "notes": "Scrollable list with position tracking"
+    },
+    {
+      "id": 393,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "share_handler: ^0.0.25",
+      "confidence": 0.75,
+      "notes": "Share content from app"
+    },
+    {
+      "id": 394,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "share_plus: ^10.1.4",
+      "confidence": 0.75,
+      "notes": "Enhanced sharing capabilities"
+    },
+    {
+      "id": 395,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "sliver_tools: ^0.2.12",
+      "confidence": 0.75,
+      "notes": "Sliver-based UI components"
+    },
+    {
+      "id": 396,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "stream_transform: ^2.1.1",
+      "confidence": 0.75,
+      "notes": "Stream data transformation"
+    },
+    {
+      "id": 397,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "thumbhash: 0.1.0+1",
+      "confidence": 0.75,
+      "notes": "Generates image thumbnails and hashes"
+    },
+    {
+      "id": 398,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "timezone: ^0.9.4",
+      "confidence": 0.75,
+      "notes": "Timezone handling"
+    },
+    {
+      "id": 399,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "url_launcher: ^6.3.2",
+      "confidence": 0.75,
+      "notes": "Launch URLs and apps"
+    },
+    {
+      "id": 400,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "uuid: ^4.5.3",
+      "confidence": 0.75,
+      "notes": "Generates unique identifiers"
+    },
+    {
+      "id": 401,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "wakelock_plus: ^1.3.3",
+      "confidence": 0.75,
+      "notes": "Prevents device sleep during background tasks"
+    },
+    {
+      "id": 402,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "worker_manager: ^7.2.9",
+      "confidence": 0.75,
+      "notes": "Background task management"
+    },
+    {
+      "id": 403,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "web_socket: ^1.0.1",
+      "confidence": 0.75,
+      "notes": "WebSocket client for real-time communication"
+    },
+    {
+      "id": 404,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "socket_io_client: git: url: https://github.com/mertalev/socket.io-client-dart",
+      "confidence": 0.75,
+      "notes": "Custom WebSocket client from Git"
+    },
+    {
+      "id": 405,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "cupertino_http: git: url: https://github.com/mertalev/http",
+      "confidence": 0.75,
+      "notes": "Custom HTTP client for iOS"
+    },
+    {
+      "id": 406,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "ok_http: git: url: https://github.com/mertalev/http",
+      "confidence": 0.75,
+      "notes": "Custom HTTP client with OkHttp integration"
+    },
+    {
+      "id": 407,
+      "category": "dependency",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "bonsoir: ^5.1.11",
+      "confidence": 0.75,
+      "notes": "Pin to 5.1.11 due to cast dependency override"
+    },
+    {
+      "id": 499,
+      "category": "dependency",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "@openapitools/openapi-generator-cli",
+      "confidence": 0.75,
+      "notes": "Required package for generating Dart code from OpenAPI specs"
+    },
+    {
+      "id": 507,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "agp",
+      "confidence": 0.75,
+      "notes": "Android Gradle Plugin version 8.11.2, used for Android project configuration and build automation"
+    },
+    {
+      "id": 508,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "kotlin",
+      "confidence": 0.75,
+      "notes": "Kotlin compiler version 2.2.20, used for Kotlin language support in Android project"
+    },
+    {
+      "id": 509,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "ksp",
+      "confidence": 0.75,
+      "notes": "Kotlin Symbol Processing version 2.2.20-2.0.3, used for Kotlin Source Set Processing (KSP) in Android"
+    },
+    {
+      "id": 510,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "coroutines",
+      "confidence": 0.75,
+      "notes": "Coroutines version 1.9.0, for asynchronous programming in Android applications"
+    },
+    {
+      "id": 511,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "work",
+      "confidence": 0.75,
+      "notes": "WorkManager version 2.9.1, for background task execution and lifecycle management"
+    },
+    {
+      "id": 512,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "concurrent",
+      "confidence": 0.75,
+      "notes": "Concurrent utilities version 1.2.0, for thread-safe operations and futures"
+    },
+    {
+      "id": 513,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "guava",
+      "confidence": 0.75,
+      "notes": "Guava version 33.3.1-android, for Java utility libraries and collections"
+    },
+    {
+      "id": 514,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "glide",
+      "confidence": 0.75,
+      "notes": "Glide version 4.16.0, for image loading and caching in Android apps"
+    },
+    {
+      "id": 515,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "serialization-json",
+      "confidence": 0.75,
+      "notes": "Kotlinx Serialization JSON version 1.8.1, for JSON serialization/deserialization"
+    },
+    {
+      "id": 516,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "glance",
+      "confidence": 0.75,
+      "notes": "Glance version 1.1.1, for Android app widgets and widget integration"
+    },
+    {
+      "id": 517,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "gson",
+      "confidence": 0.75,
+      "notes": "Gson version 2.10.1, for JSON parsing and generation"
+    },
+    {
+      "id": 518,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "okhttp",
+      "confidence": 0.75,
+      "notes": "OkHttp version 4.12.0, for HTTP client operations"
+    },
+    {
+      "id": 519,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "cronet",
+      "confidence": 0.75,
+      "notes": "Cronet version 143.7445.0, for embedded network stack in Android apps"
+    },
+    {
+      "id": 520,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "media3",
+      "confidence": 0.75,
+      "notes": "Media3 version 1.10.0, for media playback and streaming capabilities"
+    },
+    {
+      "id": 521,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "desugar",
+      "confidence": 0.75,
+      "notes": "Desugar version 2.1.2, for handling Java 8+ APIs in Android"
+    },
+    {
+      "id": 522,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "activity-compose",
+      "confidence": 0.75,
+      "notes": "Activity Compose version 1.8.2, for handling navigation and lifecycle in Compose apps"
+    },
+    {
+      "id": 523,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "compose-ui",
+      "confidence": 0.75,
+      "notes": "Compose UI version 1.1.1, for UI composition and rendering"
+    },
+    {
+      "id": 524,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "material3",
+      "confidence": 0.75,
+      "notes": "Material 3 version 1.2.1, for modern Android UI components"
+    },
+    {
+      "id": 525,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "lifecycle",
+      "confidence": 0.75,
+      "notes": "Lifecycle version 2.6.2, for component lifecycle management"
+    },
+    {
+      "id": 526,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "material",
+      "confidence": 0.75,
+      "notes": "Material Design version 1.12.0, for Android UI components and theming"
+    },
+    {
+      "id": 528,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "cronet-embedded",
+      "confidence": 0.75,
+      "notes": "Cronet embedded module for network operations in Android apps"
+    },
+    {
+      "id": 529,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "media3-datasource-okhttp",
+      "confidence": 0.75,
+      "notes": "Media3 datasource using OkHttp for network operations"
+    },
+    {
+      "id": 530,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "media3-datasource-cronet",
+      "confidence": 0.75,
+      "notes": "Media3 datasource using Cronet for network operations"
+    },
+    {
+      "id": 531,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "kotlinx-coroutines-android",
+      "confidence": 0.75,
+      "notes": "Coroutines Android module for Android-specific coroutines support"
+    },
+    {
+      "id": 532,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "work-runtime-ktx",
+      "confidence": 0.75,
+      "notes": "WorkManager runtime with Kotlin extension"
+    },
+    {
+      "id": 533,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "concurrent-futures",
+      "confidence": 0.75,
+      "notes": "Concurrent futures for thread-safe future operations"
+    },
+    {
+      "id": 535,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "glide-ksp",
+      "confidence": 0.75,
+      "notes": "Glide KSP plugin for Kotlin source processing"
+    },
+    {
+      "id": 536,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "kotlinx-serialization-json",
+      "confidence": 0.75,
+      "notes": "Kotlinx Serialization JSON module for JSON handling"
+    },
+    {
+      "id": 537,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "desugar-jdk-libs",
+      "confidence": 0.75,
+      "notes": "Desugaring of JDK libraries for Android compatibility"
+    },
+    {
+      "id": 538,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "glance-appwidget",
+      "confidence": 0.75,
+      "notes": "Glance app widget module for Android widgets"
+    },
+    {
+      "id": 541,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "compose-ui-tooling",
+      "confidence": 0.75,
+      "notes": "Compose UI tooling for debugging and development"
+    },
+    {
+      "id": 542,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "compose-material3",
+      "confidence": 0.75,
+      "notes": "Material3 Compose module for Material 3 UI components"
+    },
+    {
+      "id": 543,
+      "category": "dependency",
+      "source_file": "mobile/android/gradle/libs.versions.toml",
+      "value": "lifecycle-runtime-ktx",
+      "confidence": 0.75,
+      "notes": "Lifecycle runtime with Kotlin extension"
+    },
+    {
+      "id": 653,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "ignoredBuiltDependencies",
+      "confidence": 0.75,
+      "notes": "List of built dependencies to be excluded from the build"
+    },
+    {
+      "id": 654,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "onlyBuiltDependencies",
+      "confidence": 0.75,
+      "notes": "List of built dependencies that are explicitly included in the build"
+    },
+    {
+      "id": 656,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "@tailwindcss/oxide",
+      "confidence": 0.75,
+      "notes": "Set as a built dependency"
+    },
+    {
+      "id": 658,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "canvas",
+      "confidence": 0.75,
+      "notes": "Set to version 3.2.3 via override"
+    },
+    {
+      "id": 659,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "three",
+      "confidence": 0.75,
+      "notes": "Required by @photo-sphere-viewer packages via dependency override"
+    },
+    {
+      "id": 660,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "node-addon-api",
+      "confidence": 0.75,
+      "notes": "Required by sharp and bcrypt via dependency override"
+    },
+    {
+      "id": 661,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "node-gyp",
+      "confidence": 0.75,
+      "notes": "Required by sharp and bcrypt via dependency override"
+    },
+    {
+      "id": 663,
+      "category": "dependency",
+      "source_file": "pnpm-workspace.yaml",
+      "value": "tslib",
+      "confidence": 0.75,
+      "notes": "Required by nestjs-kysely and nestjs-otel"
+    },
+    {
+      "id": 718,
+      "category": "dependency",
+      "source_file": "packages/plugin-core/tsconfig.json",
+      "value": "es2020",
+      "confidence": 0.75,
+      "notes": "Library files for ES2020 are specified, indicating the use of modern JavaScript language features"
+    },
+    {
+      "id": 723,
+      "category": "dependency",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "git",
+      "confidence": 0.75,
+      "notes": "Script relies on Git being installed and available; snap must include git as a system package or dependency"
+    },
+    {
+      "id": 758,
+      "category": "dependency",
+      "source_file": "web/mise.toml",
+      "value": "immich-web",
+      "confidence": 0.75,
+      "notes": "Primary application package being managed in the build and install tasks"
+    },
+    {
+      "id": 759,
+      "category": "dependency",
+      "source_file": "web/mise.toml",
+      "value": "sdk",
+      "confidence": 0.75,
+      "notes": "SDK dependencies referenced in start and CI workflows"
+    },
+    {
+      "id": 858,
+      "category": "dependency",
+      "source_file": "e2e/mise.toml",
+      "value": "//:sdk:install",
+      "confidence": 0.75,
+      "notes": "Dependency on SDK installation task"
+    },
+    {
+      "id": 859,
+      "category": "dependency",
+      "source_file": "e2e/mise.toml",
+      "value": "//:sdk:build",
+      "confidence": 0.75,
+      "notes": "Dependency on SDK build task"
+    },
+    {
+      "id": 860,
+      "category": "dependency",
+      "source_file": "e2e/mise.toml",
+      "value": "//cli:install",
+      "confidence": 0.75,
+      "notes": "Dependency on CLI installation task"
+    },
+    {
+      "id": 861,
+      "category": "dependency",
+      "source_file": "e2e/mise.toml",
+      "value": "//cli:build",
+      "confidence": 0.75,
+      "notes": "Dependency on CLI build task"
+    },
+    {
+      "id": 865,
+      "category": "dependency",
+      "source_file": "mobile/packages/ui/showcase/pubspec.yaml",
+      "value": "immich_ui",
+      "confidence": 0.75,
+      "notes": "Local dependency referenced via path '../' indicating a dependency on a local package in the parent directory"
+    },
+    {
+      "id": 866,
+      "category": "dependency",
+      "source_file": "mobile/packages/ui/showcase/pubspec.yaml",
+      "value": "go_router",
+      "confidence": 0.75,
+      "notes": "Versioned dependency specified as ^17.2.1, indicating a runtime dependency on the go_router package"
+    },
+    {
+      "id": 867,
+      "category": "dependency",
+      "source_file": "mobile/packages/ui/showcase/pubspec.yaml",
+      "value": "syntax_highlight",
+      "confidence": 0.75,
+      "notes": "Versioned dependency specified as ^0.5.0, indicating a dependency on syntax highlighting functionality"
+    },
+    {
+      "id": 868,
+      "category": "dependency",
+      "source_file": "mobile/packages/ui/showcase/pubspec.yaml",
+      "value": "flutter",
+      "confidence": 0.75,
+      "notes": "SDK dependency on Flutter, indicating the app is built using the Flutter framework"
+    },
+    {
+      "id": 982,
+      "category": "dependency",
+      "source_file": "server/tsconfig.json",
+      "value": "vitest",
+      "confidence": 0.75,
+      "notes": "Indirect dependency on Vitest through types configuration, suggesting test infrastructure is part of the application."
+    },
+    {
+      "id": 987,
+      "category": "dependency",
+      "source_file": "machine-learning/scripts/healthcheck.py",
+      "value": "requests",
+      "confidence": 0.75,
+      "notes": "Python dependency required for making HTTP requests to the IMMICH service"
+    },
+    {
+      "id": 1001,
+      "category": "dependency",
+      "source_file": "mobile/build.yaml",
+      "value": "lib/infrastructure/repositories/db.repository.dart",
+      "confidence": 0.75,
+      "notes": "Specifies the main database repository file to be processed by the drift builder"
+    },
+    {
+      "id": 1002,
+      "category": "dependency",
+      "source_file": "mobile/build.yaml",
+      "value": "lib/infrastructure/entities/*.dart",
+      "confidence": 0.75,
+      "notes": "Indicates that all .dart files in the entities directory are to be processed for drift code generation"
+    },
+    {
+      "id": 1003,
+      "category": "dependency",
+      "source_file": "mobile/build.yaml",
+      "value": "lib/infrastructure/entities/*.drift",
+      "confidence": 0.75,
+      "notes": "Specifies that all .drift files in the entities directory are included in the generation process"
+    },
+    {
+      "id": 1040,
+      "category": "dependency",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No dependency declarations or references found in the file."
+    },
+    {
+      "id": 1065,
+      "category": "dependency",
+      "source_file": "machine-learning/mise.toml",
+      "value": "uv = \"0.8.15\"",
+      "confidence": 0.75,
+      "notes": "Specifies the version of the uv Python package manager to be used in task execution"
+    },
+    {
+      "id": 1066,
+      "category": "dependency",
+      "source_file": "machine-learning/mise.toml",
+      "value": "python = \"3.11\"",
+      "confidence": 0.75,
+      "notes": "Specifies the Python version required for the project's execution environment"
+    },
+    {
+      "id": 1080,
+      "category": "dependency",
+      "source_file": "server/nest-cli.json",
+      "value": "@nestjs/swagger",
+      "confidence": 0.75,
+      "notes": "Configured as a plugin in the NestJS CLI configuration to enable Swagger documentation generation with class-validator shim and comment introspection."
+    },
+    {
+      "id": 1104,
+      "category": "dependency",
+      "source_file": "docs/mise.toml",
+      "value": "wrangler",
+      "confidence": 0.75,
+      "notes": "Tool version 4.91.0 specified in the [tools] section for deploying pages"
+    },
+    {
+      "id": 1141,
+      "category": "dependency",
+      "source_file": "mobile/openapi/pubspec.yaml",
+      "value": "immich_mobile",
+      "confidence": 0.75,
+      "notes": "A local path dependency on a Flutter package located at ../, indicating a custom or internal dependency that may need to be included in the snap build process"
+    },
+    {
+      "id": 1142,
+      "category": "dependency",
+      "source_file": "mobile/openapi/pubspec.yaml",
+      "value": "collection",
+      "confidence": 0.75,
+      "notes": "Dependency on 'collection' package, version range >=1.17.0 <2.0.0, likely for data structures and utilities"
+    },
+    {
+      "id": 1143,
+      "category": "dependency",
+      "source_file": "mobile/openapi/pubspec.yaml",
+      "value": "http",
+      "confidence": 0.75,
+      "notes": "Dependency on 'http' package, version range >=0.13.0 <2.0.0, for HTTP client functionality in the API client"
+    },
+    {
+      "id": 1144,
+      "category": "dependency",
+      "source_file": "mobile/openapi/pubspec.yaml",
+      "value": "intl",
+      "confidence": 0.75,
+      "notes": "Dependency on 'intl' package with 'any' version, which may imply dynamic or runtime dependency handling"
+    },
+    {
+      "id": 1145,
+      "category": "dependency",
+      "source_file": "mobile/openapi/pubspec.yaml",
+      "value": "meta",
+      "confidence": 0.75,
+      "notes": "Dependency on 'meta' package, version >=1.1.8 <2.0.0, commonly used for metadata and reflection in Dart"
+    },
+    {
+      "id": 1160,
+      "category": "dependency",
+      "source_file": "mobile/packages/ui/pubspec.yaml",
+      "value": "flutter_test",
+      "confidence": 0.75,
+      "notes": "Test dependencies are defined, suggesting the application includes automated testing via Flutter's test suite."
+    },
+    {
+      "id": 1169,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "armnn",
+      "confidence": 0.75,
+      "notes": "Static library dependency for the ArmNN converter, linked via -larmnn"
+    },
+    {
+      "id": 1170,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "armnnDeserializer",
+      "confidence": 0.75,
+      "notes": "Static library dependency for parsing and deserializing models"
+    },
+    {
+      "id": 1171,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "armnnTfLiteParser",
+      "confidence": 0.75,
+      "notes": "Static library dependency for parsing TensorFlow Lite models"
+    },
+    {
+      "id": 1172,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "armnnOnnxParser",
+      "confidence": 0.75,
+      "notes": "Static library dependency for parsing ONNX models"
+    },
+    {
+      "id": 1173,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "armnnSerializer",
+      "confidence": 0.75,
+      "notes": "Static library dependency for serializing models"
+    },
+    {
+      "id": 1206,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/export/download-armnn.sh",
+      "value": "curl",
+      "confidence": 0.75,
+      "notes": "Required to download ARM NN and its source tarballs from GitHub"
+    },
+    {
+      "id": 1213,
+      "category": "dependency",
+      "source_file": "packages/plugin-core/mise.toml",
+      "value": "@immich/plugin-core",
+      "confidence": 0.75,
+      "notes": "A dependency explicitly filtered during the build process"
+    },
+    {
+      "id": 1238,
+      "category": "dependency",
+      "source_file": "machine-learning/scripts/configure-apt.sh",
+      "value": "debian.sources",
+      "confidence": 0.75,
+      "notes": "The script modifies Debian's sources.list.d file to include contrib, non-free, and non-free-firmware repositories, which may affect package dependency resolution in a snap environment."
+    },
+    {
+      "id": 1239,
+      "category": "dependency",
+      "source_file": "machine-learning/scripts/configure-apt.sh",
+      "value": "unstable",
+      "confidence": 0.75,
+      "notes": "The script sets a lower priority (450) for the unstable release to prefer stable packages, which can influence which versions of packages are installed in the snap environment."
+    },
+    {
+      "id": 1245,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/build.sh",
+      "value": "libarmnn",
+      "confidence": 0.75,
+      "notes": "Required ARMNN C++ library dependency for the ANN implementation."
+    },
+    {
+      "id": 1246,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/build.sh",
+      "value": "libarmnnDeserializer",
+      "confidence": 0.75,
+      "notes": "Required ARMNN library for deserializing models, used during ANN compilation."
+    },
+    {
+      "id": 1247,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/build.sh",
+      "value": "libarmnnTfLiteParser",
+      "confidence": 0.75,
+      "notes": "Required ARMNN library for parsing TensorFlow Lite models."
+    },
+    {
+      "id": 1248,
+      "category": "dependency",
+      "source_file": "machine-learning/ann/build.sh",
+      "value": "libarmnnOnnxParser",
+      "confidence": 0.75,
+      "notes": "Required ARMNN library for parsing ONNX models."
+    },
+    {
+      "id": 1298,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/log_conf.json",
+      "value": "CustomRichHandler",
+      "confidence": 0.75,
+      "notes": "A custom logging handler class used to format and display logs in a rich, formatted way, indicating a dependency on a custom logging module within immich_ml."
+    },
+    {
+      "id": 1255,
+      "category": "dependency",
+      "source_file": "deployment/modules/cloudflare/docs/config.tf",
+      "value": "cloudflare",
+      "confidence": 0.6,
+      "notes": "Terraform provider configured with version 4.52.7 from source 'cloudflare/cloudflare'"
+    },
+    {
+      "id": 1259,
+      "category": "dependency",
+      "source_file": "docs/mise.lock",
+      "value": "npm:wrangler",
+      "confidence": 0.6,
+      "notes": "The dependency is defined as 'npm:wrangler' in the Mise configuration, indicating a dependency on the Wrangler npm package for runtime or build operations."
+    },
+    {
+      "id": 1261,
+      "category": "dependency",
+      "source_file": "mobile/android/metadata/en-US/full_description.txt",
+      "value": "Immich Server",
+      "confidence": 0.6,
+      "notes": "The client app depends on an external Immich Server instance to function."
+    },
+    {
+      "id": 9,
+      "category": "dependency",
+      "source_file": "mise.lock",
+      "value": "github:extism/cli",
+      "confidence": 0.5,
+      "notes": "Defined as a tool with version 1.6.3, available for multiple platforms including Linux, macOS, and Windows"
+    },
+    {
+      "id": 10,
+      "category": "dependency",
+      "source_file": "mise.lock",
+      "value": "github:extism/js-pdk",
+      "confidence": 0.5,
+      "notes": "Defined as a tool with version 1.6.0, available for Linux ARM64 and x64 platforms"
+    },
+    {
+      "id": 11,
+      "category": "dependency",
+      "source_file": "mise.lock",
+      "value": "github:CQLabs/homebrew-dcm",
+      "confidence": 0.5,
+      "notes": "Defined as a tool with version 1.37.0, available for Linux, macOS, and Windows platforms with specific binary builds for different architectures"
+    },
+    {
+      "id": 37,
+      "category": "dependency",
+      "source_file": "server/src/constants.ts",
+      "value": "semver",
+      "confidence": 0.5,
+      "notes": "Used to parse and validate version strings in serverVersion"
+    },
+    {
+      "id": 105,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "orjson",
+      "confidence": 0.5,
+      "notes": "Used for parsing JSON payloads in the request handling logic, particularly in the `get_entries` function."
+    },
+    {
+      "id": 106,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "PIL.Image",
+      "confidence": 0.5,
+      "notes": "Used for image decoding via `decode_pil` function, indicating image processing capabilities are required."
+    },
+    {
+      "id": 108,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "pydantic",
+      "confidence": 0.5,
+      "notes": "Used for validating input schema via `ValidationError` in the `get_entries` function."
+    },
+    {
+      "id": 109,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "starlette.formparsers",
+      "confidence": 0.5,
+      "notes": "Used for handling multipart form data, with custom spool size configuration for large payloads."
+    },
+    {
+      "id": 117,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "libmali.so",
+      "confidence": 0.5,
+      "notes": "Shared library required to be mounted into the container; failure to load indicates absence of the library"
+    },
+    {
+      "id": 118,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "libann.so",
+      "confidence": 0.5,
+      "notes": "Shared library loaded via CDLL; must be available at runtime for ANN functionality"
+    },
+    {
+      "id": 193,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "fastlane",
+      "confidence": 0.5,
+      "notes": "The primary dependency specified in the Gemfile.lock, indicating the core tool used for CI/CD and mobile app automation in the Android project."
+    },
+    {
+      "id": 194,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "aws-sdk-core",
+      "confidence": 0.5,
+      "notes": "Used for AWS integration, likely for cloud-based build or deployment workflows."
+    },
+    {
+      "id": 195,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "aws-sdk-s3",
+      "confidence": 0.5,
+      "notes": "Indicates integration with AWS S3 for storing or retrieving build artifacts or configuration files."
+    },
+    {
+      "id": 196,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "google-cloud-storage",
+      "confidence": 0.5,
+      "notes": "Suggests integration with Google Cloud Storage for artifact management or CI/CD pipeline operations."
+    },
+    {
+      "id": 197,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "xcodeproj",
+      "confidence": 0.5,
+      "notes": "Used for interacting with Xcode project files, indicating iOS development or cross-platform tooling."
+    },
+    {
+      "id": 198,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "simctl",
+      "confidence": 0.5,
+      "notes": "Used for managing iOS simulators, indicating iOS testing capabilities in the pipeline."
+    },
+    {
+      "id": 199,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "xcpretty",
+      "confidence": 0.5,
+      "notes": "Used for formatting build output, likely in CI/CD environments like Travis or Jenkins."
+    },
+    {
+      "id": 200,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "faraday",
+      "confidence": 0.5,
+      "notes": "A HTTP client library used for making API calls, likely for interacting with external services like GitHub or AWS."
+    },
+    {
+      "id": 201,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "dotenv",
+      "confidence": 0.5,
+      "notes": "For loading environment variables from a .env file, useful for managing secrets and configuration in CI/CD."
+    },
+    {
+      "id": 202,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "google-apis-androidpublisher_v3",
+      "confidence": 0.5,
+      "notes": "Indicates integration with Google Play Console for app distribution or listing management."
+    },
+    {
+      "id": 203,
+      "category": "dependency",
+      "source_file": "mobile/android/Gemfile.lock",
+      "value": "google-apis-playcustomapp_v1",
+      "confidence": 0.5,
+      "notes": "Suggests integration with Google Play Custom App Management for custom app installations or testing."
+    },
+    {
+      "id": 236,
+      "category": "dependency",
+      "source_file": "server/src/main.ts",
+      "value": "nest-commander",
+      "confidence": 0.5,
+      "notes": "Used for command-line argument handling and command execution, particularly for the 'immich-admin' CLI functionality."
+    },
+    {
+      "id": 237,
+      "category": "dependency",
+      "source_file": "server/src/main.ts",
+      "value": "node:child_process",
+      "confidence": 0.5,
+      "notes": "Used to fork worker processes for handling background tasks like API and maintenance workers."
+    },
+    {
+      "id": 238,
+      "category": "dependency",
+      "source_file": "server/src/main.ts",
+      "value": "node:worker_threads",
+      "confidence": 0.5,
+      "notes": "Used to spawn and manage Node.js worker threads for parallel processing of tasks."
+    },
+    {
+      "id": 244,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "combine-schedulers",
+      "confidence": 0.5,
+      "notes": "A Swift library for managing concurrency and scheduling, hosted at https://github.com/pointfreeco/combine-schedulers"
+    },
+    {
+      "id": 245,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "grdb.swift",
+      "confidence": 0.5,
+      "notes": "A Swift database library for SQLite, hosted at https://github.com/groue/GRDB.swift"
+    },
+    {
+      "id": 246,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "sqlite-data",
+      "confidence": 0.5,
+      "notes": "A Swift library for handling SQLite data, hosted at https://github.com/pointfreeco/sqlite-data"
+    },
+    {
+      "id": 247,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-clocks",
+      "confidence": 0.5,
+      "notes": "A Swift library for time-based operations, hosted at https://github.com/pointfreeco/swift-clocks"
+    },
+    {
+      "id": 248,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-collections",
+      "confidence": 0.5,
+      "notes": "A Swift standard library for collections, hosted at https://github.com/apple/swift-collections"
+    },
+    {
+      "id": 249,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-concurrency-extras",
+      "confidence": 0.5,
+      "notes": "A Swift library providing additional concurrency utilities, hosted at https://github.com/pointfreeco/swift-concurrency-extras"
+    },
+    {
+      "id": 250,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-custom-dump",
+      "confidence": 0.5,
+      "notes": "A Swift library for custom debugging and dumping, hosted at https://github.com/pointfreeco/swift-custom-dump"
+    },
+    {
+      "id": 251,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-dependencies",
+      "confidence": 0.5,
+      "notes": "A Swift library for managing dependency resolution, hosted at https://github.com/pointfreeco/swift-dependencies"
+    },
+    {
+      "id": 252,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-http-structured-headers",
+      "confidence": 0.5,
+      "notes": "A Swift library for handling HTTP structured headers, hosted at https://github.com/apple/swift-http-structured-headers"
+    },
+    {
+      "id": 253,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-identified-collections",
+      "confidence": 0.5,
+      "notes": "A Swift library for collections with identification, hosted at https://github.com/pointfreeco/swift-identified-collections"
+    },
+    {
+      "id": 254,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-perception",
+      "confidence": 0.5,
+      "notes": "A Swift library for perception and observation patterns, hosted at https://github.com/pointfreeco/swift-perception"
+    },
+    {
+      "id": 255,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-sharing",
+      "confidence": 0.5,
+      "notes": "A Swift library for shared state and object sharing, hosted at https://github.com/pointfreeco/swift-sharing"
+    },
+    {
+      "id": 256,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-snapshot-testing",
+      "confidence": 0.5,
+      "notes": "A Swift library for UI and code snapshot testing, hosted at https://github.com/pointfreeco/swift-snapshot-testing"
+    },
+    {
+      "id": 257,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-structured-queries",
+      "confidence": 0.5,
+      "notes": "A Swift library for structured query operations, hosted at https://github.com/pointfreeco/swift-structured-queries"
+    },
+    {
+      "id": 258,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "swift-syntax",
+      "confidence": 0.5,
+      "notes": "A Swift library for parsing and analyzing Swift code, hosted at https://github.com/swiftlang/swift-syntax"
+    },
+    {
+      "id": 259,
+      "category": "dependency",
+      "source_file": "mobile/ios/Runner.xcworkspace/xcshareddata/swiftpm/Package.resolved",
+      "value": "xctest-dynamic-overlay",
+      "confidence": 0.5,
+      "notes": "A Swift library for dynamic test overlay, hosted at https://github.com/pointfreeco/xctest-dynamic-overlay"
+    },
+    {
+      "id": 281,
+      "category": "dependency",
+      "source_file": "packages/e2e-auth-server/auth-server.ts",
+      "value": "jose",
+      "confidence": 0.5,
+      "notes": "Dependency imported for JWT operations including signing, JWK handling, and key management"
+    },
+    {
+      "id": 282,
+      "category": "dependency",
+      "source_file": "packages/e2e-auth-server/auth-server.ts",
+      "value": "oidc-provider",
+      "confidence": 0.5,
+      "notes": "Core dependency for implementing OAuth 2.0 and OpenID Connect server functionality"
+    },
+    {
+      "id": 332,
+      "category": "dependency",
+      "source_file": "machine-learning/mise.lock",
+      "value": "python-3.11.15",
+      "confidence": 0.5,
+      "notes": "Python version specified in the mise.lock file for Linux, macOS, and Windows platforms"
+    },
+    {
+      "id": 333,
+      "category": "dependency",
+      "source_file": "machine-learning/mise.lock",
+      "value": "uv-0.8.15",
+      "confidence": 0.5,
+      "notes": "UV version specified for cross-platform usage, including Linux, macOS, and Windows"
+    },
+    {
+      "id": 340,
+      "category": "dependency",
+      "source_file": "server/src/repositories/server-info.repository.ts",
+      "value": "node:fs/promises",
+      "confidence": 0.5,
+      "notes": "Used to read lockfile content for version retrieval"
+    },
+    {
+      "id": 341,
+      "category": "dependency",
+      "source_file": "server/src/repositories/server-info.repository.ts",
+      "value": "node:util",
+      "confidence": 0.5,
+      "notes": "Used to promisify the exec callback function"
+    },
+    {
+      "id": 488,
+      "category": "dependency",
+      "source_file": "deployment/mise.lock",
+      "value": "opentofu",
+      "confidence": 0.5,
+      "notes": "Version 1.11.6 specified with platform-specific binaries (linux-arm64, linux-x64, macos-arm64, macos-x64, windows-x64)"
+    },
+    {
+      "id": 489,
+      "category": "dependency",
+      "source_file": "deployment/mise.lock",
+      "value": "terragrunt",
+      "confidence": 0.5,
+      "notes": "Version 1.0.3 specified with platform-specific binaries (linux-arm64, linux-x64, macos-arm64, macos-x64, windows-x64)"
+    },
+    {
+      "id": 580,
+      "category": "dependency",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "immich_ml.config.CustomUvicornWorker",
+      "confidence": 0.5,
+      "notes": "Custom worker class used by Gunicorn to handle the application's worker lifecycle."
+    },
+    {
+      "id": 585,
+      "category": "dependency",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "public.file-url",
+      "confidence": 0.5,
+      "notes": "Indicates support for file URLs as attachment types in the share extension."
+    },
+    {
+      "id": 586,
+      "category": "dependency",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "public.image",
+      "confidence": 0.5,
+      "notes": "Support for image attachments in the share extension."
+    },
+    {
+      "id": 587,
+      "category": "dependency",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "public.text",
+      "confidence": 0.5,
+      "notes": "Support for text-based attachments in the share extension."
+    },
+    {
+      "id": 588,
+      "category": "dependency",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "public.movie",
+      "confidence": 0.5,
+      "notes": "Support for video/movie attachments in the share extension."
+    },
+    {
+      "id": 589,
+      "category": "dependency",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "public.url",
+      "confidence": 0.5,
+      "notes": "Support for URL-based attachments in the share extension."
+    },
+    {
+      "id": 609,
+      "category": "dependency",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "node:os",
+      "confidence": 0.5,
+      "notes": "Used to detect CPU core count for parallel test worker allocation."
+    },
+    {
+      "id": 610,
+      "category": "dependency",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "node:path",
+      "confidence": 0.5,
+      "notes": "Used to resolve the path to the .env file in the project directory."
+    },
+    {
+      "id": 611,
+      "category": "dependency",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "@playwright/test",
+      "confidence": 0.5,
+      "notes": "Core Playwright testing library used for defining test configurations and execution."
+    },
+    {
+      "id": 773,
+      "category": "dependency",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "node:fs",
+      "confidence": 0.5,
+      "notes": "Used for file system operations such as checking existence and creating directories"
+    },
+    {
+      "id": 775,
+      "category": "dependency",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "src/utils",
+      "confidence": 0.5,
+      "notes": "Provides utility functions like connect, getAuthFilePath, requirePermissions, and writeAuthFile"
+    },
+    {
+      "id": 795,
+      "category": "dependency",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "testcontainers",
+      "confidence": 0.5,
+      "notes": "Used to manage and start a PostgreSQL container for testing"
+    },
+    {
+      "id": 796,
+      "category": "dependency",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "src/repositories/config.repository",
+      "confidence": 0.5,
+      "notes": "Used to manage configuration data during database setup"
+    },
+    {
+      "id": 797,
+      "category": "dependency",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "src/repositories/database.repository",
+      "confidence": 0.5,
+      "notes": "Handles database migrations and operations"
+    },
+    {
+      "id": 798,
+      "category": "dependency",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "src/repositories/logging.repository",
+      "confidence": 0.5,
+      "notes": "Provides logging functionality during test execution"
+    },
+    {
+      "id": 799,
+      "category": "dependency",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "src/schema",
+      "confidence": 0.5,
+      "notes": "Contains database schema definitions used by Kysely"
+    },
+    {
+      "id": 800,
+      "category": "dependency",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "src/utils/database",
+      "confidence": 0.5,
+      "notes": "Provides configuration for Kysely database connection"
+    },
+    {
+      "id": 836,
+      "category": "dependency",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "dev.flutter.flutter-plugin-loader",
+      "confidence": 0.5,
+      "notes": "Loads Flutter plugin dependencies using the Flutter plugin loader plugin"
+    },
+    {
+      "id": 837,
+      "category": "dependency",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "com.android.application",
+      "confidence": 0.5,
+      "notes": "Configures Android application plugin with version 8.11.2, applied but not active"
+    },
+    {
+      "id": 838,
+      "category": "dependency",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "org.jetbrains.kotlin.android",
+      "confidence": 0.5,
+      "notes": "Configures Kotlin Android plugin with version 2.2.20, applied but not active"
+    },
+    {
+      "id": 839,
+      "category": "dependency",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "org.jetbrains.kotlin.plugin.serialization",
+      "confidence": 0.5,
+      "notes": "Configures Kotlin serialization plugin with version 2.1.0, applied but not active"
+    },
+    {
+      "id": 840,
+      "category": "dependency",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "com.google.devtools.ksp",
+      "confidence": 0.5,
+      "notes": "Configures Kotlin Symbol Processing (KSP) plugin with version 2.2.20-2.0.3, applied but not active"
+    },
+    {
+      "id": 848,
+      "category": "dependency",
+      "source_file": "web/svelte.config.js",
+      "value": "@sveltejs/adapter-static",
+      "confidence": 0.5,
+      "notes": "Required for static site generation and serving built files"
+    },
+    {
+      "id": 849,
+      "category": "dependency",
+      "source_file": "web/svelte.config.js",
+      "value": "@sveltejs/vite-plugin-svelte",
+      "confidence": 0.5,
+      "notes": "Used for preprocessing Svelte components via Vite"
+    },
+    {
+      "id": 880,
+      "category": "dependency",
+      "source_file": "server/src/middleware/websocket.adapter.ts",
+      "value": "ioredis",
+      "confidence": 0.5,
+      "notes": "Required for creating Redis clients in the WebSocket adapter"
+    },
+    {
+      "id": 881,
+      "category": "dependency",
+      "source_file": "server/src/middleware/websocket.adapter.ts",
+      "value": "@socket.io/redis-adapter",
+      "confidence": 0.5,
+      "notes": "Used to configure Redis-based socket.io adapter"
+    },
+    {
+      "id": 882,
+      "category": "dependency",
+      "source_file": "server/src/middleware/websocket.adapter.ts",
+      "value": "@nestjs/common",
+      "confidence": 0.5,
+      "notes": "Provides INestApplicationContext and IoAdapter base classes"
+    },
+    {
+      "id": 883,
+      "category": "dependency",
+      "source_file": "server/src/middleware/websocket.adapter.ts",
+      "value": "@nestjs/platform-socket.io",
+      "confidence": 0.5,
+      "notes": "Provides IoAdapter for socket.io integration"
+    },
+    {
+      "id": 891,
+      "category": "dependency",
+      "source_file": "server/src/queries/api.key.repository.sql",
+      "value": "sql-generator",
+      "confidence": 0.5,
+      "notes": "The file is auto-generated by a SQL generator tool, indicating a dependency on a script or tool that generates SQL queries for database interactions."
+    },
+    {
+      "id": 903,
+      "category": "dependency",
+      "source_file": "server/test/vitest.config.mjs",
+      "value": "unplugin-swc",
+      "confidence": 0.5,
+      "notes": "Used for SWC-based JavaScript/TypeScript compilation in Vite plugin chain"
+    },
+    {
+      "id": 904,
+      "category": "dependency",
+      "source_file": "server/test/vitest.config.mjs",
+      "value": "vite-tsconfig-paths",
+      "confidence": 0.5,
+      "notes": "Used to integrate TypeScript configuration paths in Vite setup"
+    },
+    {
+      "id": 906,
+      "category": "dependency",
+      "source_file": "server/test/vitest.config.mjs",
+      "value": "node:url",
+      "confidence": 0.5,
+      "notes": "Used for URL manipulation and resolving module paths"
+    },
+    {
+      "id": 935,
+      "category": "dependency",
+      "source_file": "server/src/bin/sync-open-api.ts",
+      "value": "@nestjs/core",
+      "confidence": 0.5,
+      "notes": "Required dependency for NestJS application initialization and lifecycle management."
+    },
+    {
+      "id": 936,
+      "category": "dependency",
+      "source_file": "server/src/bin/sync-open-api.ts",
+      "value": "@nestjs/platform-express",
+      "confidence": 0.5,
+      "notes": "Indicates integration with Express.js for the web server, which may influence snap's web server or runtime dependencies."
+    },
+    {
+      "id": 937,
+      "category": "dependency",
+      "source_file": "server/src/bin/sync-open-api.ts",
+      "value": "src/app.module",
+      "confidence": 0.5,
+      "notes": "Module reference for the application, suggesting the application structure is defined in the source code and may need to be snap-packaged with its dependencies."
+    },
+    {
+      "id": 938,
+      "category": "dependency",
+      "source_file": "server/src/bin/sync-open-api.ts",
+      "value": "src/utils/misc",
+      "confidence": 0.5,
+      "notes": "Used for Swagger configuration, indicating the need for a shared utility module that may be part of the snap's runtime environment."
+    },
+    {
+      "id": 1010,
+      "category": "dependency",
+      "source_file": "mobile/lib/services/secure_storage.service.dart",
+      "value": "hooks_riverpod",
+      "confidence": 0.5,
+      "notes": "Required package for state management via Riverpod, used in the service implementation."
+    },
+    {
+      "id": 1011,
+      "category": "dependency",
+      "source_file": "mobile/lib/services/secure_storage.service.dart",
+      "value": "immich_mobile/repositories/secure_storage.repository.dart",
+      "confidence": 0.5,
+      "notes": "Dependency on a repository implementation for secure storage operations."
+    },
+    {
+      "id": 1147,
+      "category": "dependency",
+      "source_file": "server/src/queries/album.user.repository.sql",
+      "value": "postgresql",
+      "confidence": 0.5,
+      "notes": "The SQL file performs operations on the 'album_user' table, implying dependency on PostgreSQL for database persistence."
+    },
+    {
+      "id": 1177,
+      "category": "dependency",
+      "source_file": "packages/cli/.npmignore",
+      "value": "vite.config.ts",
+      "confidence": 0.5,
+      "notes": "The Vite configuration file is included, indicating potential use of Vite for development or build processes, which may influence snap build steps."
+    },
+    {
+      "id": 1178,
+      "category": "dependency",
+      "source_file": "packages/cli/.npmignore",
+      "value": "vitest.config.ts",
+      "confidence": 0.5,
+      "notes": "The Vitest configuration file is included, suggesting test-related dependencies that may be part of the snap's test suite or build pipeline."
+    },
+    {
+      "id": 1181,
+      "category": "dependency",
+      "source_file": "open-api/patch/api.dart.patch",
+      "value": "flutter/foundation.dart",
+      "confidence": 0.5,
+      "notes": "Imported for potential Flutter runtime or platform-specific functionality usage in the patch"
+    },
+    {
+      "id": 1182,
+      "category": "dependency",
+      "source_file": "open-api/patch/api.dart.patch",
+      "value": "immich_mobile/utils/openapi_patching.dart",
+      "confidence": 0.5,
+      "notes": "Imported for openAPI patching logic, likely related to API endpoint or response modification"
+    },
+    {
+      "id": 1286,
+      "category": "dependency",
+      "source_file": "web/.browserslistrc",
+      "value": "browserslist",
+      "confidence": 0.5,
+      "notes": "The .browserslistrc file specifies browser support versions, indicating a dependency on the browserslist package for managing browser compatibility."
+    },
+    {
+      "id": 1322,
+      "category": "dependency",
+      "source_file": "mobile/openapi/.openapi-generator/VERSION",
+      "value": "7.8.0",
+      "confidence": 0.5,
+      "notes": "Version of openapi-generator specified in the configuration file, likely indicating a dependency version for the openapi generator tool."
+    },
+    {
+      "id": 1324,
+      "category": "dependency",
+      "source_file": "server/src/queries/system.metadata.repository.sql",
+      "value": "system_metadata",
+      "confidence": 0.5,
+      "notes": "Database table referenced in the SQL file, indicating dependency on a system metadata store for runtime operations."
+    }
+  ]
+}

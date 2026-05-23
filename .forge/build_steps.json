@@ -1,0 +1,1313 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 173,
+      "category": "build_step",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "export model to TFLite and ARMNN",
+      "confidence": 0.95,
+      "notes": "The script performs model export via PyTorch JIT tracing and TFLite conversion, followed by ARMNN conversion using a subprocess call."
+    },
+    {
+      "id": 708,
+      "category": "build_step",
+      "source_file": "server/bin/start.sh",
+      "value": "build the server first",
+      "confidence": 0.95,
+      "notes": "Indicated in error message when development environment is missing the built main.js file, suggesting a build step is required in the build process."
+    },
+    {
+      "id": 1136,
+      "category": "build_step",
+      "source_file": "packages/cli/Dockerfile",
+      "value": "pnpm --filter @immich/sdk --filter @immich/cli install --frozen-lockfile",
+      "confidence": 0.9,
+      "notes": "A build step that installs dependencies for the @immich/sdk and @immich/cli packages using pnpm with a frozen lockfile for reproducibility."
+    },
+    {
+      "id": 1137,
+      "category": "build_step",
+      "source_file": "packages/cli/Dockerfile",
+      "value": "pnpm --filter @immich/sdk --filter @immich/cli build",
+      "confidence": 0.9,
+      "notes": "A build step that builds the @immich/sdk and @immich/cli packages, likely generating the final binary or distribution files."
+    },
+    {
+      "id": 1330,
+      "category": "build_step",
+      "source_file": "packages/e2e-auth-server/Dockerfile",
+      "value": "pnpm install",
+      "confidence": 0.9,
+      "notes": "The installation step uses pnpm to install dependencies, which should be mirrored in snap's build step for dependency resolution"
+    },
+    {
+      "id": 225,
+      "category": "build_step",
+      "source_file": "server/package.json",
+      "value": "nest build",
+      "confidence": 0.85,
+      "notes": "Build step in the package.json to compile NestJS application using TypeScript and build tools."
+    },
+    {
+      "id": 226,
+      "category": "build_step",
+      "source_file": "server/package.json",
+      "value": "tsc --noEmit",
+      "confidence": 0.85,
+      "notes": "TypeScript check step to validate code without emitting files."
+    },
+    {
+      "id": 227,
+      "category": "build_step",
+      "source_file": "server/package.json",
+      "value": "vitest",
+      "confidence": 0.85,
+      "notes": "Unit and integration testing framework used for testing the application's components."
+    },
+    {
+      "id": 309,
+      "category": "build_step",
+      "source_file": "web/package.json",
+      "value": "vite build",
+      "confidence": 0.85,
+      "notes": "Build command indicates a Vite build step, which may need to be integrated into Snap's build lifecycle (e.g., via snapcraft.yaml)."
+    },
+    {
+      "id": 649,
+      "category": "build_step",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "hatchling.build",
+      "confidence": 0.85,
+      "notes": "Build backend for packaging with Hatch"
+    },
+    {
+      "id": 834,
+      "category": "build_step",
+      "source_file": "docs/package.json",
+      "value": "copy:openapi",
+      "confidence": 0.85,
+      "notes": "A script to copy OpenAPI specifications from a parent directory to the static assets directory during build."
+    },
+    {
+      "id": 1037,
+      "category": "build_step",
+      "source_file": "packages/plugin-sdk/package.json",
+      "value": "node esbuild.js && tsc --emitDeclarationOnly && tsc-alias",
+      "confidence": 0.85,
+      "notes": "Build script that runs esbuild and TypeScript compiler to generate JavaScript and type declarations"
+    },
+    {
+      "id": 1119,
+      "category": "build_step",
+      "source_file": "packages/sdk/package.json",
+      "value": "tsc",
+      "confidence": 0.85,
+      "notes": "Build script uses TypeScript compiler to compile the SDK"
+    },
+    {
+      "id": 1184,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/package.json",
+      "value": "pnpm build:tsc && pnpm build:wasm",
+      "confidence": 0.85,
+      "notes": "Build script that runs TypeScript compilation and WebAssembly generation using extism-js."
+    },
+    {
+      "id": 1185,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/package.json",
+      "value": "tsc --noEmit && node esbuild.js",
+      "confidence": 0.85,
+      "notes": "TypeScript compilation without emitting files, followed by esbuild execution to process the plugin code."
+    },
+    {
+      "id": 1186,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/package.json",
+      "value": "extism-js dist/index.js -i src/index.d.ts -o dist/plugin.wasm",
+      "confidence": 0.85,
+      "notes": "Generates a WebAssembly binary from TypeScript definition using the extism-js tool."
+    },
+    {
+      "id": 1227,
+      "category": "build_step",
+      "source_file": "mobile/android/app/CMakeLists.txt",
+      "value": "add_library(native_buffer SHARED src/main/cpp/native_buffer.c)",
+      "confidence": 0.85,
+      "notes": "Defines a shared library for native code integration in Android app"
+    },
+    {
+      "id": 1228,
+      "category": "build_step",
+      "source_file": "mobile/android/app/CMakeLists.txt",
+      "value": "target_link_libraries(native_buffer jnigraphics)",
+      "confidence": 0.85,
+      "notes": "Links the native buffer library to the JNI graphics library for graphics operations"
+    },
+    {
+      "id": 165,
+      "category": "build_step",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "no build step defined",
+      "confidence": 0.75,
+      "notes": "No build instructions or custom build commands provided"
+    },
+    {
+      "id": 414,
+      "category": "build_step",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "build_runner",
+      "confidence": 0.75,
+      "notes": "Generates code from annotations (e.g., auto_route)"
+    },
+    {
+      "id": 415,
+      "category": "build_step",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "drift_dev",
+      "confidence": 0.75,
+      "notes": "Drift database schema generation"
+    },
+    {
+      "id": 416,
+      "category": "build_step",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "auto_route_generator",
+      "confidence": 0.75,
+      "notes": "Generates navigation routes"
+    },
+    {
+      "id": 417,
+      "category": "build_step",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "pigeon",
+      "confidence": 0.75,
+      "notes": "Generates type-safe platform code"
+    },
+    {
+      "id": 502,
+      "category": "build_step",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "wget -O native_class.mustache https://raw.githubusercontent.com/OpenAPITools/openapi-generator/$OPENAPI_GENERATOR_VERSION/modules/...",
+      "confidence": 0.75,
+      "notes": "Downloads and patches mustache templates from OpenAPI Generator repository"
+    },
+    {
+      "id": 503,
+      "category": "build_step",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "patch --no-backup-if-mismatch -u ...",
+      "confidence": 0.75,
+      "notes": "Applies patches to generated Dart templates and files to customize behavior"
+    },
+    {
+      "id": 592,
+      "category": "build_step",
+      "source_file": "server/bin/get-cpus.sh",
+      "value": "detect cgroup version and CPU limits",
+      "confidence": 0.75,
+      "notes": "Script checks for cgroup v1/v2 and reads CPU quota/period from appropriate sysfs paths"
+    },
+    {
+      "id": 677,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "pnpm install --filter immich --frozen-lockfile",
+      "confidence": 0.75,
+      "notes": "Installs only the immich package and its dependencies using pnpm with a frozen lockfile during installation."
+    },
+    {
+      "id": 679,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "vitest --config test/vitest.config.mjs",
+      "confidence": 0.75,
+      "notes": "Runs unit tests using Vitest with the default configuration file."
+    },
+    {
+      "id": 680,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "vitest --config test/vitest.config.medium.mjs",
+      "confidence": 0.75,
+      "notes": "Runs medium-sized tests using Vitest with the medium configuration file."
+    },
+    {
+      "id": 681,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "prettier --check .",
+      "confidence": 0.75,
+      "notes": "Checks code formatting compliance using Prettier."
+    },
+    {
+      "id": 682,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "prettier --write .",
+      "confidence": 0.75,
+      "notes": "Formats code files automatically using Prettier."
+    },
+    {
+      "id": 683,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "eslint \"src/**/*.ts\" \"test/**/*.ts\" --max-warnings 0",
+      "confidence": 0.75,
+      "notes": "Lints TypeScript files in src and test directories with no warnings allowed."
+    },
+    {
+      "id": 685,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "node ./dist/bin/sync-sql.js",
+      "confidence": 0.75,
+      "notes": "Synchronizes SQL schema using a Node.js script in the dist directory."
+    },
+    {
+      "id": 686,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "node ./dist/bin/sync-open-api.js",
+      "confidence": 0.75,
+      "notes": "Synchronizes OpenAPI schema using a Node.js script in the dist directory."
+    },
+    {
+      "id": 687,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "node ./dist/bin/migrations.js",
+      "confidence": 0.75,
+      "notes": "Executes database migration commands."
+    },
+    {
+      "id": 688,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "node ./dist/bin/migrations query 'DROP schema public cascade; CREATE schema public;'",
+      "confidence": 0.75,
+      "notes": "Performs schema drop and recreation via migration script."
+    },
+    {
+      "id": 689,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "node ./dist/bin/migrations run",
+      "confidence": 0.75,
+      "notes": "Executes database migration commands as part of a schema reset."
+    },
+    {
+      "id": 690,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": "email dev -p 3050 --dir src/emails",
+      "confidence": 0.75,
+      "notes": "Sends development emails using a custom email tool with a specific port and directory."
+    },
+    {
+      "id": 691,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": ":ci-unit",
+      "confidence": 0.75,
+      "notes": "Runs a CI pipeline for unit testing, including install, formatting, linting, and test execution."
+    },
+    {
+      "id": 692,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": ":ci-medium",
+      "confidence": 0.75,
+      "notes": "Runs a CI pipeline for medium-sized tests, including installation, plugin build, and medium test execution."
+    },
+    {
+      "id": 693,
+      "category": "build_step",
+      "source_file": "server/mise.toml",
+      "value": ":checklist",
+      "confidence": 0.75,
+      "notes": "Executes both CI unit and CI medium test pipelines as a comprehensive check."
+    },
+    {
+      "id": 712,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/tsconfig.json",
+      "value": "compile",
+      "confidence": 0.75,
+      "notes": "TypeScript compilation configured with 'noEmit': true, indicating only declaration files are generated without emitting .js or .d.ts files"
+    },
+    {
+      "id": 713,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/tsconfig.json",
+      "value": "es2020",
+      "confidence": 0.75,
+      "notes": "Target and library version set to ECMAScript 2020, ensuring compatibility with modern JavaScript features"
+    },
+    {
+      "id": 714,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/tsconfig.json",
+      "value": "nodenext",
+      "confidence": 0.75,
+      "notes": "Module and module resolution set to 'nodenext', indicating use of Node.js next module system for compatibility with modern Node.js features"
+    },
+    {
+      "id": 715,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/tsconfig.json",
+      "value": "src/**/*.ts",
+      "confidence": 0.75,
+      "notes": "TypeScript files in the src directory are included in compilation, with exclusion of node_modules"
+    },
+    {
+      "id": 716,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/tsconfig.json",
+      "value": "./dist",
+      "confidence": 0.75,
+      "notes": "Output directory for generated declaration files is set to './dist'"
+    },
+    {
+      "id": 725,
+      "category": "build_step",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "git init",
+      "confidence": 0.75,
+      "notes": "Initializes a Git repository; implies the snap may need to manage local state or workspaces"
+    },
+    {
+      "id": 726,
+      "category": "build_step",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "git add .",
+      "confidence": 0.75,
+      "notes": "Stages all files for commit; indicates the snap may manage file changes during build"
+    },
+    {
+      "id": 727,
+      "category": "build_step",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "git commit",
+      "confidence": 0.75,
+      "notes": "Commits changes with release notes; may require integration with CI/CD or version control workflows"
+    },
+    {
+      "id": 738,
+      "category": "build_step",
+      "source_file": ".devcontainer/mobile/devcontainer.json",
+      "value": "overrideCommand",
+      "confidence": 0.75,
+      "notes": "Indicates that the default command is overridden, possibly for custom startup or build behavior"
+    },
+    {
+      "id": 740,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm install --filter immich-web --frozen-lockfile",
+      "confidence": 0.75,
+      "notes": "Installation step for immich-web package filtered by package name and using frozen lockfile for consistency"
+    },
+    {
+      "id": 741,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run build",
+      "confidence": 0.75,
+      "notes": "Build step for immich-web application"
+    },
+    {
+      "id": 742,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run build:stats",
+      "confidence": 0.75,
+      "notes": "Build stats task for immich-web"
+    },
+    {
+      "id": 743,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run preview",
+      "confidence": 0.75,
+      "notes": "Preview task for immich-web"
+    },
+    {
+      "id": 744,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run dev",
+      "confidence": 0.75,
+      "notes": "Development server start command for immich-web"
+    },
+    {
+      "id": 745,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "https://demo.immich.app",
+      "confidence": 0.75,
+      "notes": "Environment variable set for IMMICH_SERVER_URL in start-demo task"
+    },
+    {
+      "id": 746,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run test",
+      "confidence": 0.75,
+      "notes": "Test execution command for immich-web"
+    },
+    {
+      "id": 747,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run format",
+      "confidence": 0.75,
+      "notes": "Code formatting task for immich-web"
+    },
+    {
+      "id": 748,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run format:fix",
+      "confidence": 0.75,
+      "notes": "Automated code formatting fixes"
+    },
+    {
+      "id": 749,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run lint",
+      "confidence": 0.75,
+      "notes": "Linter execution for immich-web"
+    },
+    {
+      "id": 750,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run lint:fix",
+      "confidence": 0.75,
+      "notes": "Linter with automatic fix application"
+    },
+    {
+      "id": 751,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run check:typescript",
+      "confidence": 0.75,
+      "notes": "TypeScript type checking task"
+    },
+    {
+      "id": 752,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run check:svelte",
+      "confidence": 0.75,
+      "notes": "Svelte-specific code checking task"
+    },
+    {
+      "id": 753,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run check",
+      "confidence": 0.75,
+      "notes": "Composite task running both TypeScript and Svelte checks"
+    },
+    {
+      "id": 754,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run install",
+      "confidence": 0.75,
+      "notes": "Dependency installation step in CI unit workflow"
+    },
+    {
+      "id": 757,
+      "category": "build_step",
+      "source_file": "web/mise.toml",
+      "value": "pnpm run test --run",
+      "confidence": 0.75,
+      "notes": "Test execution with run flag in CI unit workflow"
+    },
+    {
+      "id": 808,
+      "category": "build_step",
+      "source_file": "packages/cli/mise.toml",
+      "value": "eslint \"src/**/*.ts\" --max-warnings 0",
+      "confidence": 0.75,
+      "notes": "Linting step for TypeScript files in the 'lint' task"
+    },
+    {
+      "id": 812,
+      "category": "build_step",
+      "source_file": "packages/cli/mise.toml",
+      "value": "pnpm publish --provenance --no-git-checks",
+      "confidence": 0.75,
+      "notes": "CI publish step for publishing the package with provenance and no Git checks"
+    },
+    {
+      "id": 862,
+      "category": "build_step",
+      "source_file": "e2e/mise.toml",
+      "value": "ci-setup",
+      "confidence": 0.75,
+      "notes": "Setup step that depends on SDK and CLI installation and build tasks"
+    },
+    {
+      "id": 863,
+      "category": "build_step",
+      "source_file": "e2e/mise.toml",
+      "value": "ci-unit",
+      "confidence": 0.75,
+      "notes": "Unit test build step that depends on install, format, lint, and check tasks"
+    },
+    {
+      "id": 869,
+      "category": "build_step",
+      "source_file": "mobile/packages/ui/showcase/pubspec.yaml",
+      "value": "flutter assets",
+      "confidence": 0.75,
+      "notes": "Assets and fonts are processed during Flutter build, which implies asset copying during packaging"
+    },
+    {
+      "id": 878,
+      "category": "build_step",
+      "source_file": ".devcontainer/mobile/container-compose-overrides.yml",
+      "value": "dev-container-mobile",
+      "confidence": 0.75,
+      "notes": "Build target specified for immich-server container, indicating a custom build step in dev container"
+    },
+    {
+      "id": 897,
+      "category": "build_step",
+      "source_file": "mobile/ios/ci_scripts/ci_post_clone.sh",
+      "value": "flutter precache --ios",
+      "confidence": 0.75,
+      "notes": "A build step to pre-cache Flutter iOS artifacts, ensuring platform-specific binaries are available during CI."
+    },
+    {
+      "id": 898,
+      "category": "build_step",
+      "source_file": "mobile/ios/ci_scripts/ci_post_clone.sh",
+      "value": "flutter pub get",
+      "confidence": 0.75,
+      "notes": "Flutter dependencies are fetched using `flutter pub get`, which is a standard step in Flutter project setup."
+    },
+    {
+      "id": 899,
+      "category": "build_step",
+      "source_file": "mobile/ios/ci_scripts/ci_post_clone.sh",
+      "value": "cd ios && pod install",
+      "confidence": 0.75,
+      "notes": "Installs CocoaPods dependencies by running `pod install` in the iOS directory, a required step for iOS app development."
+    },
+    {
+      "id": 928,
+      "category": "build_step",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "dev-container-server",
+      "confidence": 0.75,
+      "notes": "Build target specified for immich-server image during container build"
+    },
+    {
+      "id": 940,
+      "category": "build_step",
+      "source_file": "packages/plugin-sdk/tsconfig.json",
+      "value": "esnext",
+      "confidence": 0.75,
+      "notes": "The target and lib settings point to esnext, indicating the build process will transpile to modern JavaScript features for Node.js environment."
+    },
+    {
+      "id": 942,
+      "category": "build_step",
+      "source_file": "packages/plugin-sdk/tsconfig.json",
+      "value": "declaration",
+      "confidence": 0.75,
+      "notes": "Enabled declaration files output, which is typical for TypeScript projects that generate .d.ts files for type checking and interop."
+    },
+    {
+      "id": 943,
+      "category": "build_step",
+      "source_file": "packages/plugin-sdk/tsconfig.json",
+      "value": "outDir",
+      "confidence": 0.75,
+      "notes": "Output directory set to './dist', indicating where compiled output will be placed during build, relevant for Snapcraft's build phase."
+    },
+    {
+      "id": 944,
+      "category": "build_step",
+      "source_file": "packages/plugin-sdk/tsconfig.json",
+      "value": "rootDir",
+      "confidence": 0.75,
+      "notes": "Source root directory set to './src', indicating the source files are located in the src directory, which Snapcraft may use to determine source layout."
+    },
+    {
+      "id": 965,
+      "category": "build_step",
+      "source_file": ".vscode/launch.json",
+      "value": "Build @immich/cli",
+      "confidence": 0.75,
+      "notes": "Pre-launch task to build the Immich CLI before execution"
+    },
+    {
+      "id": 970,
+      "category": "build_step",
+      "source_file": "mobile/scripts/check_i18n_keys.py",
+      "value": "check_i18n_keys.py",
+      "confidence": 0.75,
+      "notes": "A Python script that validates i18n keys are present in source code, likely part of a build validation or linting step."
+    },
+    {
+      "id": 972,
+      "category": "build_step",
+      "source_file": "server/tsconfig.json",
+      "value": "tsconfig.json",
+      "confidence": 0.75,
+      "notes": "Configures TypeScript compilation settings for the snap package, including module resolution, target version, and output directory."
+    },
+    {
+      "id": 974,
+      "category": "build_step",
+      "source_file": "server/tsconfig.json",
+      "value": "es2022",
+      "confidence": 0.75,
+      "notes": "Sets the JavaScript target to ES2022, indicating the target language version for generated JavaScript code."
+    },
+    {
+      "id": 975,
+      "category": "build_step",
+      "source_file": "server/tsconfig.json",
+      "value": "react",
+      "confidence": 0.75,
+      "notes": "Configures JSX support for React components, indicating the application is a React-based frontend."
+    },
+    {
+      "id": 976,
+      "category": "build_step",
+      "source_file": "server/tsconfig.json",
+      "value": "dist",
+      "confidence": 0.75,
+      "notes": "Sets the output directory for compiled TypeScript files, which will be used during the build process in the snap."
+    },
+    {
+      "id": 977,
+      "category": "build_step",
+      "source_file": "server/tsconfig.json",
+      "value": "incremental",
+      "confidence": 0.75,
+      "notes": "Enables incremental builds to improve build performance during development and continuous integration."
+    },
+    {
+      "id": 978,
+      "category": "build_step",
+      "source_file": "server/tsconfig.json",
+      "value": "tsBuildInfoFile",
+      "confidence": 0.75,
+      "notes": "Specifies a file to store TypeScript build information for faster rebuilds."
+    },
+    {
+      "id": 979,
+      "category": "build_step",
+      "source_file": "server/tsconfig.json",
+      "value": "vitest/globals",
+      "confidence": 0.75,
+      "notes": "Includes Vitest global types, indicating integration with Vitest for testing."
+    },
+    {
+      "id": 988,
+      "category": "build_step",
+      "source_file": "machine-learning/scripts/healthcheck.py",
+      "value": "import os, sys, requests, ipaddress",
+      "confidence": 0.75,
+      "notes": "Script imports necessary Python modules for environment handling and network communication"
+    },
+    {
+      "id": 992,
+      "category": "build_step",
+      "source_file": ".devcontainer/server/container-start-frontend.sh",
+      "value": "pnpm --filter @immich/sdk build",
+      "confidence": 0.75,
+      "notes": "A build step is performed for the @immich/sdk package prior to starting the web frontend."
+    },
+    {
+      "id": 999,
+      "category": "build_step",
+      "source_file": "mobile/build.yaml",
+      "value": "drift_dev:analyzer",
+      "confidence": 0.75,
+      "notes": "Configures the analyzer builder to generate code from Dart drift entities and repositories"
+    },
+    {
+      "id": 1000,
+      "category": "build_step",
+      "source_file": "mobile/build.yaml",
+      "value": "drift_dev:modular",
+      "confidence": 0.75,
+      "notes": "Enables modular builder with shared drift options and generation targets for entities and repositories"
+    },
+    {
+      "id": 1018,
+      "category": "build_step",
+      "source_file": ".devcontainer/server/container-start-backend.sh",
+      "value": "pnpm --filter immich install",
+      "confidence": 0.75,
+      "notes": "Initial build step to install dependencies for the Immich server component"
+    },
+    {
+      "id": 1046,
+      "category": "build_step",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No build instructions or build steps defined in the file."
+    },
+    {
+      "id": 1067,
+      "category": "build_step",
+      "source_file": "machine-learning/mise.toml",
+      "value": "uv sync --locked",
+      "confidence": 0.75,
+      "notes": "Installation step that synchronizes dependencies from a locked requirements file"
+    },
+    {
+      "id": 1081,
+      "category": "build_step",
+      "source_file": "server/nest-cli.json",
+      "value": "deleteOutDir: false",
+      "confidence": 0.75,
+      "notes": "Configures the compiler to not delete the output directory, which may affect build output cleanup during development or build processes."
+    },
+    {
+      "id": 1082,
+      "category": "build_step",
+      "source_file": "server/nest-cli.json",
+      "value": "webpack: false",
+      "confidence": 0.75,
+      "notes": "Disables Webpack usage in the build process, indicating a preference for the default compiler or other bundling tools."
+    },
+    {
+      "id": 1107,
+      "category": "build_step",
+      "source_file": "docs/mise.toml",
+      "value": "pnpm install --filter documentation --frozen-lockfile",
+      "confidence": 0.75,
+      "notes": "Installs only the documentation dependencies to reduce build time and footprint"
+    },
+    {
+      "id": 1126,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "module: esnext",
+      "confidence": 0.75,
+      "notes": "Specifies the module format to use during TypeScript compilation."
+    },
+    {
+      "id": 1127,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "target: es2023",
+      "confidence": 0.75,
+      "notes": "Sets the JavaScript target version to ES2023, indicating modern JavaScript features are supported."
+    },
+    {
+      "id": 1128,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "outDir: ./dist",
+      "confidence": 0.75,
+      "notes": "Specifies the output directory for compiled JavaScript files."
+    },
+    {
+      "id": 1129,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "rootDir: ./src",
+      "confidence": 0.75,
+      "notes": "Defines the source root directory for TypeScript files."
+    },
+    {
+      "id": 1130,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "incremental: true",
+      "confidence": 0.75,
+      "notes": "Enables incremental compilation for improved build performance."
+    },
+    {
+      "id": 1131,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "skipLibCheck: true",
+      "confidence": 0.75,
+      "notes": "Skips checking of library files for type consistency during compilation."
+    },
+    {
+      "id": 1132,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "types: [\"vitest/globals\"]",
+      "confidence": 0.75,
+      "notes": "Includes Vitest global types to support testing environment."
+    },
+    {
+      "id": 1133,
+      "category": "build_step",
+      "source_file": "packages/cli/tsconfig.json",
+      "value": "exclude: [\"dist\", \"node_modules\", \"vite.config.ts\"]",
+      "confidence": 0.75,
+      "notes": "Excludes specific directories and files from being compiled."
+    },
+    {
+      "id": 1155,
+      "category": "build_step",
+      "source_file": ".github/mise.toml",
+      "value": "pnpm install --filter github --frozen-lockfile",
+      "confidence": 0.75,
+      "notes": "Installs only the 'github' package filter with a frozen lockfile during the build process"
+    },
+    {
+      "id": 1167,
+      "category": "build_step",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "g++ -o ../armnnconverter -O1 -DARMNN_ONNX_PARSER -DARMNN_SERIALIZER -DARMNN_TF_LITE_PARSER -fuse-ld=gold -std=c++17 -Iinclude -Isrc/armnnUtils -Ithird-party -larmnn -larmnnDeserializer -larmnnTfLiteParser -larmnnOnnxParser -larmnnSerializer -L../armnn src/armnnConverter/ArmnnConverter.cpp",
+      "confidence": 0.75,
+      "notes": "Compilation command for building the ArmNN converter binary, including C++ flags, include paths, and library dependencies"
+    },
+    {
+      "id": 1174,
+      "category": "build_step",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "cd armnn-23.11/ || exit",
+      "confidence": 0.75,
+      "notes": "Initial directory change to the ArmNN source directory, ensuring correct build context"
+    },
+    {
+      "id": 1207,
+      "category": "build_step",
+      "source_file": "machine-learning/ann/export/download-armnn.sh",
+      "value": "download and extract ArmNN binaries",
+      "confidence": 0.75,
+      "notes": "Script downloads and extracts ArmNN binaries for ARM and x86_64 platforms"
+    },
+    {
+      "id": 1208,
+      "category": "build_step",
+      "source_file": "machine-learning/ann/export/download-armnn.sh",
+      "value": "download and extract ArmNN source code",
+      "confidence": 0.75,
+      "notes": "Script downloads and extracts ArmNN source code (v23.11) for building ArmNN Converter"
+    },
+    {
+      "id": 1210,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/mise.toml",
+      "value": "pnpm --filter @immich/plugin-sdk --filter @immich/plugin-core build",
+      "confidence": 0.75,
+      "notes": "Build command for the plugin core and SDK, executed after installation"
+    },
+    {
+      "id": 1211,
+      "category": "build_step",
+      "source_file": "packages/plugin-core/mise.toml",
+      "value": "pnpm install --frozen-lockfile",
+      "confidence": 0.75,
+      "notes": "Installation step that ensures consistent dependency resolution during build"
+    },
+    {
+      "id": 1214,
+      "category": "build_step",
+      "source_file": "server/tsconfig.build.json",
+      "value": "tsconfig.build.json",
+      "confidence": 0.75,
+      "notes": "Configures TypeScript build settings for snap packaging, including root directory and tsBuildInfoFile for incremental builds."
+    },
+    {
+      "id": 1216,
+      "category": "build_step",
+      "source_file": "server/tsconfig.build.json",
+      "value": "tsBuildInfoFile: ./dist/tsconfig.build.tsbuildinfo",
+      "confidence": 0.75,
+      "notes": "Enables incremental builds by storing TypeScript build information in a file for faster rebuilds."
+    },
+    {
+      "id": 1217,
+      "category": "build_step",
+      "source_file": "server/tsconfig.build.json",
+      "value": "exclude: [\"dist\", \"node_modules\", \"upload\", \"test\", \"e2e\", \"**/*spec.ts\"]",
+      "confidence": 0.75,
+      "notes": "Excludes common build artifacts and test files to prevent accidental inclusion in the build output."
+    },
+    {
+      "id": 1234,
+      "category": "build_step",
+      "source_file": "mobile/openapi/.travis.yml",
+      "value": "pub get",
+      "confidence": 0.75,
+      "notes": "Step to install dependencies via Dart's pub package manager"
+    },
+    {
+      "id": 1241,
+      "category": "build_step",
+      "source_file": "machine-learning/scripts/configure-apt.sh",
+      "value": "configure-apt.sh",
+      "confidence": 0.75,
+      "notes": "This script is executed during the build process to configure APT sources and preferences, which may be part of a snap's build configuration for ensuring consistent package availability."
+    },
+    {
+      "id": 1244,
+      "category": "build_step",
+      "source_file": "machine-learning/ann/build.sh",
+      "value": "g++ -shared -O3 -o libann.so -fuse-ld=gold -std=c++17 -I\"$ARMNN_PATH\"/include -larmnn -larmnnDeserializer -larmnnTfLiteParser -larmnnOnnxParser -L\"$ARMNN_PATH\" ann.cpp",
+      "confidence": 0.75,
+      "notes": "Compiles the C++ ANN library into a shared library (libann.so) using g++, linking against ARMNN libraries and including ARMNN headers."
+    },
+    {
+      "id": 14,
+      "category": "build_step",
+      "source_file": "mise.lock",
+      "value": "download and extract tool binaries",
+      "confidence": 0.5,
+      "notes": "Snapcraft build steps would likely include downloading and extracting binaries from URLs specified in the mise.lock file for each platform"
+    },
+    {
+      "id": 72,
+      "category": "build_step",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "copy-config",
+      "confidence": 0.5,
+      "notes": "Build step to copy configuration files into the application directory"
+    },
+    {
+      "id": 73,
+      "category": "build_step",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "generate-config",
+      "confidence": 0.5,
+      "notes": "Build step to generate or validate configuration based on environment"
+    },
+    {
+      "id": 102,
+      "category": "build_step",
+      "source_file": "server/src/config.ts",
+      "value": "install-ffmpeg",
+      "confidence": 0.5,
+      "notes": "Implied build step to install or configure FFmpeg in the snap"
+    },
+    {
+      "id": 113,
+      "category": "build_step",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "preload_models",
+      "confidence": 0.5,
+      "notes": "Function responsible for loading models at startup based on configuration, indicating model dependency management is part of the startup process."
+    },
+    {
+      "id": 122,
+      "category": "build_step",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "CDLL(\"libmali.so\")",
+      "confidence": 0.5,
+      "notes": "Runtime check for presence of libmali.so; if missing, fallback to ONNX backend is triggered"
+    },
+    {
+      "id": 283,
+      "category": "build_step",
+      "source_file": "packages/e2e-auth-server/auth-server.ts",
+      "value": "npm install",
+      "confidence": 0.5,
+      "notes": "Implicit build step required to install dependencies like 'jose' and 'oidc-provider' during snap build"
+    },
+    {
+      "id": 330,
+      "category": "build_step",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "configure logging with rich handler",
+      "confidence": 0.5,
+      "notes": "Custom logging handler with exclusion of certain modules for better tracebacks"
+    },
+    {
+      "id": 331,
+      "category": "build_step",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "set default values for model and batch size",
+      "confidence": 0.5,
+      "notes": "Configuration defaults for model and batch size based on system CPU"
+    },
+    {
+      "id": 334,
+      "category": "build_step",
+      "source_file": "machine-learning/mise.lock",
+      "value": "download python-build-standalone and uv binaries",
+      "confidence": 0.5,
+      "notes": "Pre-built Python and UV binaries are fetched from GitHub releases for specific architectures (aarch64, x86_64, etc.)"
+    },
+    {
+      "id": 491,
+      "category": "build_step",
+      "source_file": "deployment/mise.lock",
+      "value": "download binaries from GitHub releases",
+      "confidence": 0.5,
+      "notes": "Binaries are fetched from GitHub release URLs with checksums for integrity verification"
+    },
+    {
+      "id": 497,
+      "category": "build_step",
+      "source_file": "server/src/commands/media-location.command.ts",
+      "value": "run",
+      "confidence": 0.5,
+      "notes": "Command execution flow includes a run method that handles user input and database migration logic."
+    },
+    {
+      "id": 568,
+      "category": "build_step",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "build-lock.json",
+      "confidence": 0.5,
+      "notes": "Build lock file path used during build process"
+    },
+    {
+      "id": 569,
+      "category": "build_step",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "version.immich.cloud/version",
+      "confidence": 0.5,
+      "notes": "URL used for version check during setup"
+    },
+    {
+      "id": 575,
+      "category": "build_step",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "gunicorn_conf.py",
+      "confidence": 0.5,
+      "notes": "Configuration file used by Gunicorn to define server settings, such as workers and timeouts."
+    },
+    {
+      "id": 605,
+      "category": "build_step",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "docker compose up --build --renew-anon-volumes --force-recreate --remove-orphans",
+      "confidence": 0.5,
+      "notes": "Build and restart Docker Compose services during test execution, including volume management."
+    },
+    {
+      "id": 778,
+      "category": "build_step",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "writeAuthFile",
+      "confidence": 0.5,
+      "notes": "Writes authentication data to a file in the config directory, which is managed via the configDirectory option"
+    },
+    {
+      "id": 783,
+      "category": "build_step",
+      "source_file": "web/vite.config.ts",
+      "value": "visualizer",
+      "confidence": 0.5,
+      "notes": "Build-time plugin for generating performance stats, which may require additional build tools or output handling in snap build."
+    },
+    {
+      "id": 804,
+      "category": "build_step",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "start PostgreSQL container with custom configuration",
+      "confidence": 0.5,
+      "notes": "Container starts with specific PostgreSQL settings including vchord.so and WAL optimizations"
+    },
+    {
+      "id": 841,
+      "category": "build_step",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "includeBuild(\"$flutterSdkPath/packages/flutter_tools/gradle\")",
+      "confidence": 0.5,
+      "notes": "Includes Flutter Tools Gradle configuration from the Flutter SDK"
+    },
+    {
+      "id": 842,
+      "category": "build_step",
+      "source_file": "mobile/android/settings.gradle",
+      "value": "include \":app\"",
+      "confidence": 0.5,
+      "notes": "Includes the main Android application module in the build"
+    },
+    {
+      "id": 847,
+      "category": "build_step",
+      "source_file": "web/svelte.config.js",
+      "value": "vitePreprocess",
+      "confidence": 0.5,
+      "notes": "Uses Vite preprocessing for Svelte component compilation"
+    },
+    {
+      "id": 907,
+      "category": "build_step",
+      "source_file": "server/test/vitest.config.mjs",
+      "value": "vite",
+      "confidence": 0.5,
+      "notes": "Vite configuration includes plugin and test setup for server-side unit testing"
+    },
+    {
+      "id": 953,
+      "category": "build_step",
+      "source_file": "server/test/vitest.config.medium.mjs",
+      "value": "server:medium",
+      "confidence": 0.5,
+      "notes": "Test suite name indicating a medium-sized server test configuration"
+    },
+    {
+      "id": 1079,
+      "category": "build_step",
+      "source_file": "e2e/vitest.config.ts",
+      "value": "globalSetup",
+      "confidence": 0.5,
+      "notes": "Determines which setup scripts to run based on Docker availability"
+    },
+    {
+      "id": 1153,
+      "category": "build_step",
+      "source_file": "machine-learning/immich_ml/gunicorn_conf.py",
+      "value": "pre_fork",
+      "confidence": 0.5,
+      "notes": "Gunicorn pre_fork hook used to assign device IDs to workers, enabling distributed device usage across multiple worker processes"
+    },
+    {
+      "id": 1180,
+      "category": "build_step",
+      "source_file": "packages/cli/.npmignore",
+      "value": "Dockerfile",
+      "confidence": 0.5,
+      "notes": "The presence of a Dockerfile suggests a Docker-based build process may be used, which could influence snap build configuration if Docker is used as a build tool."
+    },
+    {
+      "id": 1192,
+      "category": "build_step",
+      "source_file": "packages/plugin-sdk/esbuild.js",
+      "value": "esbuild.build",
+      "confidence": 0.5,
+      "notes": "Configures the esbuild tool to build TypeScript files into ESM bundles with ES2020 target support"
+    },
+    {
+      "id": 1196,
+      "category": "build_step",
+      "source_file": "mobile/android/gradle/wrapper/gradle-wrapper.properties",
+      "value": "gradle-8.14-all.zip",
+      "confidence": 0.5,
+      "notes": "Specifies the Gradle distribution version to be downloaded during build setup"
+    },
+    {
+      "id": 1237,
+      "category": "build_step",
+      "source_file": "open-api/patch/pubspec_immich_mobile.yaml.patch",
+      "value": "path: ../",
+      "confidence": 0.5,
+      "notes": "Specifies that the immich_mobile dependency is resolved from a relative path (../), suggesting a local development or monorepo setup where the dependency is managed externally."
+    },
+    {
+      "id": 1266,
+      "category": "build_step",
+      "source_file": "deployment/modules/cloudflare/docs-release/terragrunt.hcl",
+      "value": "get_env",
+      "confidence": 0.5,
+      "notes": "Function call to retrieve environment variables during Terraform execution"
+    },
+    {
+      "id": 1289,
+      "category": "build_step",
+      "source_file": "web/.gitignore",
+      "value": "node_modules",
+      "confidence": 0.5,
+      "notes": "Excluded from git tracking, indicating it's managed during build process"
+    },
+    {
+      "id": 1290,
+      "category": "build_step",
+      "source_file": "web/.gitignore",
+      "value": ".svelte-kit",
+      "confidence": 0.5,
+      "notes": "SvelteKit build artifacts are excluded, suggesting they are generated during build"
+    },
+    {
+      "id": 1291,
+      "category": "build_step",
+      "source_file": "web/.gitignore",
+      "value": "build",
+      "confidence": 0.5,
+      "notes": "Build directory is excluded, indicating it's a temporary build output directory"
+    },
+    {
+      "id": 1307,
+      "category": "build_step",
+      "source_file": "server/.npmignore",
+      "value": "src",
+      "confidence": 0.5,
+      "notes": "Excludes the src directory from being included in the npm package, suggesting it's intended for source code management outside of the package."
+    },
+    {
+      "id": 1308,
+      "category": "build_step",
+      "source_file": "server/.npmignore",
+      "value": "tsconfig*",
+      "confidence": 0.5,
+      "notes": "Excludes TypeScript configuration files, indicating they are not part of the final package distribution."
+    },
+    {
+      "id": 1309,
+      "category": "build_step",
+      "source_file": "server/.npmignore",
+      "value": "eslint*",
+      "confidence": 0.5,
+      "notes": "Excludes ESLint configuration files, implying these are development-only tools not included in the final package."
+    },
+    {
+      "id": 1310,
+      "category": "build_step",
+      "source_file": "server/.npmignore",
+      "value": "pnpm*",
+      "confidence": 0.5,
+      "notes": "Excludes pnpm-related files, suggesting the package does not include pnpm configuration or scripts."
+    },
+    {
+      "id": 1311,
+      "category": "build_step",
+      "source_file": "server/.npmignore",
+      "value": "coverage",
+      "confidence": 0.5,
+      "notes": "Excludes coverage reports, which are typically generated during testing and not needed in the final snap package."
+    },
+    {
+      "id": 1312,
+      "category": "build_step",
+      "source_file": "web/.dockerignore",
+      "value": "node_modules/",
+      "confidence": 0.5,
+      "notes": "Excludes node_modules directory from Docker build to prevent unnecessary inclusion in the build context."
+    },
+    {
+      "id": 1313,
+      "category": "build_step",
+      "source_file": "web/.dockerignore",
+      "value": "coverage/",
+      "confidence": 0.5,
+      "notes": "Excludes coverage directory to avoid including test coverage data in the build."
+    },
+    {
+      "id": 1315,
+      "category": "build_step",
+      "source_file": "web/.dockerignore",
+      "value": "build/",
+      "confidence": 0.5,
+      "notes": "Excludes build output directory to prevent including compiled assets in the final image."
+    },
+    {
+      "id": 1337,
+      "category": "build_step",
+      "source_file": "packages/cli/bin/immich",
+      "value": "import '../dist/index.js';",
+      "confidence": 0.5,
+      "notes": "The entrypoint imports a bundled JavaScript file from the dist directory, suggesting a build step that bundles the CLI logic into a JavaScript file for runtime execution."
+    }
+  ]
+}

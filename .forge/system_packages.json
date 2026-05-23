@@ -1,0 +1,633 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 175,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "cuda",
+      "confidence": 0.95,
+      "notes": "Runtime dependency for GPU acceleration; script checks for CUDA availability and uses half-precision where available."
+    },
+    {
+      "id": 176,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "libonnxruntime",
+      "confidence": 0.95,
+      "notes": "Implied dependency for ONNX runtime operations, though not explicitly imported; may be required for ONNX model loading."
+    },
+    {
+      "id": 709,
+      "category": "system_package",
+      "source_file": "server/bin/start.sh",
+      "value": "node",
+      "confidence": 0.95,
+      "notes": "Required for running the Node.js server; likely included as a system package dependency in the snap."
+    },
+    {
+      "id": 710,
+      "category": "system_package",
+      "source_file": "server/bin/start.sh",
+      "value": "libmimalloc",
+      "confidence": 0.95,
+      "notes": "Library loaded via LD_PRELOAD to optimize memory usage; requires the libmimalloc.so.3 file to be present in the system's lib path."
+    },
+    {
+      "id": 711,
+      "category": "system_package",
+      "source_file": "server/bin/start.sh",
+      "value": "ffmpeg",
+      "confidence": 0.95,
+      "notes": "Indicated via LD_LIBRARY_PATH to /usr/lib/jellyfin-ffmpeg/lib; suggests ffmpeg is installed and used for media processing."
+    },
+    {
+      "id": 1166,
+      "category": "system_package",
+      "source_file": "mobile/ios/Runner/RunnerProfile.entitlements",
+      "value": "iOS SDK and Xcode tools",
+      "confidence": 0.95,
+      "notes": "Implied dependency on Apple's iOS development tools and SDKs for building and signing the app, which are not directly managed by snap but must be available in the build environment."
+    },
+    {
+      "id": 192,
+      "category": "system_package",
+      "source_file": "server/Dockerfile",
+      "value": "tini",
+      "confidence": 0.9,
+      "notes": "Used to manage process lifecycle and restarts"
+    },
+    {
+      "id": 222,
+      "category": "system_package",
+      "source_file": "server/package.json",
+      "value": "postgresql",
+      "confidence": 0.85,
+      "notes": "Required for the application to connect to a PostgreSQL database; should be installed in the snap."
+    },
+    {
+      "id": 223,
+      "category": "system_package",
+      "source_file": "server/package.json",
+      "value": "redis",
+      "confidence": 0.85,
+      "notes": "Required for Redis-based message queuing and session storage, as used by BullMQ and Redis adapter."
+    },
+    {
+      "id": 224,
+      "category": "system_package",
+      "source_file": "server/package.json",
+      "value": "nodejs",
+      "confidence": 0.85,
+      "notes": "Core runtime dependency for the Node.js-based NestJS application."
+    },
+    {
+      "id": 310,
+      "category": "system_package",
+      "source_file": "web/package.json",
+      "value": "vite",
+      "confidence": 0.85,
+      "notes": "Vite is a dev dependency and may need to be installed as a system-level dependency if not available in the Snap runtime."
+    },
+    {
+      "id": 311,
+      "category": "system_package",
+      "source_file": "web/package.json",
+      "value": "svelte",
+      "confidence": 0.85,
+      "notes": "Svelte runtime is required for the frontend, and may need to be included in the Snap runtime or provided via a custom plugin."
+    },
+    {
+      "id": 650,
+      "category": "system_package",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "python3.11",
+      "confidence": 0.85,
+      "notes": "Required Python version (>=3.11, <4.0)"
+    },
+    {
+      "id": 1088,
+      "category": "system_package",
+      "source_file": "package.json",
+      "value": "pnpm",
+      "confidence": 0.85,
+      "notes": "Required engine version >=10.0.0 for the project"
+    },
+    {
+      "id": 1113,
+      "category": "system_package",
+      "source_file": "packages/e2e-auth-server/package.json",
+      "value": "pnpm@10.33.4",
+      "confidence": 0.85,
+      "notes": "Package manager version used in the project for dependency resolution and installation."
+    },
+    {
+      "id": 1229,
+      "category": "system_package",
+      "source_file": "mobile/android/app/CMakeLists.txt",
+      "value": "CMAKE_C_STANDARD 17",
+      "confidence": 0.85,
+      "notes": "Specifies C17 standard for C compilation, relevant for C++/C interop in Android NDK"
+    },
+    {
+      "id": 1230,
+      "category": "system_package",
+      "source_file": "mobile/android/app/CMakeLists.txt",
+      "value": "CMAKE_C_STANDARD_REQUIRED ON",
+      "confidence": 0.85,
+      "notes": "Enforces C17 standard compliance during build process"
+    },
+    {
+      "id": 85,
+      "category": "system_package",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "wasm-runtime",
+      "confidence": 0.75,
+      "notes": "Likely required system package for executing WebAssembly plugins"
+    },
+    {
+      "id": 151,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "cuda-cudart=11.7.99",
+      "confidence": 0.75,
+      "notes": "CUDA runtime library required for GPU operations"
+    },
+    {
+      "id": 152,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "cuda-libraries=11.7.1",
+      "confidence": 0.75,
+      "notes": "Base CUDA libraries for GPU compute"
+    },
+    {
+      "id": 153,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "libcublas=11.10.3.66",
+      "confidence": 0.75,
+      "notes": "CUDA BLAS library for linear algebra operations"
+    },
+    {
+      "id": 154,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "libcusolver=11.4.0.1",
+      "confidence": 0.75,
+      "notes": "CUDA linear algebra solver for sparse and dense operations"
+    },
+    {
+      "id": 155,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "libcusparse=11.7.4.91",
+      "confidence": 0.75,
+      "notes": "CUDA sparse matrix operations"
+    },
+    {
+      "id": 156,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "libopenblas=0.3.25",
+      "confidence": 0.75,
+      "notes": "OpenBLAS for linear algebra operations"
+    },
+    {
+      "id": 157,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "liblapack=3.9.0",
+      "confidence": 0.75,
+      "notes": "LAPACK library for linear algebra"
+    },
+    {
+      "id": 158,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "libgfortran-ng=13.2.0",
+      "confidence": 0.75,
+      "notes": "Fortran runtime support for scientific computing"
+    },
+    {
+      "id": 159,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "libstdcxx-ng=13.2.0",
+      "confidence": 0.75,
+      "notes": "C++ standard library for C++-based operations"
+    },
+    {
+      "id": 285,
+      "category": "system_package",
+      "source_file": "mobile/mise.toml",
+      "value": "dart",
+      "confidence": 0.75,
+      "notes": "Required for executing Dart-based build and analysis tasks"
+    },
+    {
+      "id": 286,
+      "category": "system_package",
+      "source_file": "mobile/mise.toml",
+      "value": "flutter",
+      "confidence": 0.75,
+      "notes": "Required for running Flutter commands like build, test, and splash screen generation"
+    },
+    {
+      "id": 287,
+      "category": "system_package",
+      "source_file": "mobile/mise.toml",
+      "value": "dcm",
+      "confidence": 0.75,
+      "notes": "Dart Code Metrics tool used for code quality analysis and fixing"
+    },
+    {
+      "id": 505,
+      "category": "system_package",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "wget",
+      "confidence": 0.75,
+      "notes": "Used to download template files from GitHub; must be available in the build environment"
+    },
+    {
+      "id": 595,
+      "category": "system_package",
+      "source_file": "server/bin/get-cpus.sh",
+      "value": "procps",
+      "confidence": 0.75,
+      "notes": "Required for reading /proc/cpuinfo; may be a dependency in the snap"
+    },
+    {
+      "id": 596,
+      "category": "system_package",
+      "source_file": "server/bin/get-cpus.sh",
+      "value": "util-linux",
+      "confidence": 0.75,
+      "notes": "Required for reading /sys/fs/cgroup files; provides utilities for cgroup access"
+    },
+    {
+      "id": 724,
+      "category": "system_package",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "git",
+      "confidence": 0.75,
+      "notes": "Snap must include 'git' as a system package to ensure the script can execute properly"
+    },
+    {
+      "id": 739,
+      "category": "system_package",
+      "source_file": ".devcontainer/mobile/devcontainer.json",
+      "value": "vscode-docker",
+      "confidence": 0.75,
+      "notes": "VS Code extension for Docker support, used for container management"
+    },
+    {
+      "id": 820,
+      "category": "system_package",
+      "source_file": "packages/cli/mise.toml",
+      "value": "vitest",
+      "confidence": 0.75,
+      "notes": "Testing framework used for unit testing"
+    },
+    {
+      "id": 821,
+      "category": "system_package",
+      "source_file": "packages/cli/mise.toml",
+      "value": "eslint",
+      "confidence": 0.75,
+      "notes": "Linting tool used for TypeScript code quality"
+    },
+    {
+      "id": 822,
+      "category": "system_package",
+      "source_file": "packages/cli/mise.toml",
+      "value": "prettier",
+      "confidence": 0.75,
+      "notes": "Code formatting tool used for checking and fixing code style"
+    },
+    {
+      "id": 823,
+      "category": "system_package",
+      "source_file": "packages/cli/mise.toml",
+      "value": "tsc",
+      "confidence": 0.75,
+      "notes": "TypeScript compiler used for type checking"
+    },
+    {
+      "id": 879,
+      "category": "system_package",
+      "source_file": ".devcontainer/mobile/container-compose-overrides.yml",
+      "value": "busybox",
+      "confidence": 0.75,
+      "notes": "Base image used for immich-app-base service, indicating minimal environment for container startup"
+    },
+    {
+      "id": 895,
+      "category": "system_package",
+      "source_file": "mobile/ios/ci_scripts/ci_post_clone.sh",
+      "value": "cocoapods",
+      "confidence": 0.75,
+      "notes": "CocoaPods is installed via Homebrew, indicating a dependency on the macOS system package manager for iOS dependency management."
+    },
+    {
+      "id": 896,
+      "category": "system_package",
+      "source_file": "mobile/ios/ci_scripts/ci_post_clone.sh",
+      "value": "homebrew",
+      "confidence": 0.75,
+      "notes": "Homebrew is used to install CocoaPods, implying that the snap environment must support or include Homebrew for macOS compatibility."
+    },
+    {
+      "id": 969,
+      "category": "system_package",
+      "source_file": "mobile/scripts/check_i18n_keys.py",
+      "value": "grep",
+      "confidence": 0.75,
+      "notes": "Required for searching Dart files for i18n keys; must be available in the build environment."
+    },
+    {
+      "id": 973,
+      "category": "system_package",
+      "source_file": "server/tsconfig.json",
+      "value": "node20",
+      "confidence": 0.75,
+      "notes": "Specifies the Node.js version (Node 20) for the TypeScript compiler, indicating dependency on a modern Node.js runtime."
+    },
+    {
+      "id": 1047,
+      "category": "system_package",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No system package dependencies or installation instructions found in the file."
+    },
+    {
+      "id": 1168,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/build-converter.sh",
+      "value": "g++",
+      "confidence": 0.75,
+      "notes": "Required C++ compiler to build the ArmNN converter, likely included in the build environment"
+    },
+    {
+      "id": 1209,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/export/download-armnn.sh",
+      "value": "tar",
+      "confidence": 0.75,
+      "notes": "Required to extract downloaded tarball archives from GitHub releases"
+    },
+    {
+      "id": 1240,
+      "category": "system_package",
+      "source_file": "machine-learning/scripts/configure-apt.sh",
+      "value": "apt",
+      "confidence": 0.75,
+      "notes": "The script operates on APT configuration, indicating that the snap must have access to or rely on the system's APT package manager for dependency resolution."
+    },
+    {
+      "id": 1250,
+      "category": "system_package",
+      "source_file": "machine-learning/ann/build.sh",
+      "value": "libarmnn",
+      "confidence": 0.75,
+      "notes": "System-level ARMNN library dependency, likely installed via a system or snap package."
+    },
+    {
+      "id": 1256,
+      "category": "system_package",
+      "source_file": "deployment/modules/cloudflare/docs/config.tf",
+      "value": "terraform",
+      "confidence": 0.6,
+      "notes": "Terraform is configured with required version ~> 1.7, indicating a dependency on Terraform 1.7 or higher"
+    },
+    {
+      "id": 15,
+      "category": "system_package",
+      "source_file": "mise.lock",
+      "value": "musl libc",
+      "confidence": 0.5,
+      "notes": "Indicated by platform-specific musl variants (e.g., linux-arm64-musl), suggesting need for musl libc during build or runtime"
+    },
+    {
+      "id": 35,
+      "category": "system_package",
+      "source_file": "server/src/constants.ts",
+      "value": "postgres",
+      "confidence": 0.5,
+      "notes": "Indirect dependency implied by POSTGRES_VERSION_RANGE and VectorChord/Vector extensions"
+    },
+    {
+      "id": 66,
+      "category": "system_package",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "redis-server",
+      "confidence": 0.5,
+      "notes": "Required for Redis service to run as a background process"
+    },
+    {
+      "id": 93,
+      "category": "system_package",
+      "source_file": "server/src/config.ts",
+      "value": "libavcodec57",
+      "confidence": 0.5,
+      "notes": "Implied dependency for audio/video codec handling in FFmpeg"
+    },
+    {
+      "id": 94,
+      "category": "system_package",
+      "source_file": "server/src/config.ts",
+      "value": "libavformat58",
+      "confidence": 0.5,
+      "notes": "Required for handling video and audio container formats"
+    },
+    {
+      "id": 95,
+      "category": "system_package",
+      "source_file": "server/src/config.ts",
+      "value": "libswscale5",
+      "confidence": 0.5,
+      "notes": "Needed for image/colorspace conversion during processing"
+    },
+    {
+      "id": 110,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "python3",
+      "confidence": 0.5,
+      "notes": "Required as the base language runtime for all Python-based operations in the application."
+    },
+    {
+      "id": 111,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "python3-pil",
+      "confidence": 0.5,
+      "notes": "Required to support PIL-based image decoding and manipulation."
+    },
+    {
+      "id": 112,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "python3-onnxruntime",
+      "confidence": 0.5,
+      "notes": "Required for running ONNX-based inference models, as referenced in the code via onnxruntime."
+    },
+    {
+      "id": 119,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "numpy",
+      "confidence": 0.5,
+      "notes": "Required for handling tensor operations and array manipulations in the model loading and execution pipeline"
+    },
+    {
+      "id": 120,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "ctypes",
+      "confidence": 0.5,
+      "notes": "Used for binding to C shared libraries (libmali.so, libann.so) for low-level operations"
+    },
+    {
+      "id": 241,
+      "category": "system_package",
+      "source_file": "server/src/main.ts",
+      "value": "libpq",
+      "confidence": 0.5,
+      "notes": "PostgreSQL client library required for database connectivity, especially for advisory lock operations and maintenance mode checks."
+    },
+    {
+      "id": 325,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "uvicorn",
+      "confidence": 0.5,
+      "notes": "Required for running the ML service as a server"
+    },
+    {
+      "id": 326,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "pydantic",
+      "confidence": 0.5,
+      "notes": "Required for configuration model definitions and settings loading"
+    },
+    {
+      "id": 327,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "rich",
+      "confidence": 0.5,
+      "notes": "Used for rich logging and console output formatting"
+    },
+    {
+      "id": 328,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "concurrent.futures",
+      "confidence": 0.5,
+      "notes": "Used in background processing and thread management"
+    },
+    {
+      "id": 329,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "socket",
+      "confidence": 0.5,
+      "notes": "Used for socket handling in server shutdown and communication"
+    },
+    {
+      "id": 335,
+      "category": "system_package",
+      "source_file": "machine-learning/mise.lock",
+      "value": "python",
+      "confidence": 0.5,
+      "notes": "Python 3.11.15 is specified as a system-level dependency via standalone builds for different architectures"
+    },
+    {
+      "id": 336,
+      "category": "system_package",
+      "source_file": "machine-learning/mise.lock",
+      "value": "uv",
+      "confidence": 0.5,
+      "notes": "UV is used as a Python tooling dependency, with platform-specific binaries provided for installation"
+    },
+    {
+      "id": 573,
+      "category": "system_package",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "gunicorn",
+      "confidence": 0.5,
+      "notes": "Required system package to run the application, as it is invoked directly in the subprocess call."
+    },
+    {
+      "id": 606,
+      "category": "system_package",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "docker",
+      "confidence": 0.5,
+      "notes": "Implied dependency for running Docker Compose; must be available in the snap environment."
+    },
+    {
+      "id": 607,
+      "category": "system_package",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "docker-compose",
+      "confidence": 0.5,
+      "notes": "Implied dependency for executing Docker Compose; required to run the dev server."
+    },
+    {
+      "id": 786,
+      "category": "system_package",
+      "source_file": "web/vite.config.ts",
+      "value": "@sveltejs/kit",
+      "confidence": 0.5,
+      "notes": "SvelteKit integration suggests dependency on SvelteKit runtime, which may require specific runtime or build tooling in snap."
+    },
+    {
+      "id": 787,
+      "category": "system_package",
+      "source_file": "web/vite.config.ts",
+      "value": "@tailwindcss/vite",
+      "confidence": 0.5,
+      "notes": "Tailwind CSS integration via Vite plugin, indicating need for tailwindcss and its dependencies in snap."
+    },
+    {
+      "id": 788,
+      "category": "system_package",
+      "source_file": "web/vite.config.ts",
+      "value": "@testing-library/svelte",
+      "confidence": 0.5,
+      "notes": "Svelte testing utilities used in test configuration, suggesting snap may need to support test environments or CI/CD workflows."
+    },
+    {
+      "id": 789,
+      "category": "system_package",
+      "source_file": "web/vite.config.ts",
+      "value": "rollup-plugin-visualizer",
+      "confidence": 0.5,
+      "notes": "Used for performance analysis during build, which may require additional build-time tooling or output handling in snap."
+    },
+    {
+      "id": 1197,
+      "category": "system_package",
+      "source_file": "mobile/android/gradle/wrapper/gradle-wrapper.properties",
+      "value": "gradle",
+      "confidence": 0.5,
+      "notes": "Indirect dependency on Gradle 8.14, which may require installation or availability in the build environment"
+    },
+    {
+      "id": 1277,
+      "category": "system_package",
+      "source_file": "packages/plugin-core/esbuild.js",
+      "value": "esbuild",
+      "confidence": 0.5,
+      "notes": "Depends on the esbuild package to perform the JavaScript/TypeScript compilation during the build process"
+    }
+  ]
+}

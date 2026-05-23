@@ -1,0 +1,649 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 228,
+      "category": "command",
+      "source_file": "server/package.json",
+      "value": "migrations:run",
+      "confidence": 0.85,
+      "notes": "Command to run database migrations using sql-tools and PostgreSQL."
+    },
+    {
+      "id": 229,
+      "category": "command",
+      "source_file": "server/package.json",
+      "value": "schema:reset",
+      "confidence": 0.85,
+      "notes": "Command to drop and recreate the database schema, useful for development resets."
+    },
+    {
+      "id": 825,
+      "category": "command",
+      "source_file": "docs/package.json",
+      "value": "docusaurus build",
+      "confidence": 0.85,
+      "notes": "The build script triggers the Docusaurus build process, which is typically used for generating static content."
+    },
+    {
+      "id": 826,
+      "category": "command",
+      "source_file": "docs/package.json",
+      "value": "docusaurus deploy",
+      "confidence": 0.85,
+      "notes": "The deploy script is used to deploy the generated documentation, likely to a static hosting service."
+    },
+    {
+      "id": 7,
+      "category": "command",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "store_date_time_values_as_text",
+      "confidence": 0.75,
+      "notes": "Configuration option to store date/time values as text, which may affect how timestamps are handled in the database and application logic."
+    },
+    {
+      "id": 288,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart run build_runner build --delete-conflicting-outputs",
+      "confidence": 0.75,
+      "notes": "Command used in codegen:dart task to generate Dart code"
+    },
+    {
+      "id": 289,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart run build_runner watch --delete-conflicting-outputs",
+      "confidence": 0.75,
+      "notes": "Command used in codegen:watch task to watch for changes and auto-generate code"
+    },
+    {
+      "id": 290,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart run pigeon --input ...",
+      "confidence": 0.75,
+      "notes": "Command used in codegen:pigeon task to generate platform-specific Pigeon code"
+    },
+    {
+      "id": 291,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart format",
+      "confidence": 0.75,
+      "notes": "Used to format Dart files, excluding specific generated files"
+    },
+    {
+      "id": 292,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "flutter build appbundle",
+      "confidence": 0.75,
+      "notes": "Command used in build:android task to build Android release"
+    },
+    {
+      "id": 293,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart run drift_dev make-migrations",
+      "confidence": 0.75,
+      "notes": "Command used in drift:migration task to generate database migrations"
+    },
+    {
+      "id": 294,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart run easy_localization:generate -S ../i18n",
+      "confidence": 0.75,
+      "notes": "Command used in i18n:loader task to generate i18n loader"
+    },
+    {
+      "id": 295,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart run bin/generate_keys.dart",
+      "confidence": 0.75,
+      "notes": "Command used in i18n:keys task to generate i18n keys"
+    },
+    {
+      "id": 296,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart analyze --fatal-infos",
+      "confidence": 0.75,
+      "notes": "Command used in analyze:dart task to enforce strict analysis"
+    },
+    {
+      "id": 297,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dcm analyze lib --fatal-style --fatal-warnings",
+      "confidence": 0.75,
+      "notes": "Command used in analyze:dcm task to enforce style and warning rules"
+    },
+    {
+      "id": 298,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dart fix --apply",
+      "confidence": 0.75,
+      "notes": "Command used in analyze-fix:dart task to auto-fix code issues"
+    },
+    {
+      "id": 299,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "dcm fix lib",
+      "confidence": 0.75,
+      "notes": "Command used in analyze-fix:dcm task to auto-fix code metrics issues"
+    },
+    {
+      "id": 300,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "flutter pub run flutter_launcher_icons:main",
+      "confidence": 0.75,
+      "notes": "Command used in codegen:app-icon task to generate app icons"
+    },
+    {
+      "id": 301,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "flutter pub run flutter_native_splash:create",
+      "confidence": 0.75,
+      "notes": "Command used in codegen:splash task to generate splash screen"
+    },
+    {
+      "id": 302,
+      "category": "command",
+      "source_file": "mobile/mise.toml",
+      "value": "flutter test",
+      "confidence": 0.75,
+      "notes": "Command used in test task to run mobile tests"
+    },
+    {
+      "id": 498,
+      "category": "command",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "pnpm dlx --allow-build=\"\" @openapitools/openapi-generator-cli generate -g dart -i ./immich-openapi-specs.json -o ../mobile/openapi -t ./templates/mobile",
+      "confidence": 0.75,
+      "notes": "Executes the OpenAPI Generator CLI to generate Dart SDK code from an OpenAPI specification"
+    },
+    {
+      "id": 721,
+      "category": "command",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "git push",
+      "confidence": 0.75,
+      "notes": "Script uses git push to update remote repository; may require snap-specific Git integration or restricted access controls"
+    },
+    {
+      "id": 852,
+      "category": "command",
+      "source_file": "e2e/mise.toml",
+      "value": "vitest --run",
+      "confidence": 0.75,
+      "notes": "Test execution command for unit tests"
+    },
+    {
+      "id": 853,
+      "category": "command",
+      "source_file": "e2e/mise.toml",
+      "value": "playwright test",
+      "confidence": 0.75,
+      "notes": "Web test execution command using Playwright"
+    },
+    {
+      "id": 854,
+      "category": "command",
+      "source_file": "e2e/mise.toml",
+      "value": "prettier --check .",
+      "confidence": 0.75,
+      "notes": "Code formatting check command"
+    },
+    {
+      "id": 855,
+      "category": "command",
+      "source_file": "e2e/mise.toml",
+      "value": "prettier --write .",
+      "confidence": 0.75,
+      "notes": "Code formatting fix command"
+    },
+    {
+      "id": 856,
+      "category": "command",
+      "source_file": "e2e/mise.toml",
+      "value": "eslint \"src/**/*.ts\" --max-warnings 0",
+      "confidence": 0.75,
+      "notes": "TypeScript linting command for source files"
+    },
+    {
+      "id": 857,
+      "category": "command",
+      "source_file": "e2e/mise.toml",
+      "value": "tsc --noEmit",
+      "confidence": 0.75,
+      "notes": "TypeScript compilation without emitting output"
+    },
+    {
+      "id": 968,
+      "category": "command",
+      "source_file": "mobile/scripts/check_i18n_keys.py",
+      "value": "grep -q -r --include=\"*.dart\" \"{k}\"",
+      "confidence": 0.75,
+      "notes": "Used within a subprocess to search for i18n keys in Dart source files, indicating a dependency on grep and the need for a shell environment during build."
+    },
+    {
+      "id": 985,
+      "category": "command",
+      "source_file": "machine-learning/scripts/healthcheck.py",
+      "value": "healthcheck.py",
+      "confidence": 0.75,
+      "notes": "Script used to perform health checks by sending a GET request to the IMMICH service at /ping"
+    },
+    {
+      "id": 1020,
+      "category": "command",
+      "source_file": ".devcontainer/server/container-start-backend.sh",
+      "value": "run_cmd pnpm --filter immich exec nest start",
+      "confidence": 0.75,
+      "notes": "Wrapper command used to execute the Nest application with filtered package scope"
+    },
+    {
+      "id": 1042,
+      "category": "command",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No command definitions or execution instructions found in the file."
+    },
+    {
+      "id": 1100,
+      "category": "command",
+      "source_file": "docs/mise.toml",
+      "value": "docusaurus serve",
+      "confidence": 0.75,
+      "notes": "Executed in the preview task to serve the documentation locally"
+    },
+    {
+      "id": 1103,
+      "category": "command",
+      "source_file": "docs/mise.toml",
+      "value": "jq -c < ../open-api/immich-openapi-specs.json > ./static/openapi.json || exit 0",
+      "confidence": 0.75,
+      "notes": "Parses and transforms OpenAPI spec JSON into a static file for documentation"
+    },
+    {
+      "id": 1052,
+      "category": "command",
+      "source_file": "packages/cli/README.md",
+      "value": "mise //:open-api",
+      "confidence": 0.6,
+      "notes": "Command to build the open-api client, a prerequisite for building the CLI"
+    },
+    {
+      "id": 97,
+      "category": "command",
+      "source_file": "server/src/config.ts",
+      "value": "cronExpression.EVERY_DAY_AT_2AM",
+      "confidence": 0.5,
+      "notes": "Default backup cron expression indicating daily 2 AM execution"
+    },
+    {
+      "id": 98,
+      "category": "command",
+      "source_file": "server/src/config.ts",
+      "value": "cronExpression",
+      "confidence": 0.5,
+      "notes": "Used to define scheduled job times for various system tasks"
+    },
+    {
+      "id": 124,
+      "category": "command",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "load",
+      "confidence": 0.5,
+      "notes": "Function to load model files (e.g., .armnn, .tflite, .onnx) with optional caching and tuning file support"
+    },
+    {
+      "id": 125,
+      "category": "command",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "execute",
+      "confidence": 0.5,
+      "notes": "Executes inference on loaded model with input tensor validation and output tensor creation"
+    },
+    {
+      "id": 232,
+      "category": "command",
+      "source_file": "server/src/main.ts",
+      "value": "immich-admin",
+      "confidence": 0.5,
+      "notes": "A command-line entry point for 'immich-admin' is handled via CommandFactory, which runs the ImmichAdminModule when the command is specified."
+    },
+    {
+      "id": 233,
+      "category": "command",
+      "source_file": "server/src/main.ts",
+      "value": "immich",
+      "confidence": 0.5,
+      "notes": "The 'immich' command is deprecated and redirected to a warning message, indicating it should not be used directly."
+    },
+    {
+      "id": 234,
+      "category": "command",
+      "source_file": "server/src/main.ts",
+      "value": "microservices",
+      "confidence": 0.5,
+      "notes": "The 'microservices' command is deprecated and results in an error message directing users to a specific release version for more information."
+    },
+    {
+      "id": 284,
+      "category": "command",
+      "source_file": "packages/e2e-auth-server/auth-server.ts",
+      "value": "node auth-server.ts",
+      "confidence": 0.5,
+      "notes": "Likely command executed in snap to start the authentication server"
+    },
+    {
+      "id": 434,
+      "category": "command",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "login",
+      "confidence": 0.5,
+      "notes": "Command to authenticate with Immich using an API key"
+    },
+    {
+      "id": 435,
+      "category": "command",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "logout",
+      "confidence": 0.5,
+      "notes": "Command to remove stored credentials"
+    },
+    {
+      "id": 436,
+      "category": "command",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "server-info",
+      "confidence": 0.5,
+      "notes": "Command to display server information"
+    },
+    {
+      "id": 437,
+      "category": "command",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "upload",
+      "confidence": 0.5,
+      "notes": "Command to upload assets with various options and arguments"
+    },
+    {
+      "id": 494,
+      "category": "command",
+      "source_file": "server/src/commands/media-location.command.ts",
+      "value": "change-media-location",
+      "confidence": 0.5,
+      "notes": "Nest Commander command used to change database file paths to align with a new media location."
+    },
+    {
+      "id": 577,
+      "category": "command",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "--log-config-json",
+      "confidence": 0.5,
+      "notes": "Gunicorn flag to use a JSON-based logging configuration file (log_conf.json)."
+    },
+    {
+      "id": 578,
+      "category": "command",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "--keep-alive",
+      "confidence": 0.5,
+      "notes": "Configures HTTP keep-alive timeout, passed as a command-line argument to Gunicorn."
+    },
+    {
+      "id": 579,
+      "category": "command",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "--graceful-timeout",
+      "confidence": 0.5,
+      "notes": "Sets graceful shutdown timeout to 10 seconds when the server is being stopped."
+    },
+    {
+      "id": 583,
+      "category": "command",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "NSExtensionActivationRule",
+      "confidence": 0.5,
+      "notes": "Contains a complex query to determine when the extension should activate based on attachment types (file URLs, images, text, videos, URLs)."
+    },
+    {
+      "id": 790,
+      "category": "command",
+      "source_file": "web/vite.config.ts",
+      "value": "vite",
+      "confidence": 0.5,
+      "notes": "Vite is the primary build and development tool, suggesting snap may use 'vite' as a command during development or build steps."
+    },
+    {
+      "id": 791,
+      "category": "command",
+      "source_file": "web/vite.config.ts",
+      "value": "vite build",
+      "confidence": 0.5,
+      "notes": "Implied build command for generating static assets, which may be part of snap's build lifecycle."
+    },
+    {
+      "id": 792,
+      "category": "command",
+      "source_file": "web/vite.config.ts",
+      "value": "vite preview",
+      "confidence": 0.5,
+      "notes": "Implied preview command for local development, which may be used in snap's development environment."
+    },
+    {
+      "id": 888,
+      "category": "command",
+      "source_file": "mobile/packages/ui/showcase/web/index.html",
+      "value": "flutter build",
+      "confidence": 0.5,
+      "notes": "Indicates that the Flutter build command is used to generate the web app, and that the `--base-href` argument is passed to configure the base URL for the web assets."
+    },
+    {
+      "id": 892,
+      "category": "command",
+      "source_file": "server/src/queries/api.key.repository.sql",
+      "value": "select",
+      "confidence": 0.5,
+      "notes": "Multiple SELECT queries are used to retrieve API key and user data, suggesting the service relies on SQL-based data access patterns for authentication and authorization."
+    },
+    {
+      "id": 933,
+      "category": "command",
+      "source_file": "server/src/bin/sync-open-api.ts",
+      "value": "sync",
+      "confidence": 0.5,
+      "notes": "The script executes a sync operation via a Node.js command that initializes a NestJS application and closes it after setting up Swagger."
+    },
+    {
+      "id": 960,
+      "category": "command",
+      "source_file": "server/bin/immich-healthcheck",
+      "value": "curl -fsS -m 2 http://\"$IMMICH_HOST\":\"$IMMICH_PORT\"/api/server/ping",
+      "confidence": 0.5,
+      "notes": "Performs a timeout-based HTTP GET to verify server health via API ping endpoint"
+    },
+    {
+      "id": 1006,
+      "category": "command",
+      "source_file": "server/src/commands/oauth-login.ts",
+      "value": "enable-oauth-login",
+      "confidence": 0.5,
+      "notes": "A CLI command to enable OAuth login functionality"
+    },
+    {
+      "id": 1007,
+      "category": "command",
+      "source_file": "server/src/commands/oauth-login.ts",
+      "value": "disable-oauth-login",
+      "confidence": 0.5,
+      "notes": "A CLI command to disable OAuth login functionality"
+    },
+    {
+      "id": 1012,
+      "category": "command",
+      "source_file": "mobile/lib/services/secure_storage.service.dart",
+      "value": "read",
+      "confidence": 0.5,
+      "notes": "Service provides a read operation to retrieve a value from secure storage by key."
+    },
+    {
+      "id": 1013,
+      "category": "command",
+      "source_file": "mobile/lib/services/secure_storage.service.dart",
+      "value": "write",
+      "confidence": 0.5,
+      "notes": "Service provides a write operation to store a value in secure storage with a given key."
+    },
+    {
+      "id": 1014,
+      "category": "command",
+      "source_file": "mobile/lib/services/secure_storage.service.dart",
+      "value": "delete",
+      "confidence": 0.5,
+      "notes": "Service provides a delete operation to remove a value from secure storage by key."
+    },
+    {
+      "id": 1055,
+      "category": "command",
+      "source_file": "server/src/commands/version.command.ts",
+      "value": "version",
+      "confidence": 0.5,
+      "notes": "The 'version' command is implemented as a CLI command using Nest Commander, which can be invoked via the snap interface to retrieve the Immich version."
+    },
+    {
+      "id": 1072,
+      "category": "command",
+      "source_file": "server/src/queries/move.repository.sql",
+      "value": "select * from \"move_history\" where \"entityId\" = $1 and \"pathType\" = $2",
+      "confidence": 0.5,
+      "notes": "A database query used to retrieve move history records by entity and path type, indicating a runtime database interaction."
+    },
+    {
+      "id": 1073,
+      "category": "command",
+      "source_file": "server/src/queries/move.repository.sql",
+      "value": "delete from \"move_history\" where \"id\" = $1 returning *",
+      "confidence": 0.5,
+      "notes": "A database deletion operation with return of affected rows, used for soft or hard deletion of a move history record by ID."
+    },
+    {
+      "id": 1074,
+      "category": "command",
+      "source_file": "server/src/queries/move.repository.sql",
+      "value": "delete from \"move_history\" where \"pathType\" = 'original' and \"entityId\" = $1",
+      "confidence": 0.5,
+      "notes": "A cleanup operation to delete original path records from move history, likely used to maintain data integrity."
+    },
+    {
+      "id": 1077,
+      "category": "command",
+      "source_file": "e2e/vitest.config.ts",
+      "value": "fetch('http://127.0.0.1:2285/api/server/ping')",
+      "confidence": 0.5,
+      "notes": "Checks server availability via HTTP ping; part of Docker setup logic"
+    },
+    {
+      "id": 1096,
+      "category": "command",
+      "source_file": "web/bin/immich-web",
+      "value": "pnpm --filter immich-web exec vite dev",
+      "confidence": 0.5,
+      "notes": "Starts the Vite development server for the immich-web application with host and port configuration."
+    },
+    {
+      "id": 1148,
+      "category": "command",
+      "source_file": "server/src/queries/album.user.repository.sql",
+      "value": "insert into \"album_user\" (\"userId\", \"albumId\") values ($1, $2) returning \"userId\", \"albumId\", \"role\"",
+      "confidence": 0.5,
+      "notes": "This command represents a create operation for user-album associations, which may be invoked via a service command in the snap."
+    },
+    {
+      "id": 1149,
+      "category": "command",
+      "source_file": "server/src/queries/album.user.repository.sql",
+      "value": "update \"album_user\" set \"role\" = $1 where \"userId\" = $2 and \"albumId\" = $3",
+      "confidence": 0.5,
+      "notes": "An update operation to modify the role of a user in an album, indicating dynamic access control logic in the application."
+    },
+    {
+      "id": 1150,
+      "category": "command",
+      "source_file": "server/src/queries/album.user.repository.sql",
+      "value": "delete from \"album_user\" where \"userId\" = $1 and \"albumId\" = $2",
+      "confidence": 0.5,
+      "notes": "A delete operation to remove user-album associations, suggesting the need for proper transactional handling in the snap's service logic."
+    },
+    {
+      "id": 1282,
+      "category": "command",
+      "source_file": "server/src/queries/database.repository.sql",
+      "value": "SHOW server_version",
+      "confidence": 0.5,
+      "notes": "PostgreSQL command to retrieve the server version, indicating runtime database interaction"
+    },
+    {
+      "id": 1283,
+      "category": "command",
+      "source_file": "server/src/queries/database.repository.sql",
+      "value": "SELECT name, default_version, installed_version FROM pg_available_extensions WHERE name IN ($1)",
+      "confidence": 0.5,
+      "notes": "Query to fetch extension versions, suggesting dynamic SQL execution during runtime"
+    },
+    {
+      "id": 1303,
+      "category": "command",
+      "source_file": "server/bin/immich-admin",
+      "value": "start.sh",
+      "confidence": 0.5,
+      "notes": "The script uses a wrapper script named 'start.sh' to manage the immich-admin service startup, suggesting a custom startup mechanism."
+    },
+    {
+      "id": 1306,
+      "category": "command",
+      "source_file": "server/src/queries/version.history.repository.sql",
+      "value": "select * from \"version_history\" order by \"createdAt\" desc",
+      "confidence": 0.5,
+      "notes": "Database query used to retrieve version history records in descending order of creation time, indicating a data access pattern for version history."
+    },
+    {
+      "id": 1319,
+      "category": "command",
+      "source_file": "server/bin/immich-dev",
+      "value": "pnpm --filter immich exec nest start --debug \"0.0.0.0:9230\" --watch -- \"$@\"",
+      "confidence": 0.5,
+      "notes": "Command executed to start the Immich application with debug mode, listening on 0.0.0.0:9230, and watching for changes"
+    },
+    {
+      "id": 1325,
+      "category": "command",
+      "source_file": "server/src/queries/system.metadata.repository.sql",
+      "value": "SystemMetadataRepository.get",
+      "confidence": 0.5,
+      "notes": "A database query operation to retrieve metadata by key, suggesting the presence of a service or command handling system metadata retrieval."
+    },
+    {
+      "id": 1326,
+      "category": "command",
+      "source_file": "server/src/queries/system.metadata.repository.sql",
+      "value": "SystemMetadataRepository.delete",
+      "confidence": 0.5,
+      "notes": "A database operation to delete metadata by key, indicating potential runtime deletion of system configuration entries."
+    }
+  ]
+}

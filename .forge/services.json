@@ -1,0 +1,785 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 172,
+      "category": "service",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "armnnconverter",
+      "confidence": 0.95,
+      "notes": "External binary required for converting TFLite to ARMNN format; must be available in the system path or provided as a volume."
+    },
+    {
+      "id": 706,
+      "category": "service",
+      "source_file": "server/bin/start.sh",
+      "value": "node",
+      "confidence": 0.95,
+      "notes": "The Node.js binary is executed to launch the Immich server after configuration and environment loading."
+    },
+    {
+      "id": 1058,
+      "category": "service",
+      "source_file": "mobile/ios/Runner/Runner.entitlements",
+      "value": "com.apple.developer.associated-domains",
+      "confidence": 0.95,
+      "notes": "Configures support for app link domains, enabling deep linking via applinks:my.immich.app."
+    },
+    {
+      "id": 1059,
+      "category": "service",
+      "source_file": "mobile/ios/Runner/Runner.entitlements",
+      "value": "com.apple.developer.networking.wifi-info",
+      "confidence": 0.95,
+      "notes": "Enables the app to access WiFi information, which may be relevant for network-based features in the app."
+    },
+    {
+      "id": 1060,
+      "category": "service",
+      "source_file": "mobile/ios/Runner/Runner.entitlements",
+      "value": "com.apple.security.application-groups",
+      "confidence": 0.95,
+      "notes": "Defines application groups for data sharing between apps; uses a dynamic group ID via $(CUSTOM_GROUP_ID)."
+    },
+    {
+      "id": 180,
+      "category": "service",
+      "source_file": "server/Dockerfile",
+      "value": "immich-healthcheck",
+      "confidence": 0.9,
+      "notes": "Healthcheck command used to verify service health"
+    },
+    {
+      "id": 1332,
+      "category": "service",
+      "source_file": "packages/e2e-auth-server/Dockerfile",
+      "value": "2286",
+      "confidence": 0.9,
+      "notes": "Port 2286 is exposed and likely used by the e2e-auth-server service, which should be configured in snap's service definition for network accessibility"
+    },
+    {
+      "id": 216,
+      "category": "service",
+      "source_file": "server/package.json",
+      "value": "immich-server",
+      "confidence": 0.85,
+      "notes": "Likely the main entrypoint service for the Immich application, running on a web server with NestJS."
+    },
+    {
+      "id": 304,
+      "category": "service",
+      "source_file": "web/package.json",
+      "value": "immich-web",
+      "confidence": 0.85,
+      "notes": "The application name 'immich-web' is used as the service identifier, suggesting it will be exposed as a Snap service."
+    },
+    {
+      "id": 315,
+      "category": "service",
+      "source_file": "web/package.json",
+      "value": "vite preview",
+      "confidence": 0.85,
+      "notes": "Preview command suggests a static site preview feature, which may be used in CI/CD or local testing and should be considered in Snap's service setup."
+    },
+    {
+      "id": 651,
+      "category": "service",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "gunicorn",
+      "confidence": 0.85,
+      "notes": "Potential service to run as a background process"
+    },
+    {
+      "id": 652,
+      "category": "service",
+      "source_file": "machine-learning/pyproject.toml",
+      "value": "uvicorn",
+      "confidence": 0.85,
+      "notes": "ASGI server to serve FastAPI endpoints"
+    },
+    {
+      "id": 676,
+      "category": "service",
+      "source_file": "packages/cli/package.json",
+      "value": "immich",
+      "confidence": 0.85,
+      "notes": "CLI service entry point, likely invoked via command-line invocation, not a background daemon"
+    },
+    {
+      "id": 2,
+      "category": "service",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "user_entity",
+      "confidence": 0.75,
+      "notes": "A database table schema representing user data with fields like id, name, email, and admin status, including custom constraints for boolean fields."
+    },
+    {
+      "id": 3,
+      "category": "service",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "remote_asset_entity",
+      "confidence": 0.75,
+      "notes": "A database table schema for remote assets with fields such as name, type, checksum, and references to user entities via owner_id."
+    },
+    {
+      "id": 4,
+      "category": "service",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "stack_entity",
+      "confidence": 0.75,
+      "notes": "A database table schema for stack entities, likely representing a group of related assets or data, with fields like id, stack_id, and visibility."
+    },
+    {
+      "id": 74,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "assetFileFilter",
+      "confidence": 0.75,
+      "notes": "Service method for filtering assets by filename pattern"
+    },
+    {
+      "id": 75,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "filterFileType",
+      "confidence": 0.75,
+      "notes": "Service method for filtering by file type"
+    },
+    {
+      "id": 76,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "filterPerson",
+      "confidence": 0.75,
+      "notes": "Service method for filtering by person detection"
+    },
+    {
+      "id": 77,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "assetArchive",
+      "confidence": 0.75,
+      "notes": "Service method to toggle asset visibility to archive"
+    },
+    {
+      "id": 78,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "assetLock",
+      "confidence": 0.75,
+      "notes": "Service method to move asset to locked folder"
+    },
+    {
+      "id": 79,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "assetTimeline",
+      "confidence": 0.75,
+      "notes": "Service method to move asset to timeline"
+    },
+    {
+      "id": 80,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "assetVisibility",
+      "confidence": 0.75,
+      "notes": "Service method to update asset visibility"
+    },
+    {
+      "id": 81,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "assetFavorite",
+      "confidence": 0.75,
+      "notes": "Service method to favorite or unfavorite an asset"
+    },
+    {
+      "id": 82,
+      "category": "service",
+      "source_file": "packages/plugin-core/manifest.json",
+      "value": "assetAddToAlbums",
+      "confidence": 0.75,
+      "notes": "Service method to add assets to albums"
+    },
+    {
+      "id": 160,
+      "category": "service",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "no service defined",
+      "confidence": 0.75,
+      "notes": "No explicit service configuration found in the file"
+    },
+    {
+      "id": 409,
+      "category": "service",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "background_downloader",
+      "confidence": 0.75,
+      "notes": "Background task for file transfers"
+    },
+    {
+      "id": 410,
+      "category": "service",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "wakelock_plus",
+      "confidence": 0.75,
+      "notes": "Prevents device sleep during operations"
+    },
+    {
+      "id": 411,
+      "category": "service",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "geolocator",
+      "confidence": 0.75,
+      "notes": "Location-based services"
+    },
+    {
+      "id": 412,
+      "category": "service",
+      "source_file": "mobile/pubspec.yaml",
+      "value": "network_info_plus",
+      "confidence": 0.75,
+      "notes": "Network connectivity monitoring"
+    },
+    {
+      "id": 500,
+      "category": "service",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "openapi-generator",
+      "confidence": 0.75,
+      "notes": "Indirect dependency via the OpenAPI Generator CLI, used for code generation"
+    },
+    {
+      "id": 593,
+      "category": "service",
+      "source_file": "server/bin/get-cpus.sh",
+      "value": "immmich",
+      "confidence": 0.75,
+      "notes": "The script is likely part of the immich service's runtime logic for determining CPU core usage"
+    },
+    {
+      "id": 728,
+      "category": "service",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "git_remote",
+      "confidence": 0.75,
+      "notes": "Script checks for remote configuration; may imply need for service-level Git configuration in snap"
+    },
+    {
+      "id": 730,
+      "category": "service",
+      "source_file": ".devcontainer/mobile/devcontainer.json",
+      "value": "immich-init",
+      "confidence": 0.75,
+      "notes": "A service included in the runServices array, likely for initialization tasks"
+    },
+    {
+      "id": 731,
+      "category": "service",
+      "source_file": ".devcontainer/mobile/devcontainer.json",
+      "value": "redis",
+      "confidence": 0.75,
+      "notes": "Redis service is part of the runServices, indicating use of Redis for caching or session management"
+    },
+    {
+      "id": 732,
+      "category": "service",
+      "source_file": ".devcontainer/mobile/devcontainer.json",
+      "value": "database",
+      "confidence": 0.75,
+      "notes": "Database service is included in runServices, suggesting a database backend is required"
+    },
+    {
+      "id": 733,
+      "category": "service",
+      "source_file": ".devcontainer/mobile/devcontainer.json",
+      "value": "immich-machine-learning",
+      "confidence": 0.75,
+      "notes": "Machine learning service is part of the runServices, indicating ML capabilities are enabled"
+    },
+    {
+      "id": 760,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "dev",
+      "confidence": 0.75,
+      "notes": "Development server service started via 'pnpm run dev'"
+    },
+    {
+      "id": 761,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "preview",
+      "confidence": 0.75,
+      "notes": "Preview environment service available via 'pnpm run preview'"
+    },
+    {
+      "id": 762,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "test",
+      "confidence": 0.75,
+      "notes": "Test service execution via 'pnpm run test'"
+    },
+    {
+      "id": 763,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "format",
+      "confidence": 0.75,
+      "notes": "Code formatting service via 'pnpm run format'"
+    },
+    {
+      "id": 764,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "lint",
+      "confidence": 0.75,
+      "notes": "Code linting service via 'pnpm run lint'"
+    },
+    {
+      "id": 765,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "check-typescript",
+      "confidence": 0.75,
+      "notes": "TypeScript type checking service"
+    },
+    {
+      "id": 766,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "check-svelte",
+      "confidence": 0.75,
+      "notes": "Svelte-specific code checking service"
+    },
+    {
+      "id": 767,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "ci-unit",
+      "confidence": 0.75,
+      "notes": "CI unit test workflow that runs install, format, check, and test"
+    },
+    {
+      "id": 768,
+      "category": "service",
+      "source_file": "web/mise.toml",
+      "value": "checklist",
+      "confidence": 0.75,
+      "notes": "Composite service that runs CI unit and lint tasks"
+    },
+    {
+      "id": 817,
+      "category": "service",
+      "source_file": "packages/cli/mise.toml",
+      "value": "ci-publish",
+      "confidence": 0.75,
+      "notes": "CI publish workflow that triggers install, build, and publish steps"
+    },
+    {
+      "id": 931,
+      "category": "service",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "immich-app-base",
+      "confidence": 0.75,
+      "notes": "Base service used as parent for immich-server and other services"
+    },
+    {
+      "id": 986,
+      "category": "service",
+      "source_file": "machine-learning/scripts/healthcheck.py",
+      "value": "healthcheck.py",
+      "confidence": 0.75,
+      "notes": "Script can be integrated into a snap service to monitor IMMICH service availability"
+    },
+    {
+      "id": 998,
+      "category": "service",
+      "source_file": ".devcontainer/server/container-start-frontend.sh",
+      "value": "vite",
+      "confidence": 0.75,
+      "notes": "Vite is used as the development server for the Immich web frontend."
+    },
+    {
+      "id": 1005,
+      "category": "service",
+      "source_file": "mobile/build.yaml",
+      "value": "drift_dev",
+      "confidence": 0.75,
+      "notes": "Designates a modular builder for drift database operations, disabled by default"
+    },
+    {
+      "id": 1016,
+      "category": "service",
+      "source_file": ".devcontainer/server/container-start-backend.sh",
+      "value": "Nest API Server",
+      "confidence": 0.75,
+      "notes": "The service being managed by the script, which runs in a loop upon crashes"
+    },
+    {
+      "id": 1041,
+      "category": "service",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No service definitions or configuration found in the file."
+    },
+    {
+      "id": 1068,
+      "category": "service",
+      "source_file": "machine-learning/mise.toml",
+      "value": "tasks.ci-unit",
+      "confidence": 0.75,
+      "notes": "CI pipeline task that runs a sequence of checks including install, format, lint, check, and test"
+    },
+    {
+      "id": 1069,
+      "category": "service",
+      "source_file": "machine-learning/mise.toml",
+      "value": "tasks.checklist",
+      "confidence": 0.75,
+      "notes": "Comprehensive check task that runs all required validation steps in sequence"
+    },
+    {
+      "id": 1218,
+      "category": "service",
+      "source_file": "docker/prometheus.yml",
+      "value": "immich_api",
+      "confidence": 0.75,
+      "notes": "Configures Prometheus to scrape metrics from the immich API service running on port 8081"
+    },
+    {
+      "id": 1219,
+      "category": "service",
+      "source_file": "docker/prometheus.yml",
+      "value": "immich_microservices",
+      "confidence": 0.75,
+      "notes": "Configures Prometheus to scrape metrics from immich microservices running on port 8082"
+    },
+    {
+      "id": 1297,
+      "category": "service",
+      "source_file": "machine-learning/immich_ml/log_conf.json",
+      "value": "immich_ml",
+      "confidence": 0.75,
+      "notes": "The configuration file is part of a machine learning service (immich_ml), likely used to manage logging behavior during service runtime."
+    },
+    {
+      "id": 1053,
+      "category": "service",
+      "source_file": "packages/cli/README.md",
+      "value": "Immich CLI",
+      "confidence": 0.6,
+      "notes": "The service provided by the CLI for interacting with the Immich photo manager"
+    },
+    {
+      "id": 1262,
+      "category": "service",
+      "source_file": "mobile/android/metadata/en-US/full_description.txt",
+      "value": "Immich Server",
+      "confidence": 0.6,
+      "notes": "The user must independently run and manage the Immich Server service."
+    },
+    {
+      "id": 1334,
+      "category": "service",
+      "source_file": "web/static/robots.txt",
+      "value": "web server",
+      "confidence": 0.6,
+      "notes": "The presence of robots.txt suggests the service exposes a web server that handles static file serving, likely managed by a web framework or server like Nginx or Apache."
+    },
+    {
+      "id": 13,
+      "category": "service",
+      "source_file": "mise.lock",
+      "value": "extism-cli",
+      "confidence": 0.5,
+      "notes": "Potential service wrapper for the Extism CLI tool, which may be used to manage runtime execution of the PDK and CLI tools"
+    },
+    {
+      "id": 63,
+      "category": "service",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "bullmq",
+      "confidence": 0.5,
+      "notes": "Background job processing service using BullMQ"
+    },
+    {
+      "id": 91,
+      "category": "service",
+      "source_file": "server/src/config.ts",
+      "value": "ffmpeg",
+      "confidence": 0.5,
+      "notes": "Configured with FFmpeg settings including codecs, resolution, and hardware acceleration"
+    },
+    {
+      "id": 96,
+      "category": "service",
+      "source_file": "server/src/config.ts",
+      "value": "cron",
+      "confidence": 0.5,
+      "notes": "Used for scheduled tasks like database backup and library scanning"
+    },
+    {
+      "id": 104,
+      "category": "service",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "FastAPI",
+      "confidence": 0.5,
+      "notes": "The application uses FastAPI as the web framework for handling HTTP requests and managing endpoints like /predict and /ping."
+    },
+    {
+      "id": 123,
+      "category": "service",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "Ann class",
+      "confidence": 0.5,
+      "notes": "Singleton-based model loading and execution service for ANN inference with support for multiple model formats"
+    },
+    {
+      "id": 276,
+      "category": "service",
+      "source_file": "packages/e2e-auth-server/auth-server.ts",
+      "value": "auth-server",
+      "confidence": 0.5,
+      "notes": "The service name derived from the e2e-auth-server module, likely used in snap service configuration"
+    },
+    {
+      "id": 342,
+      "category": "service",
+      "source_file": "server/src/repositories/server-info.repository.ts",
+      "value": "getLatestRelease",
+      "confidence": 0.5,
+      "notes": "Fetches the latest GitHub release version via HTTP request to a version check URL"
+    },
+    {
+      "id": 343,
+      "category": "service",
+      "source_file": "server/src/repositories/server-info.repository.ts",
+      "value": "getBuildVersions",
+      "confidence": 0.5,
+      "notes": "Retrieves build-time version information for Node.js, FFmpeg, ImageMagick, ExifTool, and libvips"
+    },
+    {
+      "id": 563,
+      "category": "service",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "bull",
+      "confidence": 0.5,
+      "notes": "Bull queue service configured with prefix 'immich_bull' and queue named 'queue-1'"
+    },
+    {
+      "id": 571,
+      "category": "service",
+      "source_file": "machine-learning/immich_ml/__main__.py",
+      "value": "immich_ml.main:app",
+      "confidence": 0.5,
+      "notes": "The Python module and object being served by Gunicorn, indicating the main application entry point."
+    },
+    {
+      "id": 582,
+      "category": "service",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "NSExtension",
+      "confidence": 0.5,
+      "notes": "Defines the extension capabilities, enabling sharing of content via the share sheet interface."
+    },
+    {
+      "id": 590,
+      "category": "service",
+      "source_file": "mobile/ios/ShareExtension/Info.plist",
+      "value": "MainInterface",
+      "confidence": 0.5,
+      "notes": "Specifies the storyboard file to load when the extension is activated."
+    },
+    {
+      "id": 598,
+      "category": "service",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "docker compose up --build --renew-anon-volumes --force-recreate --remove-orphans",
+      "confidence": 0.5,
+      "notes": "Command executed by the webServer to launch the local dev server via Docker Compose."
+    },
+    {
+      "id": 771,
+      "category": "service",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "auth",
+      "confidence": 0.5,
+      "notes": "Implies an authentication service component that manages user sessions and credentials via file-based storage"
+    },
+    {
+      "id": 782,
+      "category": "service",
+      "source_file": "web/vite.config.ts",
+      "value": "http://immich-server:2283/",
+      "confidence": 0.5,
+      "notes": "Default backend URL used in proxy configuration, indicating potential dependency on an external Immich server service."
+    },
+    {
+      "id": 801,
+      "category": "service",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "postgres",
+      "confidence": 0.5,
+      "notes": "Containerized PostgreSQL instance running on port 5432"
+    },
+    {
+      "id": 846,
+      "category": "service",
+      "source_file": "web/svelte.config.js",
+      "value": "adapter",
+      "confidence": 0.5,
+      "notes": "Uses @sveltejs/adapter-static for static file serving, with fallback to index.html and precompression enabled"
+    },
+    {
+      "id": 885,
+      "category": "service",
+      "source_file": "server/src/middleware/websocket.adapter.ts",
+      "value": "websocket.adapter.ts",
+      "confidence": 0.5,
+      "notes": "Implements a WebSocket adapter using Redis for message persistence"
+    },
+    {
+      "id": 889,
+      "category": "service",
+      "source_file": "mobile/packages/ui/showcase/web/index.html",
+      "value": "web",
+      "confidence": 0.5,
+      "notes": "The web app is served as part of a larger UI showcase, suggesting the presence of a web service or entrypoint that serves this HTML file as part of a mobile UI component library."
+    },
+    {
+      "id": 890,
+      "category": "service",
+      "source_file": "server/src/queries/api.key.repository.sql",
+      "value": "api.key.repository.sql",
+      "confidence": 0.5,
+      "notes": "A SQL query file used for database operations in the API key repository, likely used during runtime to fetch or retrieve API key data with user details."
+    },
+    {
+      "id": 908,
+      "category": "service",
+      "source_file": "server/test/vitest.config.mjs",
+      "value": "vitest",
+      "confidence": 0.5,
+      "notes": "Test framework used for server-side unit testing with coverage and environment setup"
+    },
+    {
+      "id": 934,
+      "category": "service",
+      "source_file": "server/src/bin/sync-open-api.ts",
+      "value": "NestJS application",
+      "confidence": 0.5,
+      "notes": "The script launches a NestJS Express application using NestFactory, suggesting it's part of a backend service that may be managed as a snap service."
+    },
+    {
+      "id": 961,
+      "category": "service",
+      "source_file": "server/bin/immich-healthcheck",
+      "value": "healthcheck",
+      "confidence": 0.5,
+      "notes": "Implies a service or hook that runs this script to ensure the Immich server is operational"
+    },
+    {
+      "id": 1008,
+      "category": "service",
+      "source_file": "server/src/commands/oauth-login.ts",
+      "value": "CliService",
+      "confidence": 0.5,
+      "notes": "Service used to handle OAuth login enable/disable operations"
+    },
+    {
+      "id": 1009,
+      "category": "service",
+      "source_file": "mobile/lib/services/secure_storage.service.dart",
+      "value": "secure_storage.service.dart",
+      "confidence": 0.5,
+      "notes": "A Dart service file defining a secure storage service with read, write, and delete operations using Riverpod and a repository pattern."
+    },
+    {
+      "id": 1070,
+      "category": "service",
+      "source_file": "server/src/queries/move.repository.sql",
+      "value": "move.repository.sql",
+      "confidence": 0.5,
+      "notes": "A SQL script file used by the application to define database operations for move repository functionality, likely used during runtime queries and database interactions."
+    },
+    {
+      "id": 1078,
+      "category": "service",
+      "source_file": "e2e/vitest.config.ts",
+      "value": "docker-compose",
+      "confidence": 0.5,
+      "notes": "Indirectly referenced through globalSetup to run docker-compose.ts if server is not reachable"
+    },
+    {
+      "id": 1091,
+      "category": "service",
+      "source_file": "web/bin/immich-web",
+      "value": "vite dev",
+      "confidence": 0.5,
+      "notes": "The Vite development server is started with `--host 0.0.0.0 --port 3000` to allow external access during development."
+    },
+    {
+      "id": 1124,
+      "category": "service",
+      "source_file": "mobile/ios/WidgetExtension/Info.plist",
+      "value": "NSAppTransportSecurity",
+      "confidence": 0.5,
+      "notes": "Configures app transport security to allow arbitrary loads, which may imply relaxed network security policies for the extension."
+    },
+    {
+      "id": 1146,
+      "category": "service",
+      "source_file": "server/src/queries/album.user.repository.sql",
+      "value": "album.user.repository.sql",
+      "confidence": 0.5,
+      "notes": "A SQL script file used for database operations related to album-user relationships, likely part of a backend service's data access layer."
+    },
+    {
+      "id": 1175,
+      "category": "service",
+      "source_file": "mobile/android/app/src/main/res/xml/network_security_config.xml",
+      "value": "Android app network configuration",
+      "confidence": 0.5,
+      "notes": "This file configures network behavior for the Android app, which may influence how snap handles network access in mobile applications."
+    },
+    {
+      "id": 1179,
+      "category": "service",
+      "source_file": "packages/cli/.npmignore",
+      "value": "coverage",
+      "confidence": 0.5,
+      "notes": "The coverage directory is excluded, indicating that test coverage reports are not included in the snap, which may affect how testing and reporting are handled."
+    },
+    {
+      "id": 1204,
+      "category": "service",
+      "source_file": "deployment/state.hcl",
+      "value": "remote_state",
+      "confidence": 0.5,
+      "notes": "Configures Terraform remote state backend using PostgreSQL as the backend storage"
+    },
+    {
+      "id": 1281,
+      "category": "service",
+      "source_file": "server/src/queries/database.repository.sql",
+      "value": "database.repository.sql",
+      "confidence": 0.5,
+      "notes": "SQL file used for database operations like fetching extension versions and PostgreSQL version, likely used in backend service logic"
+    },
+    {
+      "id": 1304,
+      "category": "service",
+      "source_file": "server/src/queries/version.history.repository.sql",
+      "value": "version.history.repository.sql",
+      "confidence": 0.5,
+      "notes": "A SQL query file generated by the sql-generator, used for database operations in the version history repository. Likely used during runtime to fetch version history data."
+    }
+  ]
+}

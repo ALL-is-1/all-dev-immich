@@ -1,0 +1,169 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 707,
+      "category": "volume",
+      "source_file": "server/bin/start.sh",
+      "value": "CREDENTIALS_DIRECTORY",
+      "confidence": 0.95,
+      "notes": "Directory where credential files (e.g., DB_PASSWORD) are stored; read by the script to load sensitive values into environment variables."
+    },
+    {
+      "id": 190,
+      "category": "volume",
+      "source_file": "server/Dockerfile",
+      "value": "/data",
+      "confidence": 0.9,
+      "notes": "Persistent volume for data storage"
+    },
+    {
+      "id": 164,
+      "category": "volume",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "no volume defined",
+      "confidence": 0.75,
+      "notes": "No volume mount or data persistence configuration"
+    },
+    {
+      "id": 504,
+      "category": "volume",
+      "source_file": "open-api/bin/generate-dart-sdk.sh",
+      "value": "../mobile/openapi",
+      "confidence": 0.75,
+      "notes": "Output directory for generated Dart SDK code"
+    },
+    {
+      "id": 876,
+      "category": "volume",
+      "source_file": ".devcontainer/mobile/container-compose-overrides.yml",
+      "value": "upload-devcontainer-volume",
+      "confidence": 0.75,
+      "notes": "Volume used for storing user uploads, dynamically bound via UPLOAD_LOCATION environment variable"
+    },
+    {
+      "id": 877,
+      "category": "volume",
+      "source_file": ".devcontainer/mobile/container-compose-overrides.yml",
+      "value": "postgres-devcontainer-volume",
+      "confidence": 0.75,
+      "notes": "Volume used for PostgreSQL data persistence, dynamically bound via UPLOAD_LOCATION environment variable"
+    },
+    {
+      "id": 929,
+      "category": "volume",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "pnpm_store_server",
+      "confidence": 0.75,
+      "notes": "Volume mount for pnpm cache sharing between builds"
+    },
+    {
+      "id": 930,
+      "category": "volume",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "../packages/plugin-core",
+      "confidence": 0.75,
+      "notes": "Volume mount for immich plugin core source code during development"
+    },
+    {
+      "id": 1045,
+      "category": "volume",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No volume mount configurations found in the file."
+    },
+    {
+      "id": 70,
+      "category": "volume",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "/var/lib/immich",
+      "confidence": 0.5,
+      "notes": "Potential volume mount for persistent storage of media files"
+    },
+    {
+      "id": 71,
+      "category": "volume",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "/etc/immich/config.json",
+      "confidence": 0.5,
+      "notes": "Potential configuration file volume mount for dynamic config overrides"
+    },
+    {
+      "id": 99,
+      "category": "volume",
+      "source_file": "server/src/config.ts",
+      "value": "storage",
+      "confidence": 0.5,
+      "notes": "Implied volume mount for user data and media storage"
+    },
+    {
+      "id": 100,
+      "category": "volume",
+      "source_file": "server/src/config.ts",
+      "value": "config",
+      "confidence": 0.5,
+      "notes": "Potential configuration volume for dynamic config file overrides"
+    },
+    {
+      "id": 128,
+      "category": "volume",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "tuning_file",
+      "confidence": 0.5,
+      "notes": "File path for storing tuning information; must exist and be writable during runtime"
+    },
+    {
+      "id": 496,
+      "category": "volume",
+      "source_file": "server/src/commands/media-location.command.ts",
+      "value": "${UPLOAD_LOCATION}:/data",
+      "confidence": 0.5,
+      "notes": "Volume mount example provided in the command output for updating Docker container configuration."
+    },
+    {
+      "id": 564,
+      "category": "volume",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "/build/www",
+      "confidence": 0.5,
+      "notes": "Web resource path volume mount point for static files"
+    },
+    {
+      "id": 565,
+      "category": "volume",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "/build/geodata",
+      "confidence": 0.5,
+      "notes": "Geodata files volume mount path including various geospatial files"
+    },
+    {
+      "id": 566,
+      "category": "volume",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "/build/plugins/immich-plugin-core",
+      "confidence": 0.5,
+      "notes": "Core plugin resource path volume mount"
+    },
+    {
+      "id": 567,
+      "category": "volume",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "/app/data/plugins",
+      "confidence": 0.5,
+      "notes": "External plugin installation directory volume path"
+    },
+    {
+      "id": 793,
+      "category": "volume",
+      "source_file": "web/vite.config.ts",
+      "value": "/.well-known/immich",
+      "confidence": 0.5,
+      "notes": "Proxy path suggests potential need for volume mounting in snap if dynamic content like .well-known files are served."
+    }
+  ]
+}

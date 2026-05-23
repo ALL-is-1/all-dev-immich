@@ -1,0 +1,80 @@
+app:
+  name: all-dev-immich
+  version: "2.7.5"
+
+description: "Immich is a privacy-focused media management application that allows users to store, organize, and share photos and videos. It supports end-to-end encryption, automatic metadata extraction, and advanced search features. The application includes a web interface, mobile apps, and a backend service for managing media files and user accounts. It is built on a modern stack of Node.js, TypeScript, and Svelte, with support for machine learning-based features for image analysis and metadata extraction."
+
+# CT Engine settings
+run:
+  command: "$SNAP/usr/bin/node $SNAP/bin/immich-server --host 0.0.0.0 --port {port}"
+
+
+# Callbacks / Output
+output:
+  mode: "logs"
+  interval: 60
+  initial_event: "message_initial"
+  periodic_event: "message"
+
+# Configuration Schema
+config:
+
+  example-param:
+    visibility: user
+    required: true
+    type: string
+
+    default: "default-value"
+
+
+    description: "An example parameter"
+
+
+  port:
+    visibility: user
+    required: true
+    type: number
+
+    default: 8080
+
+
+    description: "The port the application listens on."
+
+
+  ct-callback-url:
+    visibility: ct
+    required: false
+    type: string
+
+
+    description: "CT engine callback URL"
+
+
+  ct-snap-name:
+    visibility: ct
+    required: false
+    type: string
+
+
+    description: "CT engine snap identifier"
+
+
+  ct-node-id:
+    visibility: ct
+    required: false
+    type: string
+
+
+    description: "CT node ID"
+
+
+  ct-deployment-id:
+    visibility: ct
+    required: false
+    type: string
+
+
+    description: "CT deployment ID"
+
+
+

@@ -1,0 +1,86 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "slug": "immich",
+  "source_url": "https://github.com/immich-app/immich.git",
+  "source_branch": "",
+  "clone_path": ".all-forge/sessions/immich/source",
+  "recipe": {
+    "project_type": "Node.js",
+    "build_packages": [
+      "nodejs",
+      "nodejs-dev",
+      "libssl-dev",
+      "libffi-dev",
+      "libxslt1-dev",
+      "libavcodec-dev",
+      "libavformat-dev",
+      "libavutil-dev",
+      "libswscale-dev",
+      "libmimalloc-dev"
+    ],
+    "stage_packages": [
+      "ca-certificates",
+      "libssl1.1",
+      "libffi8",
+      "libxslt1.1",
+      "libavcodec1",
+      "libavformat1",
+      "libavutil1",
+      "libswscale1"
+    ],
+    "run_commands": [
+      "node $SNAP/bin/immich-server --host 0.0.0.0 --port {port}"
+    ],
+    "build_commands": [
+      "npm_config_engine_strict=false && NODE_OPTIONS=\"--max-old-space-size=6144\" && pnpm install --frozen-lockfile && pnpm build"
+    ],
+    "requires_manual_review": false,
+    "auto_profile": {
+      "app_version": "2.7.5",
+      "summary": "A secure, open-source media management platform for organizing and sharing photos and videos.",
+      "description": "Immich is a privacy-focused media management application that allows users to store, organize, and share photos and videos. It supports end-to-end encryption, automatic metadata extraction, and advanced search features. The application includes a web interface, mobile apps, and a backend service for managing media files and user accounts. It is built on a modern stack of Node.js, TypeScript, and Svelte, with support for machine learning-based features for image analysis and metadata extraction.",
+      "plugs": [
+        "network",
+        "network-bind",
+        "home"
+      ],
+      "config_schema": {
+        "port": {
+          "visibility": "user",
+          "required": true,
+          "type": "number",
+          "default": 8080,
+          "description": "The port the application listens on."
+        },
+        "ct-callback-url": {
+          "visibility": "ct",
+          "type": "string",
+          "required": false,
+          "description": "CT engine callback URL"
+        },
+        "ct-snap-name": {
+          "visibility": "ct",
+          "type": "string",
+          "required": false,
+          "description": "CT engine snap identifier"
+        },
+        "ct-node-id": {
+          "visibility": "ct",
+          "type": "string",
+          "required": false,
+          "description": "CT node ID"
+        },
+        "ct-deployment-id": {
+          "visibility": "ct",
+          "type": "string",
+          "required": false,
+          "description": "CT deployment ID"
+        }
+      }
+    }
+  }
+}

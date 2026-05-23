@@ -1,0 +1,1529 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 174,
+      "category": "env_var",
+      "source_file": "machine-learning/ann/export/run.py",
+      "value": "LD_LIBRARY_PATH",
+      "confidence": 0.95,
+      "notes": "Set to 'armnn' to ensure ARMNN libraries are accessible during TFLite to ARMNN conversion."
+    },
+    {
+      "id": 695,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "IMMICH_SOURCE_REF",
+      "confidence": 0.95,
+      "notes": "Used to pass source reference information to the startup script for logging purposes."
+    },
+    {
+      "id": 696,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "IMMICH_ENV",
+      "confidence": 0.95,
+      "notes": "Determines if the environment is development or production, influencing whether build instructions are needed during startup."
+    },
+    {
+      "id": 697,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "CPU_CORES",
+      "confidence": 0.95,
+      "notes": "Detected via get-cpus.sh; used to set UV_THREADPOOL_SIZE based on available CPU cores for performance tuning."
+    },
+    {
+      "id": 698,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "DB_URL",
+      "confidence": 0.95,
+      "notes": "Loaded from a file specified via DB_URL_FILE environment variable or credentials directory."
+    },
+    {
+      "id": 699,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "DB_HOSTNAME",
+      "confidence": 0.95,
+      "notes": "Loaded from a file specified via DB_HOSTNAME_FILE environment variable or credentials directory."
+    },
+    {
+      "id": 700,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "DB_DATABASE_NAME",
+      "confidence": 0.95,
+      "notes": "Loaded from a file specified via DB_DATABASE_NAME_FILE environment variable or credentials directory."
+    },
+    {
+      "id": 701,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "DB_USERNAME",
+      "confidence": 0.95,
+      "notes": "Loaded from a file specified via DB_USERNAME_FILE environment variable or credentials directory."
+    },
+    {
+      "id": 702,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "DB_PASSWORD",
+      "confidence": 0.95,
+      "notes": "Loaded from a file specified via DB_PASSWORD_FILE environment variable or credentials directory."
+    },
+    {
+      "id": 703,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "REDIS_PASSWORD",
+      "confidence": 0.95,
+      "notes": "Loaded from a file specified via REDIS_PASSWORD_FILE environment variable or credentials directory."
+    },
+    {
+      "id": 704,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "QUIET",
+      "confidence": 0.95,
+      "notes": "Controls whether verbose logging is enabled; set to true when starting as 'immich-admin'."
+    },
+    {
+      "id": 705,
+      "category": "env_var",
+      "source_file": "server/bin/start.sh",
+      "value": "UV_THREADPOOL_SIZE",
+      "confidence": 0.95,
+      "notes": "Set dynamically based on detected CPU cores; defaults to 4 if not detected or if get-cpus.sh is unavailable."
+    },
+    {
+      "id": 1057,
+      "category": "env_var",
+      "source_file": "mobile/ios/Runner/Runner.entitlements",
+      "value": "CUSTOM_GROUP_ID",
+      "confidence": 0.95,
+      "notes": "Placeholder environment variable referenced in the entitlements file for application group ID; must be defined during build or runtime."
+    },
+    {
+      "id": 181,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "NODE_ENV=production",
+      "confidence": 0.9,
+      "notes": "Sets the Node.js environment to production mode"
+    },
+    {
+      "id": 182,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "NVIDIA_DRIVER_CAPABILITIES=all",
+      "confidence": 0.9,
+      "notes": "Enables full NVIDIA GPU driver capabilities for GPU acceleration"
+    },
+    {
+      "id": 183,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "NVIDIA_VISIBLE_DEVICES=all",
+      "confidence": 0.9,
+      "notes": "Makes all NVIDIA devices visible to the application"
+    },
+    {
+      "id": 184,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "IMMICH_BUILD",
+      "confidence": 0.9,
+      "notes": "Passes build ID to the application for traceability"
+    },
+    {
+      "id": 185,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "IMMICH_BUILD_URL",
+      "confidence": 0.9,
+      "notes": "URL to the GitHub Actions run for build context"
+    },
+    {
+      "id": 186,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "IMMICH_BUILD_IMAGE",
+      "confidence": 0.9,
+      "notes": "Build image identifier for container tracking"
+    },
+    {
+      "id": 187,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "IMMICH_REPOSITORY",
+      "confidence": 0.9,
+      "notes": "Repository URL for immich-app/immich"
+    },
+    {
+      "id": 189,
+      "category": "env_var",
+      "source_file": "server/Dockerfile",
+      "value": "IMMICH_SOURCE_COMMIT",
+      "confidence": 0.9,
+      "notes": "Source commit hash used in the build"
+    },
+    {
+      "id": 314,
+      "category": "env_var",
+      "source_file": "web/package.json",
+      "value": "BUILD_STATS=true",
+      "confidence": 0.85,
+      "notes": "Build stats are enabled via environment variable, suggesting a need for environment-specific build configuration in Snap."
+    },
+    {
+      "id": 8,
+      "category": "env_var",
+      "source_file": "mobile/drift_schemas/main/drift_schema_v5.json",
+      "value": "store_date_time_values_as_text",
+      "confidence": 0.75,
+      "notes": "Environmental variable or runtime setting that controls whether date/time fields are stored as text instead of datetime types."
+    },
+    {
+      "id": 163,
+      "category": "env_var",
+      "source_file": "machine-learning/ann/export/env.yaml",
+      "value": "no env_var defined",
+      "confidence": 0.75,
+      "notes": "No environment variables specified"
+    },
+    {
+      "id": 594,
+      "category": "env_var",
+      "source_file": "server/bin/get-cpus.sh",
+      "value": "IMMICH_LOG_LEVEL",
+      "confidence": 0.75,
+      "notes": "Environment variable used to control logging verbosity (debug/verbose/info) in the script"
+    },
+    {
+      "id": 720,
+      "category": "env_var",
+      "source_file": "mobile/openapi/git_push.sh",
+      "value": "GIT_TOKEN",
+      "confidence": 0.75,
+      "notes": "Environment variable used in the script to authenticate Git pushes; indicates potential security or authentication requirement in snap packaging"
+    },
+    {
+      "id": 734,
+      "category": "env_var",
+      "source_file": ".devcontainer/mobile/devcontainer.json",
+      "value": "UPLOAD_LOCATION",
+      "confidence": 0.75,
+      "notes": "Environment variable for specifying the location where uploaded files are stored"
+    },
+    {
+      "id": 864,
+      "category": "env_var",
+      "source_file": "e2e/mise.toml",
+      "value": "./node_modules/.bin",
+      "confidence": 0.75,
+      "notes": "Environment path set for accessing node binaries in various tasks"
+    },
+    {
+      "id": 900,
+      "category": "env_var",
+      "source_file": "mobile/ios/ci_scripts/ci_post_clone.sh",
+      "value": "HOMEBREW_NO_AUTO_UPDATE=1",
+      "confidence": 0.75,
+      "notes": "Disables Homebrew's automatic updates to prevent interference during CI builds, ensuring consistent dependency versions."
+    },
+    {
+      "id": 910,
+      "category": "env_var",
+      "source_file": "docker/example.env",
+      "value": "DB_DATA_LOCATION",
+      "confidence": 0.75,
+      "notes": "Configures the directory where database files are stored, set to ./postgres"
+    },
+    {
+      "id": 911,
+      "category": "env_var",
+      "source_file": "docker/example.env",
+      "value": "TZ",
+      "confidence": 0.75,
+      "notes": "Timezone setting is commented out; would allow setting a timezone via Etc/UTC or other valid TZ identifier"
+    },
+    {
+      "id": 912,
+      "category": "env_var",
+      "source_file": "docker/example.env",
+      "value": "IMMICH_VERSION",
+      "confidence": 0.75,
+      "notes": "Sets the Immich version to use, pinned to v2"
+    },
+    {
+      "id": 923,
+      "category": "env_var",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "IMMICH_SERVER_URL",
+      "confidence": 0.75,
+      "notes": "Environment variable set to point to the immich server URL for internal routing"
+    },
+    {
+      "id": 924,
+      "category": "env_var",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "DB_PASSWORD-postgres",
+      "confidence": 0.75,
+      "notes": "PostgreSQL password from environment variable, used in database service"
+    },
+    {
+      "id": 925,
+      "category": "env_var",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "DB_USERNAME-postgres",
+      "confidence": 0.75,
+      "notes": "PostgreSQL username from environment variable, used in database service"
+    },
+    {
+      "id": 926,
+      "category": "env_var",
+      "source_file": ".devcontainer/server/container-compose-overrides.yml",
+      "value": "DB_DATABASE_NAME-immich",
+      "confidence": 0.75,
+      "notes": "PostgreSQL database name for immich instance"
+    },
+    {
+      "id": 966,
+      "category": "env_var",
+      "source_file": ".vscode/launch.json",
+      "value": "remoteRoot",
+      "confidence": 0.75,
+      "notes": "Configures remote root path for debugging, set to /usr/src/app/server"
+    },
+    {
+      "id": 967,
+      "category": "env_var",
+      "source_file": ".vscode/launch.json",
+      "value": "localRoot",
+      "confidence": 0.75,
+      "notes": "Configures local root path for debugging, uses workspace folder mapping"
+    },
+    {
+      "id": 983,
+      "category": "env_var",
+      "source_file": "machine-learning/scripts/healthcheck.py",
+      "value": "IMMICH_PORT",
+      "confidence": 0.75,
+      "notes": "Environment variable used to configure the healthcheck port; defaults to 3003 if not set"
+    },
+    {
+      "id": 984,
+      "category": "env_var",
+      "source_file": "machine-learning/scripts/healthcheck.py",
+      "value": "IMMICH_HOST",
+      "confidence": 0.75,
+      "notes": "Environment variable used to configure the healthcheck host; defaults to '0.0.0.0' if not set"
+    },
+    {
+      "id": 997,
+      "category": "env_var",
+      "source_file": ".devcontainer/server/container-start-frontend.sh",
+      "value": "DEV_PORT",
+      "confidence": 0.75,
+      "notes": "Configures the port on which the Vite development server for the web frontend listens."
+    },
+    {
+      "id": 1021,
+      "category": "env_var",
+      "source_file": ".devcontainer/server/container-start-backend.sh",
+      "value": "CI=1",
+      "confidence": 0.75,
+      "notes": "Environment variable set to indicate continuous integration context"
+    },
+    {
+      "id": 1022,
+      "category": "env_var",
+      "source_file": ".devcontainer/server/container-start-backend.sh",
+      "value": "IMMICH_WORKSPACE",
+      "confidence": 0.75,
+      "notes": "Environment variable used to determine the workspace directory for the Immich server"
+    },
+    {
+      "id": 1029,
+      "category": "env_var",
+      "source_file": ".github/labeler.yml",
+      "value": "changelog:translation",
+      "confidence": 0.75,
+      "notes": "Configures a pattern for translation-related changes, matching branches starting with 'chore/translations'"
+    },
+    {
+      "id": 1044,
+      "category": "env_var",
+      "source_file": ".github/release.yml",
+      "value": "none",
+      "confidence": 0.75,
+      "notes": "No environment variable definitions found in the file."
+    },
+    {
+      "id": 1105,
+      "category": "env_var",
+      "source_file": "docs/mise.toml",
+      "value": "PROJECT_NAME",
+      "confidence": 0.75,
+      "notes": "Used in the deploy task to specify the project name for Wrangler deployment"
+    },
+    {
+      "id": 1106,
+      "category": "env_var",
+      "source_file": "docs/mise.toml",
+      "value": "BRANCH_NAME",
+      "confidence": 0.75,
+      "notes": "Used in the deploy task to specify the source branch for deployment"
+    },
+    {
+      "id": 1223,
+      "category": "env_var",
+      "source_file": "deployment/.env",
+      "value": "CLOUDFLARE_ACCOUNT_ID",
+      "confidence": 0.75,
+      "notes": "Environment variable pointing to a secret managed via ops (op://tf/cloudflare/account_id)"
+    },
+    {
+      "id": 1224,
+      "category": "env_var",
+      "source_file": "deployment/.env",
+      "value": "CLOUDFLARE_API_TOKEN",
+      "confidence": 0.75,
+      "notes": "Environment variable pointing to a secret managed via ops (op://tf/cloudflare/api_token)"
+    },
+    {
+      "id": 1225,
+      "category": "env_var",
+      "source_file": "deployment/.env",
+      "value": "TF_STATE_POSTGRES_CONN_STR",
+      "confidence": 0.75,
+      "notes": "Environment variable pointing to a secret managed via ops (op://tf/tf_state/postgres_conn_str)"
+    },
+    {
+      "id": 1226,
+      "category": "env_var",
+      "source_file": "deployment/.env",
+      "value": "TF_VAR_env",
+      "confidence": 0.75,
+      "notes": "Environment variable dynamically set to the value of ENVIRONMENT, used to configure deployment context"
+    },
+    {
+      "id": 1251,
+      "category": "env_var",
+      "source_file": "machine-learning/ann/build.sh",
+      "value": "ARMNN_PATH",
+      "confidence": 0.75,
+      "notes": "Environment variable used to specify the path to the ARMNN installation, which must be set during build."
+    },
+    {
+      "id": 1299,
+      "category": "env_var",
+      "source_file": ".github/FUNDING.yml",
+      "value": "custom",
+      "confidence": 0.75,
+      "notes": "Configures custom funding URLs for Immich application"
+    },
+    {
+      "id": 1300,
+      "category": "env_var",
+      "source_file": ".github/FUNDING.yml",
+      "value": "https://buy.immich.app",
+      "confidence": 0.75,
+      "notes": "Custom funding URL for Immich application"
+    },
+    {
+      "id": 1301,
+      "category": "env_var",
+      "source_file": ".github/FUNDING.yml",
+      "value": "https://immich.store",
+      "confidence": 0.75,
+      "notes": "Custom funding URL for Immich application"
+    },
+    {
+      "id": 492,
+      "category": "env_var",
+      "source_file": "docs/docs/administration/system-integrity.md",
+      "value": "IMMICH_IGNORE_MOUNT_CHECK_ERRORS",
+      "confidence": 0.6,
+      "notes": "Environment variable to disable volume mount checks in Immich, intended for advanced users who understand the implications of bypassing integrity verification"
+    },
+    {
+      "id": 1335,
+      "category": "env_var",
+      "source_file": "web/static/robots.txt",
+      "value": "ROBOTSTXT_ENABLED",
+      "confidence": 0.6,
+      "notes": "Although not explicitly defined, the file's content implies the application may have an environment variable to control robot.txt behavior, though no direct reference exists in the file."
+    },
+    {
+      "id": 17,
+      "category": "env_var",
+      "source_file": "mise.lock",
+      "value": "EXTISM_HOME",
+      "confidence": 0.5,
+      "notes": "Potential environment variable for Extism tooling, though not explicitly defined in the file"
+    },
+    {
+      "id": 19,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "POSTGRES_VERSION_RANGE",
+      "confidence": 0.5,
+      "notes": "Defines the required PostgreSQL version range (>=14.0.0) for dependency compatibility"
+    },
+    {
+      "id": 20,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "VECTORCHORD_VERSION_RANGE",
+      "confidence": 0.5,
+      "notes": "Specifies the version range for VectorChord (>=0.3 <2) as a dependency constraint"
+    },
+    {
+      "id": 21,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "VECTOR_VERSION_RANGE",
+      "confidence": 0.5,
+      "notes": "Specifies the version range for Vector (>=0.5 <1) as a dependency constraint"
+    },
+    {
+      "id": 22,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "JOBS_ASSET_PAGINATION_SIZE",
+      "confidence": 0.5,
+      "notes": "Configures pagination size for asset jobs (default 1000) in backend processing"
+    },
+    {
+      "id": 23,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "JOBS_LIBRARY_PAGINATION_SIZE",
+      "confidence": 0.5,
+      "notes": "Configures pagination size for library jobs (default 10,000) in backend processing"
+    },
+    {
+      "id": 24,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "LOGIN_DUMMY_HASH",
+      "confidence": 0.5,
+      "notes": "A hardcoded bcrypt hash used to prevent timing-based user enumeration in login flow"
+    },
+    {
+      "id": 25,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "MOBILE_REDIRECT",
+      "confidence": 0.5,
+      "notes": "Defines redirect URL for mobile app OAuth callback"
+    },
+    {
+      "id": 26,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "LOGIN_URL",
+      "confidence": 0.5,
+      "notes": "Defines the login endpoint path used in authentication flow"
+    },
+    {
+      "id": 27,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "excludePaths",
+      "confidence": 0.5,
+      "notes": "List of paths to exclude from media processing (e.g., /.well-known/immich)"
+    },
+    {
+      "id": 28,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "FACE_THUMBNAIL_SIZE",
+      "confidence": 0.5,
+      "notes": "Sets the size for face thumbnails (250x250 pixels)"
+    },
+    {
+      "id": 29,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "SALT_ROUNDS",
+      "confidence": 0.5,
+      "notes": "Configures bcrypt salt rounds (10) for password hashing"
+    },
+    {
+      "id": 30,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "VECTOR_INDEX_TABLES",
+      "confidence": 0.5,
+      "notes": "Maps vector index types to database table names (e.g., Clip \u2192 smart_search)"
+    },
+    {
+      "id": 31,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "VECTORCHORD_LIST_SLACK_FACTOR",
+      "confidence": 0.5,
+      "notes": "Configures a slack factor (1.2) for VectorChord list operations"
+    },
+    {
+      "id": 32,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "serverVersion",
+      "confidence": 0.5,
+      "notes": "Parsed version from package.json, used for versioning and compatibility checks"
+    },
+    {
+      "id": 33,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "citiesFile",
+      "confidence": 0.5,
+      "notes": "Reference to a file (cities500.txt) used in reverse geocoding"
+    },
+    {
+      "id": 34,
+      "category": "env_var",
+      "source_file": "server/src/constants.ts",
+      "value": "reverseGeocodeMaxDistance",
+      "confidence": 0.5,
+      "notes": "Maximum distance (25,000 meters) for reverse geocoding operations"
+    },
+    {
+      "id": 40,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "host",
+      "confidence": 0.5,
+      "notes": "Configurable host address for the Immich server"
+    },
+    {
+      "id": 41,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "port",
+      "confidence": 0.5,
+      "notes": "Port number for the Immich server to listen on"
+    },
+    {
+      "id": 42,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "environment",
+      "confidence": 0.5,
+      "notes": "Specifies the Immich environment (e.g., production, staging, development)"
+    },
+    {
+      "id": 43,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "logLevel",
+      "confidence": 0.5,
+      "notes": "Sets the logging level (e.g., info, error, debug)"
+    },
+    {
+      "id": 44,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "logFormat",
+      "confidence": 0.5,
+      "notes": "Configures the format of log output (e.g., json, text)"
+    },
+    {
+      "id": 45,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "buildMetadata",
+      "confidence": 0.5,
+      "notes": "Metadata related to build information including build URL, commit, and repository details"
+    },
+    {
+      "id": 46,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "bull",
+      "confidence": 0.5,
+      "notes": "Configures BullMQ queue settings including queue options and registration options"
+    },
+    {
+      "id": 47,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "cls",
+      "confidence": 0.5,
+      "notes": "Configures CLS (Context Sensitive Logging) module options for thread context propagation"
+    },
+    {
+      "id": 48,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "helmet",
+      "confidence": 0.5,
+      "notes": "Configures Helmet middleware settings for security headers"
+    },
+    {
+      "id": 49,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "database",
+      "confidence": 0.5,
+      "notes": "Database connection parameters and migration settings"
+    },
+    {
+      "id": 50,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "licensePublicKey",
+      "confidence": 0.5,
+      "notes": "Client and server license public keys for authentication"
+    },
+    {
+      "id": 51,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "versionCheck",
+      "confidence": 0.5,
+      "notes": "URL for version check endpoint"
+    },
+    {
+      "id": 52,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "network",
+      "confidence": 0.5,
+      "notes": "Configures trusted proxies for the application"
+    },
+    {
+      "id": 53,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "otel",
+      "confidence": 0.5,
+      "notes": "OpenTelemetry module options for distributed tracing"
+    },
+    {
+      "id": 54,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "resourcePaths",
+      "confidence": 0.5,
+      "notes": "Paths to various resources like lock files, geodata, and web assets"
+    },
+    {
+      "id": 55,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "redis",
+      "confidence": 0.5,
+      "notes": "Redis configuration options for session and queue storage"
+    },
+    {
+      "id": 56,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "setup",
+      "confidence": 0.5,
+      "notes": "Configures whether setup is allowed to proceed"
+    },
+    {
+      "id": 57,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "telemetry",
+      "confidence": 0.5,
+      "notes": "Telemetry configuration including API and microservices ports"
+    },
+    {
+      "id": 58,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "storage",
+      "confidence": 0.5,
+      "notes": "Configures storage behavior including media location and mount error handling"
+    },
+    {
+      "id": 59,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "workers",
+      "confidence": 0.5,
+      "notes": "List of configured Immich workers (e.g., for processing media)"
+    },
+    {
+      "id": 60,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "plugins",
+      "confidence": 0.5,
+      "notes": "Configures external plugin behavior including installation folder and access control"
+    },
+    {
+      "id": 61,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "noColor",
+      "confidence": 0.5,
+      "notes": "Disables colored output in logs"
+    },
+    {
+      "id": 62,
+      "category": "env_var",
+      "source_file": "server/src/repositories/config.repository.ts",
+      "value": "nodeVersion",
+      "confidence": 0.5,
+      "notes": "Specifies the Node.js version used by the application"
+    },
+    {
+      "id": 86,
+      "category": "env_var",
+      "source_file": "server/src/config.ts",
+      "value": "IMMICH_MACHINE_LEARNING_ENABLED",
+      "confidence": 0.5,
+      "notes": "Used to control machine learning module enablement via environment variable"
+    },
+    {
+      "id": 87,
+      "category": "env_var",
+      "source_file": "server/src/config.ts",
+      "value": "IMMICH_MACHINE_LEARNING_URL",
+      "confidence": 0.5,
+      "notes": "Configured as default URL for machine learning service in environment"
+    },
+    {
+      "id": 114,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "settings.model_ttl",
+      "confidence": 0.5,
+      "notes": "Controls model cache revalidation period, potentially affecting runtime behavior and memory usage."
+    },
+    {
+      "id": 115,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "settings.request_threads",
+      "confidence": 0.5,
+      "notes": "Configures the number of threads in a thread pool for handling blocking operations, affecting performance."
+    },
+    {
+      "id": 116,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/main.py",
+      "value": "settings.preload",
+      "confidence": 0.5,
+      "notes": "Configures which models to preload at startup, influencing model loading and startup time."
+    },
+    {
+      "id": 126,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "log_level",
+      "confidence": 0.5,
+      "notes": "Configurable logging level (0-5) used to control verbosity of internal operations"
+    },
+    {
+      "id": 127,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/sessions/ann/loader.py",
+      "value": "tuning_level",
+      "confidence": 0.5,
+      "notes": "Controls model tuning behavior (0-3), with 0 requiring a tuning file for loading"
+    },
+    {
+      "id": 316,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "MACHINE_LEARNING_DEVICE_ID",
+      "confidence": 0.5,
+      "notes": "Environment variable used to set device ID in the ML settings configuration"
+    },
+    {
+      "id": 317,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "MACHINE_LEARNING_",
+      "confidence": 0.5,
+      "notes": "Environment prefix used by Pydantic Settings for configuration loading"
+    },
+    {
+      "id": 321,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/config.py",
+      "value": "no_color",
+      "confidence": 0.5,
+      "notes": "Environment variable controlling whether colorized logs are shown"
+    },
+    {
+      "id": 344,
+      "category": "env_var",
+      "source_file": "server/src/repositories/server-info.repository.ts",
+      "value": "versionCheck.url",
+      "confidence": 0.5,
+      "notes": "Configured via environment to point to a version check endpoint"
+    },
+    {
+      "id": 346,
+      "category": "env_var",
+      "source_file": "server/src/repositories/server-info.repository.ts",
+      "value": "resourcePaths.lockFile",
+      "confidence": 0.5,
+      "notes": "Configured via environment to point to the lockfile location for version parsing"
+    },
+    {
+      "id": 418,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_CONFIG_DIR",
+      "confidence": 0.5,
+      "notes": "Environment variable for configuring the configuration directory (default: ~/.config/immich/)"
+    },
+    {
+      "id": 419,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_INSTANCE_URL",
+      "confidence": 0.5,
+      "notes": "Environment variable for Immich server URL"
+    },
+    {
+      "id": 420,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_API_KEY",
+      "confidence": 0.5,
+      "notes": "Environment variable for Immich API key"
+    },
+    {
+      "id": 421,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_RECURSIVE",
+      "confidence": 0.5,
+      "notes": "Environment variable for enabling recursive upload behavior"
+    },
+    {
+      "id": 422,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_IGNORE_PATHS",
+      "confidence": 0.5,
+      "notes": "Environment variable for specifying file patterns to ignore during upload"
+    },
+    {
+      "id": 423,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_SKIP_HASH",
+      "confidence": 0.5,
+      "notes": "Environment variable to skip hashing files before upload"
+    },
+    {
+      "id": 424,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_INCLUDE_HIDDEN",
+      "confidence": 0.5,
+      "notes": "Environment variable to include hidden folders during upload"
+    },
+    {
+      "id": 425,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_AUTO_CREATE_ALBUM",
+      "confidence": 0.5,
+      "notes": "Environment variable to automatically create albums based on folder names"
+    },
+    {
+      "id": 426,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_ALBUM_NAME",
+      "confidence": 0.5,
+      "notes": "Environment variable to add all assets to a specified album"
+    },
+    {
+      "id": 427,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_DRY_RUN",
+      "confidence": 0.5,
+      "notes": "Environment variable to simulate upload without performing actions"
+    },
+    {
+      "id": 428,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_UPLOAD_CONCURRENCY",
+      "confidence": 0.5,
+      "notes": "Environment variable to set concurrency for uploads (default: number of CPUs - 1)"
+    },
+    {
+      "id": 429,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_JSON_OUTPUT",
+      "confidence": 0.5,
+      "notes": "Environment variable to output detailed information in JSON format"
+    },
+    {
+      "id": 430,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_DELETE_ASSETS",
+      "confidence": 0.5,
+      "notes": "Environment variable to delete local assets after upload"
+    },
+    {
+      "id": 431,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_DELETE_DUPLICATES",
+      "confidence": 0.5,
+      "notes": "Environment variable to delete local assets that are duplicates on the server"
+    },
+    {
+      "id": 432,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_PROGRESS_BAR",
+      "confidence": 0.5,
+      "notes": "Environment variable to hide progress bars (default: true)"
+    },
+    {
+      "id": 433,
+      "category": "env_var",
+      "source_file": "packages/cli/src/index.ts",
+      "value": "IMMICH_WATCH_CHANGES",
+      "confidence": 0.5,
+      "notes": "Environment variable to watch for changes and automatically upload"
+    },
+    {
+      "id": 438,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_API_METRICS_PORT",
+      "confidence": 0.5,
+      "notes": "Configurable API metrics port, expected as integer"
+    },
+    {
+      "id": 439,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_BUILD_DATA",
+      "confidence": 0.5,
+      "notes": "Path to build data, optional"
+    },
+    {
+      "id": 443,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_BUILD_IMAGE_URL",
+      "confidence": 0.5,
+      "notes": "URL for build image, optional"
+    },
+    {
+      "id": 444,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_CONFIG_FILE",
+      "confidence": 0.5,
+      "notes": "Path to configuration file, optional"
+    },
+    {
+      "id": 445,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_HELMET_FILE",
+      "confidence": 0.5,
+      "notes": "Path to helmet file, optional"
+    },
+    {
+      "id": 450,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_LOG_FORMAT",
+      "confidence": 0.5,
+      "notes": "Log format configuration, defined via enum"
+    },
+    {
+      "id": 451,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_MEDIA_LOCATION",
+      "confidence": 0.5,
+      "notes": "Absolute path to media location"
+    },
+    {
+      "id": 452,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_MICROSERVICES_METRICS_PORT",
+      "confidence": 0.5,
+      "notes": "Port for microservices metrics, integer"
+    },
+    {
+      "id": 453,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_ALLOW_EXTERNAL_PLUGINS",
+      "confidence": 0.5,
+      "notes": "Boolean-like string flag to allow external plugins"
+    },
+    {
+      "id": 454,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_PLUGINS_INSTALL_FOLDER",
+      "confidence": 0.5,
+      "notes": "Absolute path for plugins installation"
+    },
+    {
+      "id": 457,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_REPOSITORY_URL",
+      "confidence": 0.5,
+      "notes": "Repository URL, optional"
+    },
+    {
+      "id": 460,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_SOURCE_URL",
+      "confidence": 0.5,
+      "notes": "Source URL, optional"
+    },
+    {
+      "id": 461,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_TELEMETRY_INCLUDE",
+      "confidence": 0.5,
+      "notes": "Comma-separated list of telemetry data to include"
+    },
+    {
+      "id": 462,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_TELEMETRY_EXCLUDE",
+      "confidence": 0.5,
+      "notes": "Comma-separated list of telemetry data to exclude"
+    },
+    {
+      "id": 463,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_THIRD_PARTY_SOURCE_URL",
+      "confidence": 0.5,
+      "notes": "URL for third-party source"
+    },
+    {
+      "id": 464,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_THIRD_PARTY_BUG_FEATURE_URL",
+      "confidence": 0.5,
+      "notes": "URL for third-party bug/feature reporting"
+    },
+    {
+      "id": 465,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_THIRD_PARTY_DOCUMENTATION_URL",
+      "confidence": 0.5,
+      "notes": "URL for third-party documentation"
+    },
+    {
+      "id": 466,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_THIRD_PARTY_SUPPORT_URL",
+      "confidence": 0.5,
+      "notes": "URL for third-party support"
+    },
+    {
+      "id": 467,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_ALLOW_SETUP",
+      "confidence": 0.5,
+      "notes": "Boolean-like string flag to allow setup"
+    },
+    {
+      "id": 468,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_TRUSTED_PROXIES",
+      "confidence": 0.5,
+      "notes": "Comma-separated list of trusted proxy IPs or IP ranges"
+    },
+    {
+      "id": 469,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_WORKERS_INCLUDE",
+      "confidence": 0.5,
+      "notes": "Comma-separated list of workers to include"
+    },
+    {
+      "id": 470,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "IMMICH_WORKERS_EXCLUDE",
+      "confidence": 0.5,
+      "notes": "Comma-separated list of workers to exclude"
+    },
+    {
+      "id": 474,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "DB_PORT",
+      "confidence": 0.5,
+      "notes": "Database port, integer"
+    },
+    {
+      "id": 475,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "DB_SKIP_MIGRATIONS",
+      "confidence": 0.5,
+      "notes": "Boolean-like string flag to skip database migrations"
+    },
+    {
+      "id": 476,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "DB_SSL_MODE",
+      "confidence": 0.5,
+      "notes": "Database SSL mode (e.g., disable, require), defined via enum"
+    },
+    {
+      "id": 479,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "DB_VECTOR_EXTENSION",
+      "confidence": 0.5,
+      "notes": "Vector extension (e.g., pgvector, vectorchord), optional"
+    },
+    {
+      "id": 481,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "REDIS_HOSTNAME",
+      "confidence": 0.5,
+      "notes": "Redis hostname, optional"
+    },
+    {
+      "id": 482,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "REDIS_PORT",
+      "confidence": 0.5,
+      "notes": "Redis port, integer"
+    },
+    {
+      "id": 483,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "REDIS_DBINDEX",
+      "confidence": 0.5,
+      "notes": "Redis database index, integer"
+    },
+    {
+      "id": 484,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "REDIS_USERNAME",
+      "confidence": 0.5,
+      "notes": "Redis username, optional"
+    },
+    {
+      "id": 486,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "REDIS_SOCKET",
+      "confidence": 0.5,
+      "notes": "Redis socket path, optional"
+    },
+    {
+      "id": 487,
+      "category": "env_var",
+      "source_file": "server/src/dtos/env.dto.ts",
+      "value": "REDIS_URL",
+      "confidence": 0.5,
+      "notes": "Full Redis URL, optional"
+    },
+    {
+      "id": 551,
+      "category": "env_var",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "IMMICH_DATABASE_HOST",
+      "confidence": 0.5,
+      "notes": "Implied environment variable for database host, set to 'database' in config"
+    },
+    {
+      "id": 552,
+      "category": "env_var",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "IMMICH_REDIS_HOST",
+      "confidence": 0.5,
+      "notes": "Implied environment variable for Redis host, set to 'redis' in config"
+    },
+    {
+      "id": 554,
+      "category": "env_var",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "IMMICH_ENVIRONMENT",
+      "confidence": 0.5,
+      "notes": "Implied environment variable for environment, set to 'Production'"
+    },
+    {
+      "id": 555,
+      "category": "env_var",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "IMMICH_TELEMETRY_API_PORT",
+      "confidence": 0.5,
+      "notes": "Implied environment variable for telemetry API port, set to 8081"
+    },
+    {
+      "id": 556,
+      "category": "env_var",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "IMMICH_TELEMETRY_MICROSERVICES_PORT",
+      "confidence": 0.5,
+      "notes": "Implied environment variable for microservices port, set to 8082"
+    },
+    {
+      "id": 557,
+      "category": "env_var",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "IMMICH_WORKER",
+      "confidence": 0.5,
+      "notes": "Implied environment variable for worker type, set to 'Api' and 'Microservices'"
+    },
+    {
+      "id": 558,
+      "category": "env_var",
+      "source_file": "server/test/repositories/config.repository.mock.ts",
+      "value": "IMMICH_PLUGIN_INSTALL_FOLDER",
+      "confidence": 0.5,
+      "notes": "Implied environment variable for external plugin install folder, set to '/app/data/plugins'"
+    },
+    {
+      "id": 600,
+      "category": "env_var",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "PLAYWRIGHT_HOST",
+      "confidence": 0.5,
+      "notes": "Environment variable to override the host for Playwright tests, defaults to '127.0.0.1'."
+    },
+    {
+      "id": 601,
+      "category": "env_var",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "PLAYWRIGHT_DB_HOST",
+      "confidence": 0.5,
+      "notes": "Environment variable to override the database host for Playwright tests, defaults to '127.0.0.1'."
+    },
+    {
+      "id": 602,
+      "category": "env_var",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "PLAYWRIGHT_BASE_URL",
+      "confidence": 0.5,
+      "notes": "Environment variable to set the base URL for tests, defaults to http://127.0.0.1:2285."
+    },
+    {
+      "id": 603,
+      "category": "env_var",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "PLAYWRIGHT_SLOW_MO",
+      "confidence": 0.5,
+      "notes": "Environment variable to set slow motion for tests, parsed as integer; defaults to 0."
+    },
+    {
+      "id": 604,
+      "category": "env_var",
+      "source_file": "e2e/playwright.config.ts",
+      "value": "PLAYWRIGHT_DISABLE_WEBSERVER",
+      "confidence": 0.5,
+      "notes": "Environment variable to disable the web server startup; if set, the webServer is removed from config."
+    },
+    {
+      "id": 776,
+      "category": "env_var",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "IMMICH_URL",
+      "confidence": 0.5,
+      "notes": "Implied by URL parameter in login; may be used in environment to pass authentication endpoint"
+    },
+    {
+      "id": 777,
+      "category": "env_var",
+      "source_file": "packages/cli/src/commands/auth.ts",
+      "value": "IMMICH_KEY",
+      "confidence": 0.5,
+      "notes": "Implied by key parameter in login; may be used in environment to pass authentication token"
+    },
+    {
+      "id": 781,
+      "category": "env_var",
+      "source_file": "web/vite.config.ts",
+      "value": "BUILD_STATS",
+      "confidence": 0.5,
+      "notes": "Environment variable controlling whether Rollup plugin visualizer is enabled during build, potentially used in snap build-time decisions."
+    },
+    {
+      "id": 803,
+      "category": "env_var",
+      "source_file": "server/test/medium/globalSetup.ts",
+      "value": "IMMICH_TEST_POSTGRES_URL",
+      "confidence": 0.5,
+      "notes": "Set to store the test database connection URL for downstream use"
+    },
+    {
+      "id": 843,
+      "category": "env_var",
+      "source_file": "web/svelte.config.js",
+      "value": "PUBLIC_IMMICH_BUY_HOST",
+      "confidence": 0.5,
+      "notes": "Configured to point to https://buy.immich.app, used for redirecting buy requests in the Svelte app"
+    },
+    {
+      "id": 844,
+      "category": "env_var",
+      "source_file": "web/svelte.config.js",
+      "value": "PUBLIC_IMMICH_PAY_HOST",
+      "confidence": 0.5,
+      "notes": "Configured to point to https://pay.futo.org, used for payment-related redirects"
+    },
+    {
+      "id": 887,
+      "category": "env_var",
+      "source_file": "mobile/packages/ui/showcase/web/index.html",
+      "value": "FLUTTER_BASE_HREF",
+      "confidence": 0.5,
+      "notes": "An environment variable used in the base href tag, intended to be set by the Flutter build process when serving the web app from a path other than the root."
+    },
+    {
+      "id": 1075,
+      "category": "env_var",
+      "source_file": "e2e/vitest.config.ts",
+      "value": "VITEST_DISABLE_DOCKER_SETUP",
+      "confidence": 0.5,
+      "notes": "Used to skip Docker setup during e2e tests by setting it to 'true'"
+    },
+    {
+      "id": 1076,
+      "category": "env_var",
+      "source_file": "e2e/vitest.config.ts",
+      "value": "CI",
+      "confidence": 0.5,
+      "notes": "Used to determine retry count for tests; affects test retry behavior"
+    },
+    {
+      "id": 1151,
+      "category": "env_var",
+      "source_file": "machine-learning/immich_ml/gunicorn_conf.py",
+      "value": "MACHINE_LEARNING_DEVICE_IDS",
+      "confidence": 0.5,
+      "notes": "Environment variable used to specify device IDs for machine learning tasks, passed to Gunicorn via environment configuration"
+    },
+    {
+      "id": 1232,
+      "category": "env_var",
+      "source_file": "deployment/modules/cloudflare/docs-release/providers.tf",
+      "value": "api_token",
+      "confidence": 0.5,
+      "notes": "The provider uses an API token, which may be sourced from environment variables or remote state, indicating potential need for secure credential handling in packaging."
+    },
+    {
+      "id": 1242,
+      "category": "env_var",
+      "source_file": "mobile/ios/fastlane/Appfile",
+      "value": "app_identifier",
+      "confidence": 0.5,
+      "notes": "Configures the bundle identifier for the iOS app, used in Fastlane for iOS app signing and identification"
+    },
+    {
+      "id": 1243,
+      "category": "env_var",
+      "source_file": "mobile/ios/fastlane/Appfile",
+      "value": "apple_id",
+      "confidence": 0.5,
+      "notes": "Configures the Apple developer email address for authentication and signing in Fastlane"
+    },
+    {
+      "id": 1279,
+      "category": "env_var",
+      "source_file": "mobile/android/fastlane/Appfile",
+      "value": "json_key_file",
+      "confidence": 0.5,
+      "notes": "Specifies the path to a JSON key file used for authentication, likely for Google Play or Firebase services"
+    },
+    {
+      "id": 1280,
+      "category": "env_var",
+      "source_file": "mobile/android/fastlane/Appfile",
+      "value": "package_name",
+      "confidence": 0.5,
+      "notes": "Defines the package name for the application, used in Android app signing and distribution"
+    },
+    {
+      "id": 1288,
+      "category": "env_var",
+      "source_file": "web/.browserslistrc",
+      "value": "not dead",
+      "confidence": 0.5,
+      "notes": "The 'not dead' comment may indicate a policy or flag to exclude deprecated or obsolete browsers, potentially affecting the application's target browser support."
+    },
+    {
+      "id": 1292,
+      "category": "env_var",
+      "source_file": "web/.gitignore",
+      "value": ".env",
+      "confidence": 0.5,
+      "notes": "Environment variables are tracked in .env, which may be used during runtime configuration"
+    },
+    {
+      "id": 1293,
+      "category": "env_var",
+      "source_file": "web/.gitignore",
+      "value": ".env.*",
+      "confidence": 0.5,
+      "notes": "All environment variable files are excluded from git, suggesting sensitive or dynamic config is managed externally"
+    },
+    {
+      "id": 1294,
+      "category": "env_var",
+      "source_file": "web/.gitignore",
+      "value": ".env.example",
+      "confidence": 0.5,
+      "notes": "Example environment file is included, likely for developers to reference configuration setup"
+    },
+    {
+      "id": 1339,
+      "category": "env_var",
+      "source_file": "web/.npmrc",
+      "value": "engine-strict",
+      "confidence": 0.5,
+      "notes": "Configures npm to enforce strict engine version compatibility, indicating a requirement for specific Node.js versions in the application environment."
+    },
+    {
+      "id": 1340,
+      "category": "env_var",
+      "source_file": ".nvmrc",
+      "value": "24.15.0",
+      "confidence": 0.5,
+      "notes": "Specifies the Node.js version to be used by nvm (Node Version Manager), which may influence the build environment or runtime dependencies in a snap package."
+    }
+  ]
+}

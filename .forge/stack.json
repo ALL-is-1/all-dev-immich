@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-23T15:40:44.226167+00:00",
+    "source_slug": "immich",
+    "phase": "deep_analysis"
+  },
+  "findings": [
+    {
+      "id": 1316,
+      "category": "stack",
+      "source_file": "mobile/android/metadata/en-US/title.txt",
+      "value": "immich",
+      "confidence": 0.6,
+      "notes": "The application name 'Immich' is identified from the metadata file, indicating the primary application identifier for the snap package."
+    },
+    {
+      "id": 1267,
+      "category": "stack",
+      "source_file": "packages/sdk/.npmignore",
+      "value": "node.js",
+      "confidence": 0.5,
+      "notes": "The presence of package-lock.json and tsconfig.json suggests a Node.js-based application stack"
+    }
+  ]
+}
