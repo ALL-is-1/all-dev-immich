@@ -1,0 +1,52 @@
+#!/bin/sh -eux
+
+_setpriv() {
+    setpriv --clear-groups --reuid _daemon_ --regid _daemon_ -- "$@"
+}
+
+_data="$(snapctl get postgresql.db)"
+_pass="$(snapctl get postgresql.password)"
+_user="$(snapctl get postgresql.username)"
+_dbname="$(snapctl get postgresql.dbname)"
+
+PGDATA="${_data:-$SNAP_COMMON/postgresql/database}"
+
+for dir in logs history database postgresql; do
+    [ -e "${PGDATA%/*}/${dir}" ] || {
+        # We only want the octal to apply to the last directory
+        # shellcheck disable=2174
+        mkdir -pm 0750 "${PGDATA%/*}/${dir}"
+                   
+    }
+done
+
+# echo "127.0.0.1:${_port:-5433}:${_dbname:-immich}:${_user:-postgres}:${_pass:-postgres}" > "${PGPASSFILE}"
+_setpriv echo "*:*:*:*:${_pass:-postgres}" > "${PGPASSFILE}"
+chmod 0600 "${PGPASSFILE}"
+
+# postgres does not like being root. Satisfy it by dropping priv
+# As a result, directory ownership must change
+chown -Rf _daemon_:_daemon_ "${PGDATA%/*}"
+
+# TODO: make database initialization configurable.
+# Create a cluster so that postgres is available immediately.
+if [ -e "${PGDATA}/postgresql.conf" ]; then
+    exit 0
+else
+    echo "${_pass:-postgres}" > /tmp/pwfile
+    _setpriv initdb                     \
+        --auth=md5                      \
+        --pgdata="${PGDATA}"            \
+        --pwfile=/tmp/pwfile            \
+        --username="${_user:-postgres}" \
+        --no-instructions
+
+    rm -f /tmp/pwfile
+fi
+
+# Enable pgvecto-rs
+_setpriv sed -i "s|^#shared_preload_libraries.*|shared_preload_libraries = 'vector, vchord'|" \
+    "${PGDATA}/postgresql.conf"
+
+snapctl start --enable "${SNAP_INSTANCE_NAME}.postgresql"
+snapctl start --enable "${SNAP_INSTANCE_NAME}.createdb"

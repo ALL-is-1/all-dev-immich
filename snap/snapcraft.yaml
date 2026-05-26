@@ -1,0 +1,408 @@
+name: all-dev-immich
+adopt-info: immich
+base: core24
+icon: snap/gui/icon.png
+license: "CC-BY-NC-SA-4.0 AND AGPL-3.0"
+website: https://immich.app
+contact: dilyn.corner@tutanota.com
+issues: https://github.com/dilyn-corner/core-nas/issues
+source-code: https://github.com/dilyn-corner/core-nas/tree/22/immich
+summary: High performance self-hosted photo and video management solution.
+description: |
+  immich is intended to be a high performance self-hosted alternative to larger
+  cloud offerings for similar services. The features are numerous. For more
+  information on immich in general, see the upstream documentation:
+  https://immich.app/docs/overview/introduction
+
+  This particular snap is unaffiliated with the official upstream and is
+  intended for use on Ubuntu Core. The primary focus is on factoring out as much
+  as the infrastructure to other snaps as possible. This means:
+
+  1) using a separate http server snap
+  2) using a separate data store snap
+  3) using a separate database snap
+  4) using a separate graphics libraries snap
+
+  The canonical implementation is using caddy, dilyn-valkey, dilyn-postgresql,
+  and dilyn-jellyfin-ffmpeg to expose all the underlying infrastructure. Please
+  refer to those snaps for more information on their usage.
+
+  Essentially, this snap should deploy and function out-of-the-box when using
+  those snaps. Immich should expose itself on some port (3001 by default) to
+  all devices on a LAN (or on the broader internet, if setup as such), it should
+  manage its own database as configured using the postgresql snap, and it should
+  handle any graphical needs via the graphics libraries snap.
+
+grade: stable
+confinement: strict
+
+assumes: [snapd2.68]
+
+architectures:
+  - build-on: [amd64]
+  # Cross-building currently doesn't work all that well. TBD. For now we can use
+  # remote-build and make some small changes to the snapcraft.yaml.
+  - build-on: [arm64]
+
+lint:
+  ignore: [library]
+
+# v2.5.0+ requires python 3.11 which is not available from the archive on Jammy
+#package-repositories:
+#- type: apt
+#  ppa: deadsnakes/ppa
+#   key-id: F23C5A6CF475977595C89F51BA6932366A755776
+  # Will be available starting on core26
+  # - type: apt
+  #   ppa: jdxcode/mise
+  #   key-id: 38A097C0CCE691795E4B15BE23997D3EEE1EDC52
+
+# postgres hates to run with root permissions and this is a workaround to allow
+# a snap to drop privileges to some non-root user.
+# Requires setpriv and some sort of command chain script to handle permission
+# dropping. See: https://snapcraft.io/docs/system-usernames
+system-usernames:
+  _daemon_: shared
+
+plugs:
+  postgresql:
+    interface: content
+    content: pg-content
+    target: postgresql
+    default-provider: dilyn-postgresql
+  graphics-core22:
+    interface: content
+    content: graphics-libs
+    target: graphics
+    default-provider: dilyn-jellyfin-ffmpeg
+
+layout:
+  /etc/fonts:
+    bind: $SNAP/etc/fonts
+  /etc/OpenCL:
+    symlink: $SNAP/graphics/etc/OpenCL
+  /etc/ImageMagick-6:
+    symlink: $SNAP/etc/ImageMagick-6
+  /usr/share/fonts:
+    bind: $SNAP/usr/share/fonts
+  /usr/share/libdrm/amdgpu.ids:
+    bind-file: $SNAP/graphics/usr/lib/jellyfin-ffmpeg/share/libdrm/amdgpu.ids
+  /usr/lib/jellyfin-ffmpeg:
+    symlink: $SNAP/graphics/usr/lib/jellyfin-ffmpeg
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/intel-opencl:
+    bind: $SNAP/graphics/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/intel-opencl
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/ImageMagick-6.9.11:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/ImageMagick-6.9.11
+
+hooks:
+  connect-plug-postgresql:
+    plugs: &_pgplugs [network, network-bind, postgresql]
+    environment: &_pgenv
+      PGDATA: ${SNAP_COMMON}/postgresql/database
+      PGPASSFILE: ${SNAP_COMMON}/postgresql/.pgpass
+      PATH: ${SNAP}/postgresql/usr/lib/postgresql/14/bin:${PATH}
+      LD_LIBRARY_PATH: ${SNAP}/postgresql/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}:${LD_LIBRARY_PATH}
+
+apps:
+  server:
+    after: [postgresql]
+    command: usr/bin/immich-server.sh
+    command-chain: [usr/bin/graphics-core22-wrapper]
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - graphics-core22
+      - network
+      - network-bind
+      - mount-observe
+      - opengl
+      - postgresql
+      - removable-media
+    # Documentation for all the supported env variables available at https://immich.app/docs/install/environment-variables
+    # Any user-configurable environment variables can be set via snap
+    # configuration and will be set to expected defaults in immich-server.sh
+    environment:
+      DB_PORT: "5433"
+      DB_HOSTNAME: 127.0.0.1
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE_NAME: immich
+      REDIS_PORT: "6379"
+      REDIS_HOSTNAME: 127.0.0.1
+      NODE_ENV: production
+      IMMICH_ENV: production
+      IMMICH_BUILD_DATA: ${SNAP}/usr/lib/immich/build
+      PATH: ${SNAP}/postgresql/usr/lib/postgresql/14/bin:${SNAP}/graphics/bin:${SNAP}/graphics/usr/bin:${PATH}
+      PERL5LIB: ${SNAP}/usr/share/perl5:${SNAP}/usr/share/perl:${PERL5LIB}
+      LD_LIBRARY_PATH: ${SNAP}/postgresql/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}:${LD_LIBRARY_PATH}
+
+  postgresql:
+    command: usr/bin/postgresql.sh start
+    daemon: simple
+    install-mode: disable
+    stop-command: usr/bin/postgresql.sh stop
+    reload-command: usr/bin/postgresql.sh reload
+    plugs: *_pgplugs
+    environment: *_pgenv
+
+  createdb:
+    after: [postgresql]
+    command: usr/bin/postgresql.sh createdb
+    daemon: simple
+    install-mode: disable
+    plugs: *_pgplugs
+    environment: *_pgenv
+
+  ml:
+    command: usr/bin/machine-learning.sh
+    command-chain: [usr/bin/graphics-core22-wrapper]
+    daemon: simple
+    install-mode: disable
+    plugs: [network, network-bind]
+    environment:
+      LD_PRELOAD: "${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libmimalloc.so.2"
+      PYTHONUNBUFFERED: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      NODE_ENV: production
+      IMMICH_BUILD_DATA: "$SNAP/usr/lib/immich/build"
+      TRANSFORMERS_CACHE: /tmp/cache
+      PATH: ${SNAP}/postgresql/usr/lib/postgresql/14/bin:${SNAP}/graphics/bin:${SNAP}/graphics/usr/bin:${PATH}
+      LD_LIBRARY_PATH: ${SNAP}/postgresql/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}:${LD_LIBRARY_PATH}
+
+parts:
+  # mise packages from the PPA aren't available until Resolute; for now, add a
+  # simple part to get mise.
+  # Use the static mise to avoid glibc symbol errors.
+  # This is used to build the plugins, which can be made available once we transition to core24
+  # mise:
+  #   source: https://github.com/jdx/mise/releases/download/v2026.3.9/mise-v2026.3.9-linux-x64-musl.tar.xz
+  #   plugin: dump
+  #   stage:
+  #     - bin/mise
+  #   prime:
+  #     - -*
+
+  immich:
+    # after: [mise]
+    plugin: python
+    source: https://github.com/immich-app/immich
+    source-depth: 1
+    source-type: git
+    source-tag: v2.5.6
+    build-snaps: [node/22/stable]
+    stage-snaps: [node/22/stable]
+    build-packages:
+      - libcfitsio-dev
+      - libexif-dev
+      - libexpat1-dev
+      - libfftw3-dev
+      - libglib2.0-dev
+      - libgsf-1-dev
+      - libheif-dev
+      - libimagequant-dev
+      - libjpeg-turbo8-dev
+      - liblcms2-dev
+      - libmatio-dev
+      - libopenexr-dev
+      - libopenjp2-7-dev
+      - libopenslide-dev
+      - liborc-dev
+      - libpango1.0-dev
+      - libpoppler-glib-dev
+      - librsvg2-dev
+      - libtiff5-dev
+      - libvips-dev
+      - libwebp-dev
+      - libpython3.11-dev:${CRAFT_ARCH_BUILD_FOR}
+      - python3.11
+    stage-packages:
+      - libstdc++6:${CRAFT_ARCH_BUILD_FOR}
+      - libvips42:${CRAFT_ARCH_BUILD_FOR}
+      - perl:${CRAFT_ARCH_BUILD_FOR}
+      - python3.11:${CRAFT_ARCH_BUILD_FOR}
+    build-environment:
+      - COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
+      - NODE_OPTIONS: --max-old-space-size=4096
+      # - MISE_TRUSTED_CONFIG_PATHS: "${CRAFT_PART_BUILD}/plugins/mise.toml"
+      - SHARPIGNORE_GLOBAL_LIBVIPS: "true"
+      - CI: "1"
+    override-pull: |
+      craftctl default
+
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/pgdump.patch"
+
+      # Unecessary license
+      rm cli/LICENSE
+      # Interrupts unattended builds -- can be enabled when we transition to core24
+      # rm "${CRAFT_PART_SRC}/mise.toml"
+
+      craftctl set version=$(git describe --tags)
+
+      # Fetch pnpm for building
+      npm install --global corepack@latest
+      corepack enable pnpm
+
+      # Avoid calling npm during builds
+      pnpm fetch \
+        --ignore-scripts
+
+      pnpm install      \
+        --offline       \
+        --filter immich \
+        --frozen-lockfile
+
+      _sharp_dir="$(pnpm patch sharp | sed -n '3p' | sed 's/^[[:space:]]*//')"
+      cd "${_sharp_dir}"
+      sed -i 's/|| npm run build",/|| pnpm run build",/' package.json
+      cd -
+
+      # Run the scripts
+      pnpm patch-commit "${_sharp_dir}" 
+
+      # Fix a dependency resolution problem
+      cd "${CRAFT_PART_SRC}/web"
+      pnpm add 'three@^0.179.0'
+    override-build: |
+      install -Dm644 LICENSE \
+        "${CRAFT_PART_INSTALL}/usr/lib/immich/app/LICENSE"
+
+      # TODO: mkdir and cp can be moved to organize...
+      mkdir -p "${CRAFT_PART_INSTALL}/usr/bin"              \
+               "${CRAFT_PART_INSTALL}/usr/lib/immich/cli"   \
+               "${CRAFT_PART_INSTALL}/usr/lib/immich/build" \
+               "${CRAFT_PART_INSTALL}/usr/lib/immich/app/server"
+
+      # Server
+      cd "${CRAFT_PART_BUILD}/server"
+
+      pnpm exec nest build \
+        --type-check
+
+      pnpm              \
+        --filter immich \
+        --frozen-lockfile build
+
+      pnpm                   \
+        --prod               \
+        --filter immich      \
+        --frozen-lockfile    \
+        --no-optional deploy \
+        "${CRAFT_PART_INSTALL}/usr/lib/immich/app/server"
+      cd -
+      ## 
+
+      # SDK and web frontend
+      pnpm                   \
+        --filter @immich/sdk \
+        --filter immich-web  \
+        --frozen-lockfile install
+
+      pnpm                   \
+        --filter @immich/sdk \
+        --filter immich-web build
+
+      mkdir -p "${CRAFT_PART_INSTALL}/usr/lib/immich/build"
+      cp -af "${CRAFT_PART_BUILD}/web/build" "${CRAFT_PART_INSTALL}/usr/lib/immich/build/www"
+
+      # Plugins - these can be available once we transition to core24
+      # cd plugins
+      # mise install
+      # mise run build
+
+      # Install the immich-core manifest
+      install -Dm644 "${CRAFT_PART_SRC}/plugins/manifest.json" \
+        "${CRAFT_PART_INSTALL}/usr/lib/immich/build/corePlugin/manifest.json"
+    stage:
+      - -usr/lib/immich/app/server/bin
+      - -usr/lib/immich/app/server/test
+      - -usr/lib/immich/app/server/.nvmrc
+      - -usr/lib/immich/app/server/Dockerfile
+      - -usr/lib/immich/app/server/.prettierrc
+      - -usr/lib/immich/app/server/nest-cli.json
+      - -usr/lib/immich/app/server/pnpm-lock.yaml
+      - -usr/lib/immich/app/server/.prettierignore
+
+  machine-learning:
+    plugin: uv
+    source: https://github.com/immich-app/immich
+    source-depth: 1
+    source-type: git
+    source-tag: v2.5.6
+    source-subdir: machine-learning
+    uv-extras: [cpu]
+    build-snaps: [astral-uv]
+    stage-packages:
+      - gunicorn:all
+      - libgl1:${CRAFT_ARCH_BUILD_FOR}
+      - libmimalloc2.0:${CRAFT_ARCH_BUILD_FOR}
+    override-build: |
+      craftctl default
+
+      mkdir -p "${CRAFT_PART_INSTALL}/etc"
+      cp -rf machine-learning/immich_ml/log_conf.json "${CRAFT_PART_INSTALL}/etc"
+    override-stage: |
+      craftctl default
+
+      unlink "${CRAFT_STAGE}/bin/python"
+      ln -sf python3 "${CRAFT_STAGE}/bin/python"
+
+  # Generate build-lock.json
+  build-lock:
+    after: [immich]
+    plugin: nil
+    source: https://github.com/immich-app/base-images
+    source-depth: 1
+    source-type: git
+    build-packages: [jq]
+    override-prime: |
+      jq -s '.' "${CRAFT_PART_SRC}/server/sources/"*.json  > /tmp/sources.json
+      jq -s '.' "${CRAFT_PART_SRC}/server/packages/"*.json > /tmp/packages.json
+
+      jq -n \
+        --slurpfile sources /tmp/sources.json            \
+        --slurpfile packages /tmp/packages.json          \
+        '{sources: $sources[0], packages: $packages[0]}' \
+        > "${CRAFT_PRIME}/usr/lib/immich/build/build-lock.json"
+      chmod 644 "${CRAFT_PRIME}/usr/lib/immich/build/build-lock.json"
+
+  geonames:
+    plugin: nil
+    source: https://download.geonames.org/export/dump/cities500.zip
+    build-packages: [curl]
+    override-pull: |
+      craftctl default
+
+      mkdir -p "${CRAFT_PART_INSTALL}/usr/lib/immich/build/geodata"
+
+      curl -o "${CRAFT_PART_INSTALL}/usr/lib/immich/build/geodata/admin1CodesASCII.txt"             \
+        https://download.geonames.org/export/dump/admin1CodesASCII.txt
+      curl -o "${CRAFT_PART_INSTALL}/usr/lib/immich/build/geodata/admin2Codes.txt"                  \
+        https://download.geonames.org/export/dump/admin2Codes.txt
+      curl -o "${CRAFT_PART_INSTALL}/usr/lib/immich/build/geodata/ne_10m_admin_0_countries.geojson" \
+        https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson
+
+      cp -f "${CRAFT_PART_SRC}/"* "${CRAFT_PART_INSTALL}/usr/lib/immich/build/geodata"
+
+      date --iso-8601=seconds | tr -d "\n" > "${CRAFT_PART_INSTALL}/usr/lib/immich/build/geodata/geodata-date.txt"
+
+  scripts:
+    after: [build-lock, geonames, immich, machine-learning]
+    plugin: dump
+    source: src/
+    override-build: |
+      craftctl default
+
+      sed -i "s/_arch/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/" "${CRAFT_PART_INSTALL}/pg_dumpall"
+    organize:
+      "*": usr/bin/
+    # Remove any overlapping binaries provided by our graphics snap
+    override-prime: |
+      craftctl default
+
+      find /snap/dilyn-jellyfin-ffmpeg/current/usr/lib -type f -o -type l |\
+        while read -r file; do
+          rm -f "${CRAFT_PRIME}/${file##*/current/}"
+        done
+
+      # These files seem to come from nowhere. They aren't necessary at least.
+      rm -f "${CRAFT_PRIME}/qemu_bcrypt."*

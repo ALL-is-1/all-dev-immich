@@ -1,0 +1,7 @@
+#!/bin/sh -eux
+
+mkdir -p "${SNAP_COMMON}/sync"    \
+         "${SNAP_COMMON}/cache"   \
+         "${SNAP_COMMON}/upload"  \
+         "${SNAP_COMMON}/backups" \
+         "${SNAP_COMMON}/reverse-geocoding-dump"

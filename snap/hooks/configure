@@ -1,0 +1,5 @@
+#!/bin/sh -eux
+
+_ml="$(snapctl get ml.enabled)"
+
+[ "$_ml" = "true" ] || snapctl stop --disable "${SNAP_INSTANCE_NAME}.ml"
