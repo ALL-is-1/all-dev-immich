@@ -1,0 +1,6 @@
+#!/bin/sh -eux
+
+# Check if the postgresql database has been created
+[ "$(snapctl get db)" = "created" ] || exit 0
+
+snapctl start --enable "${SNAP_INSTANCE_NAME}.server"

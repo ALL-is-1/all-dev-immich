@@ -1,0 +1,3 @@
+#!/bin/sh -eux
+
+exec "${SNAP}/graphics/bin/gpu-2404-provider-wrapper" "$@"
