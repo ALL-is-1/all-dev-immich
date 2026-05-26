@@ -38,9 +38,9 @@ description: |
 assumes:
   - snapd2.68
 
-architectures:
-  - build-on: [amd64]
-  - build-on: [arm64]
+platforms:
+  amd64:
+  arm64:
 
 lint:
   ignore:
