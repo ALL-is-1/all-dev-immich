@@ -519,3 +519,9 @@ parts:
       craftctl default
 
       rm -f "${CRAFT_PRIME}/qemu_bcrypt."*
+
+      # The libstdc++ that ends up bundled is older than what insightface's
+      # mesh_core_cython.so (compiled from source during build) requires
+      # (GLIBCXX_3.4.32). Drop it so the runtime falls back to core24's,
+      # which is in sync with the build environment.
+      rm -f "${CRAFT_PRIME}/usr/lib/"*"-linux-gnu/libstdc++.so."*
