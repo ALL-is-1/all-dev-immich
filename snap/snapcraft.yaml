@@ -301,6 +301,34 @@ parts:
         deploy \
         "${CRAFT_PART_INSTALL}/usr/lib/immich/app/server"
 
+      # pnpm 10 isolated deploy strips optional native deps. Restore sharp's
+      # platform-specific @img/* packages from the build's virtual store and
+      # re-link them where sharp's loader expects to find them.
+      _dest_pnpm="${CRAFT_PART_INSTALL}/usr/lib/immich/app/server/node_modules/.pnpm"
+
+      for _src_root in \
+        "${CRAFT_PART_BUILD}/node_modules/.pnpm" \
+        "${CRAFT_PART_SRC}/node_modules/.pnpm"; do
+        [ -d "${_src_root}" ] || continue
+        for _src in "${_src_root}"/@img+sharp-*; do
+          [ -d "${_src}" ] || continue
+          _base="$(basename "${_src}")"
+          [ -d "${_dest_pnpm}/${_base}" ] || cp -af "${_src}" "${_dest_pnpm}/${_base}"
+        done
+      done
+
+      _sharp_dir="$(find "${_dest_pnpm}" -maxdepth 1 -name 'sharp@*_patch_hash=*' -type d -print -quit)"
+      if [ -n "${_sharp_dir}" ]; then
+        mkdir -p "${_sharp_dir}/node_modules/@img"
+        for _pnpm_pkg in "${_dest_pnpm}"/@img+sharp-*; do
+          [ -d "${_pnpm_pkg}" ] || continue
+          _base="$(basename "${_pnpm_pkg}")"
+          _pkg="$(echo "${_base}" | sed -E 's/@img\+(sharp-[^@]+)@.*/\1/')"
+          ln -sfn "../../../${_base}/node_modules/@img/${_pkg}" \
+            "${_sharp_dir}/node_modules/@img/${_pkg}"
+        done
+      fi
+
       cd -
 
       pnpm \
