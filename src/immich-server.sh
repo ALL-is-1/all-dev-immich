@@ -47,7 +47,7 @@ export NVIDIA_DRIVER_CAPABILITIES=all
 export NVIDIA_VISIBLE_DEVICES=all
 
 export IMMICH_MACHINE_LEARNING_ENABLED="${_mlon:-true}"
-export MACHINE_LEARNING_CACHE_FOLDER="${_mlcache:-/tmp/cache}"
+export MACHINE_LEARNING_CACHE_FOLDER="${_mlcache:-$SNAP_COMMON/cache}"
 export IMMICH_MACHINE_LEARNING_URL=http://127.0.0.1:3003
 
 # Node is dumb and requires package.json in $PWD for `node <foo>` to work

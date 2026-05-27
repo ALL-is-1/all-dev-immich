@@ -22,15 +22,12 @@ summary: High performance self-hosted photo and video management solution.
 description: |
   Immich is a high performance self-hosted photo and video management solution.
 
-  This snap is optimized for Ubuntu Core and modular infrastructure deployments.
-  Services such as PostgreSQL, FFmpeg, OpenCL, and graphics runtimes are exposed
-  through dedicated snaps and content interfaces.
+  This snap is optimized for Ubuntu Core. FFmpeg and Redis are bundled.
+  PostgreSQL is provided via a content interface.
 
   The snap is intended to work seamlessly with:
     - dilyn-postgresql
-    - dilyn-jellyfin-ffmpeg
     - caddy
-    - valkey/redis services
 
   Immich will expose itself on port 3001 by default and can be accessed
   locally or through reverse proxies.
@@ -56,33 +53,15 @@ plugs:
     target: postgresql
     default-provider: dilyn-postgresql
 
-  graphics-core22:
-    interface: content
-    content: graphics-libs
-    target: graphics
-    default-provider: dilyn-jellyfin-ffmpeg
-
 layout:
   /etc/fonts:
     bind: $SNAP/etc/fonts
-
-  /etc/OpenCL:
-    symlink: $SNAP/graphics/etc/OpenCL
 
   /etc/ImageMagick-6:
     symlink: $SNAP/etc/ImageMagick-6
 
   /usr/share/fonts:
     bind: $SNAP/usr/share/fonts
-
-  /usr/share/libdrm/amdgpu.ids:
-    bind-file: $SNAP/graphics/usr/lib/jellyfin-ffmpeg/share/libdrm/amdgpu.ids
-
-  /usr/lib/jellyfin-ffmpeg:
-    symlink: $SNAP/graphics/usr/lib/jellyfin-ffmpeg
-
-  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/intel-opencl:
-    bind: $SNAP/graphics/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/intel-opencl
 
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/ImageMagick-6.9.11:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/ImageMagick-6.9.11
@@ -103,14 +82,24 @@ hooks:
       LD_LIBRARY_PATH: ${SNAP}/postgresql/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}:${LD_LIBRARY_PATH}
 
 apps:
+  redis:
+    command: usr/bin/redis.sh
+
+    daemon: simple
+    install-mode: enable
+
+    restart-condition: always
+
+    plugs:
+      - network
+      - network-bind
+
   server:
     after:
       - postgresql
+      - redis
 
     command: usr/bin/immich-server.sh
-
-    command-chain:
-      - usr/bin/graphics-core22-wrapper
 
     daemon: simple
     install-mode: disable
@@ -118,7 +107,6 @@ apps:
     restart-condition: always
 
     plugs:
-      - graphics-core22
       - network
       - network-bind
       - mount-observe
@@ -141,7 +129,7 @@ apps:
 
       IMMICH_BUILD_DATA: ${SNAP}/usr/lib/immich/build
 
-      PATH: ${SNAP}/postgresql/usr/lib/postgresql/16/bin:${SNAP}/graphics/bin:${SNAP}/graphics/usr/bin:${PATH}
+      PATH: ${SNAP}/postgresql/usr/lib/postgresql/16/bin:${PATH}
 
       PERL5LIB: ${SNAP}/usr/share/perl5:${SNAP}/usr/share/perl:${PERL5LIB}
 
@@ -151,7 +139,7 @@ apps:
     command: usr/bin/postgresql.sh start
 
     daemon: simple
-    install-mode: disable
+    install-mode: enable
 
     stop-command: usr/bin/postgresql.sh stop
     reload-command: usr/bin/postgresql.sh reload
@@ -169,7 +157,7 @@ apps:
     command: usr/bin/postgresql.sh createdb
 
     daemon: oneshot
-    install-mode: disable
+    install-mode: enable
 
     plugs: *_pgplugs
 
@@ -178,16 +166,12 @@ apps:
   ml:
     command: usr/bin/machine-learning.sh
 
-    command-chain:
-      - usr/bin/graphics-core22-wrapper
-
     daemon: simple
     install-mode: disable
 
     restart-condition: always
 
     plugs:
-      - graphics-core22
       - network
       - network-bind
       - opengl
@@ -202,11 +186,7 @@ apps:
 
       IMMICH_BUILD_DATA: "$SNAP/usr/lib/immich/build"
 
-      TRANSFORMERS_CACHE: /tmp/cache
-
-      PATH: ${SNAP}/postgresql/usr/lib/postgresql/16/bin:${SNAP}/graphics/bin:${SNAP}/graphics/usr/bin:${PATH}
-
-      LD_LIBRARY_PATH: ${SNAP}/postgresql/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}:${LD_LIBRARY_PATH}
+      TRANSFORMERS_CACHE: ${SNAP_COMMON}/cache
 
 parts:
   immich:
@@ -254,6 +234,8 @@ parts:
       - libstdc++6:${CRAFT_ARCH_BUILD_FOR}
       - libvips42:${CRAFT_ARCH_BUILD_FOR}
       - perl:${CRAFT_ARCH_BUILD_FOR}
+      - ffmpeg:${CRAFT_ARCH_BUILD_FOR}
+      - redis-server:${CRAFT_ARCH_BUILD_FOR}
 
     build-environment:
       - COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
@@ -477,12 +459,11 @@ parts:
     organize:
       "*": usr/bin/
 
+    stage:
+      - -usr/bin/graphics-core22-wrapper
+      - -usr/bin/gpu-2404-wrapper
+
     override-prime: |
       craftctl default
-
-      find /snap/dilyn-jellyfin-ffmpeg/current/usr/lib \
-        -type f -o -type l | while read -r file; do
-          rm -f "${CRAFT_PRIME}/${file##*/current/}"
-        done
 
       rm -f "${CRAFT_PRIME}/qemu_bcrypt."*

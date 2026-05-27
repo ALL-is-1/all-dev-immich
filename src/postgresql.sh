@@ -54,11 +54,9 @@ EOF
             snapctl restart "${SNAP_INSTANCE_NAME}.postgresql"
             sleep 10
 
-            # If graphics-core22 isn't connected immich may struggle
-            if snapctl is-connected graphics-core22; then
-                # Start immich
-                snapctl start --enable "${SNAP_INSTANCE_NAME}.server"
-            fi
+            snapctl start --enable "${SNAP_INSTANCE_NAME}.redis"
+            snapctl start --enable "${SNAP_INSTANCE_NAME}.server"
+            snapctl start --enable "${SNAP_INSTANCE_NAME}.ml"
         }
 
     snapctl set postgresql.db=created
@@ -66,7 +64,18 @@ EOF
 }
 
 start() {
+    if [ ! -s "${PGDATA}/PG_VERSION" ]; then
+        log "INFO" "Initializing postgresql database cluster"
+        mkdir -p "${PGDATA}"
+        _setpriv initdb \
+            --pgdata="${PGDATA}" \
+            --username=postgres \
+            --auth=trust \
+            --auth-local=trust
+    fi
+
     log "INFO" "Starting postgresql database"
+    mkdir -p "${SNAP_COMMON}/postgresql"
     _setpriv postgres                  \
         -h 127.0.0.1                   \
         -p "${_port:-5433}"            \
