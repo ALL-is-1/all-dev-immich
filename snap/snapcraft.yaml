@@ -429,6 +429,7 @@ parts:
     stage-packages:
       - postgresql-16:${CRAFT_ARCH_BUILD_FOR}
       - postgresql-client-16:${CRAFT_ARCH_BUILD_FOR}
+      - postgresql-16-pgvector:${CRAFT_ARCH_BUILD_FOR}
 
     stage:
       - -usr/bin/pg_dump

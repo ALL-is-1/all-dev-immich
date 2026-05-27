@@ -57,10 +57,6 @@ EOF
 
             rm -f /tmp/enable-vectors.sql
 
-            # Restart postgres for changes to take effect
-            snapctl restart "${SNAP_INSTANCE_NAME}.postgresql"
-            _wait_for_postgres
-
             snapctl start --enable "${SNAP_INSTANCE_NAME}.redis"
             snapctl start --enable "${SNAP_INSTANCE_NAME}.server"
             snapctl start --enable "${SNAP_INSTANCE_NAME}.ml"
