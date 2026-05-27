@@ -64,6 +64,9 @@ EOF
 start() {
     if [ ! -s "${PGDATA}/PG_VERSION" ]; then
         log "INFO" "Initializing postgresql database cluster"
+        # PG_VERSION is missing, so any other contents are leftovers from a
+        # previous failed initdb. Wipe them or initdb will refuse to run.
+        rm -rf "${PGDATA}"
         mkdir -p "${PGDATA}"
         chown _daemon_:_daemon_ "${PGDATA}"
         _setpriv initdb \
