@@ -430,6 +430,10 @@ parts:
       - postgresql-16:${CRAFT_ARCH_BUILD_FOR}
       - postgresql-client-16:${CRAFT_ARCH_BUILD_FOR}
 
+    stage:
+      - -usr/bin/pg_dump
+      - -usr/bin/pg_dumpall
+
   vchord:
     plugin: nil
 
