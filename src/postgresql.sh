@@ -74,6 +74,7 @@ start() {
     if [ ! -s "${PGDATA}/PG_VERSION" ]; then
         log "INFO" "Initializing postgresql database cluster"
         mkdir -p "${PGDATA}"
+        chown _daemon_:_daemon_ "${PGDATA}"
         _setpriv initdb \
             --pgdata="${PGDATA}" \
             --username=postgres \
@@ -83,6 +84,7 @@ start() {
 
     log "INFO" "Starting postgresql database"
     mkdir -p "${SNAP_COMMON}/postgresql"
+    chown _daemon_:_daemon_ "${SNAP_COMMON}/postgresql"
     _setpriv postgres                              \
         -h 127.0.0.1                               \
         -p "${_port:-5433}"                        \
