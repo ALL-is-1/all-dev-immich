@@ -15,10 +15,17 @@ log() {
     printf '%s: %s\n' "$1" "$2"
 }
 
+_wait_for_postgres() {
+    _tries=0
+    while ! pg_isready -h 127.0.0.1 -p "${_port:-5433}" -q; do
+        _tries=$((_tries + 1))
+        [ "${_tries}" -lt 30 ] || { log "ERROR" "PostgreSQL not ready after 60s"; return 1; }
+        sleep 2
+    done
+}
+
 createdb() {
-    # Wait for cluster to be available
-    # TODO: more reliable way of knowing when postgres is available
-    sleep 10
+    _wait_for_postgres
 
     [ "$(snapctl get postgresql.db)" = "created" ] ||
         _setpriv psql -lqt -U postgres -h 127.0.0.1 -p 5433 | cut -d\| -f1 | grep -qw immich || {
@@ -52,7 +59,7 @@ EOF
 
             # Restart postgres for changes to take effect
             snapctl restart "${SNAP_INSTANCE_NAME}.postgresql"
-            sleep 10
+            _wait_for_postgres
 
             snapctl start --enable "${SNAP_INSTANCE_NAME}.redis"
             snapctl start --enable "${SNAP_INSTANCE_NAME}.server"
