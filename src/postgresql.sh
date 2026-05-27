@@ -76,10 +76,11 @@ start() {
 
     log "INFO" "Starting postgresql database"
     mkdir -p "${SNAP_COMMON}/postgresql"
-    _setpriv postgres                  \
-        -h 127.0.0.1                   \
-        -p "${_port:-5433}"            \
-        -k "${SNAP_COMMON}/postgresql" \
+    _setpriv postgres                              \
+        -h 127.0.0.1                               \
+        -p "${_port:-5433}"                        \
+        -k "${SNAP_COMMON}/postgresql"             \
+        -c shared_preload_libraries=vchord         \
         -D "${PGDATA}"
 }
 
