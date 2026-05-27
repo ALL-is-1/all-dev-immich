@@ -80,11 +80,12 @@ apps:
     after:
       - postgresql
       - redis
+      - createdb
 
     command: usr/bin/immich-server.sh
 
     daemon: simple
-    install-mode: disable
+    install-mode: enable
 
     restart-condition: always
 
@@ -149,10 +150,13 @@ apps:
     environment: *_pgenv
 
   ml:
+    after:
+      - createdb
+
     command: usr/bin/machine-learning.sh
 
     daemon: simple
-    install-mode: disable
+    install-mode: enable
 
     restart-condition: always
 
@@ -429,11 +433,25 @@ parts:
     stage-packages:
       - postgresql-16:${CRAFT_ARCH_BUILD_FOR}
       - postgresql-client-16:${CRAFT_ARCH_BUILD_FOR}
-      - postgresql-16-pgvector:${CRAFT_ARCH_BUILD_FOR}
 
     stage:
       - -usr/bin/pg_dump
       - -usr/bin/pg_dumpall
+
+  pgvector:
+    plugin: nil
+
+    build-packages:
+      - curl
+
+    # Update _ver to match the version in immich-app/base-images
+    override-build: |
+      _ver="0.8.0"
+      _arch=$(dpkg --print-architecture)
+      _deb="postgresql-16-pgvector_${_ver}-1.pgdg24.04+1_${_arch}.deb"
+      curl -fsSL -o "/tmp/${_deb}" \
+        "https://apt.postgresql.org/pub/repos/apt/pool/main/p/postgresql-16-pgvector/${_deb}"
+      dpkg-deb -x "/tmp/${_deb}" "${CRAFT_PART_INSTALL}"
 
   vchord:
     plugin: nil
@@ -456,6 +474,7 @@ parts:
       - geonames
       - immich
       - machine-learning
+      - pgvector
       - postgresql
       - vchord
 

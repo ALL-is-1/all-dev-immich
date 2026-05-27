@@ -56,14 +56,9 @@ EOF
             -f /tmp/enable-vectors.sql
 
             rm -f /tmp/enable-vectors.sql
-
-            snapctl start --enable "${SNAP_INSTANCE_NAME}.redis"
-            snapctl start --enable "${SNAP_INSTANCE_NAME}.server"
-            snapctl start --enable "${SNAP_INSTANCE_NAME}.ml"
         }
 
     snapctl set postgresql.db=created
-    snapctl stop --disable "${SNAP_INSTANCE_NAME}.createdb"
 }
 
 start() {
