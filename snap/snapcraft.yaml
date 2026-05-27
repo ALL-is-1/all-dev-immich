@@ -298,7 +298,6 @@ parts:
         --prod \
         --filter immich \
         --frozen-lockfile \
-        --no-optional \
         deploy \
         "${CRAFT_PART_INSTALL}/usr/lib/immich/app/server"
 
