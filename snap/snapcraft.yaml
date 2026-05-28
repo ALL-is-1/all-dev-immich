@@ -120,7 +120,11 @@ apps:
 
       PATH: ${SNAP}/usr/lib/postgresql/16/bin:${PATH}
 
-      PERL5LIB: ${SNAP}/usr/share/perl5:${SNAP}/usr/share/perl:${PERL5LIB}
+      # exiftool (perl) needs the snap's arch-specific module dirs on @INC,
+      # not just the arch-independent ones. Without perl-base / perl/5.38.2,
+      # core XS modules like File::Glob fail to load, exiftool crashes on
+      # startup, and /api/server/about hangs (blocking web UI login).
+      PERL5LIB: ${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/perl-base:${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/perl/5.38.2:${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/perl5/5.38:${SNAP}/usr/share/perl/5.38.2:${SNAP}/usr/share/perl5:${SNAP}/usr/share/perl:${PERL5LIB}
 
   postgresql:
     command: usr/bin/postgresql.sh start
