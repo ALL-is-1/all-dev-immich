@@ -70,6 +70,30 @@ layout:
   /usr/share/postgresql:
     bind: $SNAP/usr/share/postgresql
 
+  # exiftool-vendored spawns the exiftool perl script with a sanitized
+  # environment that drops PERL5LIB, so the perl child falls back to its
+  # compiled-in default @INC (host paths, which under core24 have no perl
+  # modules) and aborts with "Can't locate strict.pm". That stalls
+  # exiftool.version(), which hangs /api/server/about and blocks web UI
+  # login. Bind the bundled perl module dirs onto those default @INC
+  # paths so perl resolves its modules for any process, env or not.
+  # @INC uses the short version (5.38) for the priv/arch libs while the
+  # package installs them under 5.38.2, so map short -> full for those.
+  /usr/share/perl5:
+    bind: $SNAP/usr/share/perl5
+
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/perl-base:
+    bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/perl-base
+
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/perl5/5.38:
+    bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/perl5/5.38
+
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/perl/5.38:
+    bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/perl/5.38.2
+
+  /usr/share/perl/5.38:
+    bind: $SNAP/usr/share/perl/5.38.2
+
 apps:
   redis:
     command: usr/bin/redis.sh
@@ -120,10 +144,11 @@ apps:
 
       PATH: ${SNAP}/usr/lib/postgresql/16/bin:${PATH}
 
-      # exiftool (perl) needs the snap's arch-specific module dirs on @INC,
-      # not just the arch-independent ones. Without perl-base / perl/5.38.2,
-      # core XS modules like File::Glob fail to load, exiftool crashes on
-      # startup, and /api/server/about hangs (blocking web UI login).
+      # Puts the bundled perl modules on @INC for perl invoked directly by
+      # the server process. Child processes spawned by exiftool-vendored do
+      # NOT inherit this (it sanitizes their env), so the actual exiftool
+      # fix lives in the `layout` block, which maps the same modules onto
+      # perl's default @INC. This var is the belt to that layout's braces.
       PERL5LIB: ${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/perl-base:${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/perl/5.38.2:${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/perl5/5.38:${SNAP}/usr/share/perl/5.38.2:${SNAP}/usr/share/perl5:${SNAP}/usr/share/perl:${PERL5LIB}
 
   postgresql:
