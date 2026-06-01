@@ -1,0 +1,90 @@
+app:
+  name: all-dev-immich
+  version: "2.5.6"
+
+# Sidecar mode.
+#
+# Immich runs its own snapd-managed services (postgresql, redis, server, ml,
+# createdb). The CT engine does NOT launch or manage Immich — it runs as a
+# lightweight reporting sidecar that validates/persists the config Control
+# Tower pushes via `snap set` and streams status callbacks back to CT.
+run:
+  command: ""
+
+# Status reported on the initial and periodic callbacks. Immich's web server
+# listens on port 3001 (see src/immich-server.sh).
+sidecar:
+  status_command: "hostname -I | awk '{print \"Immich: http://\" $1 \":3001\"}'"
+
+output:
+  mode: logs
+  interval: 5
+  initial_event: "message_initial"
+  periodic_event: "message"
+  stop_event: "deployment_stop"
+
+# Configuration schema — the keys Control Tower sends via `snap set`. The
+# ct-* integration keys (ct-callback-url, ct-node-id, ct-deployment-id,
+# ct-snap-name) are handled automatically by ct-engine and must NOT be listed.
+#
+# All keys are optional: the bundled snap already carries working defaults
+# (DB_*/REDIS_* are hardcoded in snapcraft.yaml's `server` app environment,
+# and ml.enabled is consumed by the configure hook + server wrapper). They
+# are declared here so CT knows the schema and the engine validates them.
+config:
+
+  DB_HOSTNAME:
+    visibility: user
+    required: false
+    type: string
+    default: "127.0.0.1"
+    description: "Hostname or IP of the PostgreSQL server (bundled: 127.0.0.1)."
+
+  DB_PORT:
+    visibility: user
+    required: false
+    type: int
+    default: 5433
+    description: "PostgreSQL server port (bundled Postgres listens on 5433)."
+
+  DB_USERNAME:
+    visibility: user
+    required: false
+    type: string
+    default: "postgres"
+    description: "PostgreSQL username."
+
+  DB_PASSWORD:
+    visibility: user
+    required: false
+    type: string
+    default: "postgres"
+    description: "PostgreSQL password."
+
+  DB_DATABASE_NAME:
+    visibility: user
+    required: false
+    type: string
+    default: "immich"
+    description: "PostgreSQL database name."
+
+  REDIS_HOSTNAME:
+    visibility: user
+    required: false
+    type: string
+    default: "127.0.0.1"
+    description: "Hostname or IP of the Redis server."
+
+  REDIS_PORT:
+    visibility: user
+    required: false
+    type: int
+    default: 6379
+    description: "Redis server port."
+
+  ml.enabled:
+    visibility: user
+    required: false
+    type: bool
+    default: "true"
+    description: "Enable the machine-learning service. When false the configure hook disables the ml daemon."

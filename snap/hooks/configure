@@ -1,5 +1,17 @@
-#!/bin/sh -eux
+#!/bin/sh -eu
 
-_ml="$(snapctl get ml.enabled)"
+# Snap *hooks* (unlike apps) do not inherit the snapcraft-managed PATH, so the
+# staged python3 used by ct-engine's `#!/usr/bin/env python3` shebang — and
+# snapctl — are not discoverable. Expose the snap's own bin dirs first.
+export PATH="$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
 
+# Disable the machine-learning service unless explicitly enabled.
+_ml="$(snapctl get ml.enabled || true)"
 [ "$_ml" = "true" ] || snapctl stop --disable "${SNAP_INSTANCE_NAME}.ml"
+
+# Control Tower integration: validate + persist the config CT pushed via
+# `snap set` to $SNAP_COMMON/config.yaml. The engine deliberately does not
+# manage Immich's own services; restart only the reporting sidecar so it
+# re-reads the new config / callback URL (no-op on first install).
+"$SNAP/bin/ct-engine" hook-configure
+snapctl restart "${SNAP_INSTANCE_NAME}.ct-engine" 2>/dev/null || true
