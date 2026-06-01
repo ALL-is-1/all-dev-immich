@@ -1,59 +1,13 @@
-#!/bin/sh -e
-
-# This hook runs when the snap is configured.
-# It reads settings from 'snapctl get' and applies them.
-
-
-# An example parameter
-VALUE=$(snapctl get example-param)
-if [ -z "$VALUE" ]; then
-  VALUE="default-value"
-fi
-echo "Setting example-param=$VALUE"
-# TODO: Write to your app's config file or environment
-# e.g., echo "example-param=$VALUE" >> $SNAP_COMMON/config.env
-
-# The port the application listens on.
-VALUE=$(snapctl get port)
-if [ -z "$VALUE" ]; then
-  VALUE="8080"
-fi
-echo "Setting port=$VALUE"
-# TODO: Write to your app's config file or environment
-# e.g., echo "port=$VALUE" >> $SNAP_COMMON/config.env
-
-# CT engine callback URL
-VALUE=$(snapctl get ct-callback-url)
-if [ -z "$VALUE" ]; then
-  VALUE=""
-fi
-echo "Setting ct-callback-url=$VALUE"
-# TODO: Write to your app's config file or environment
-# e.g., echo "ct-callback-url=$VALUE" >> $SNAP_COMMON/config.env
-
-# CT engine snap identifier
-VALUE=$(snapctl get ct-snap-name)
-if [ -z "$VALUE" ]; then
-  VALUE=""
-fi
-echo "Setting ct-snap-name=$VALUE"
-# TODO: Write to your app's config file or environment
-# e.g., echo "ct-snap-name=$VALUE" >> $SNAP_COMMON/config.env
-
-# CT node ID
-VALUE=$(snapctl get ct-node-id)
-if [ -z "$VALUE" ]; then
-  VALUE=""
-fi
-echo "Setting ct-node-id=$VALUE"
-# TODO: Write to your app's config file or environment
-# e.g., echo "ct-node-id=$VALUE" >> $SNAP_COMMON/config.env
-
-# CT deployment ID
-VALUE=$(snapctl get ct-deployment-id)
-if [ -z "$VALUE" ]; then
-  VALUE=""
-fi
-echo "Setting ct-deployment-id=$VALUE"
-# TODO: Write to your app's config file or environment
-# e.g., echo "ct-deployment-id=$VALUE" >> $SNAP_COMMON/config.env
+#!/bin/sh
+# Snap configure hook.
+#
+# Delegates to the CT engine, which reads config via `snapctl get`
+# (safely tolerating unset keys), validates it against plugin.yaml,
+# persists it to $SNAP_COMMON/config.yaml, runs config-change setup
+# commands, and restarts the daemon so it picks up the new config.
+#
+# NOTE: no `set -e` here on purpose. `snapctl get <unset-key>` exits
+# non-zero, so a naive `set -e` script aborts before doing any work.
+# The engine handles missing/invalid config without failing the hook,
+# letting the daemon wait for a valid `snap set`.
+exec "$SNAP/bin/ct-engine" hook-configure

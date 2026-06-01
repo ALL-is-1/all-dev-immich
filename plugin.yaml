@@ -2,12 +2,27 @@ app:
   name: all-dev-immich
   version: "2.7.5"
 
-description: "Immich is a privacy-focused media management application that allows users to store, organize, and share photos and videos. It supports end-to-end encryption, automatic metadata extraction, and advanced search features. The application includes a web interface, mobile apps, and a backend service for managing media files and user accounts. It is built on a modern stack of Node.js, TypeScript, and Svelte, with support for machine learning-based features for image analysis and metadata extraction."
+description: "Immich is a privacy-focused media management application that allows users to store, organize, and share photos and videos. It supports automatic metadata extraction and advanced, machine-learning-based search. This snap runs the Immich server (NestJS/Node); Postgres and Redis are expected to be reachable at the configured host/port, and are not managed by this snap."
 
-# CT Engine settings
+# CT Engine settings.
+#
+# Immich is configured via environment variables, not CLI flags, so the run
+# command sets them inline from snap config before exec'ing the server.
+#   - {KEY} placeholders are interpolated by ct-engine from snap config.
+#   - $SNAP / $SNAP_COMMON are expanded by the shell at launch time.
+#   - `exec` replaces the shell with node so SIGTERM reaches the server
+#     directly for graceful shutdown.
+#
+# Two paths to confirm against a built snap (`unsquashfs -l dist/*.snap`):
+#   - `node` resolves via PATH ($SNAP/bin is on the app PATH for the npm plugin).
+#   - the server entrypoint lives at $SNAP/server/dist/main(.js).
 run:
-  command: "$SNAP/usr/bin/node $SNAP/bin/immich-server --host 0.0.0.0 --port {port}"
+  command: "cd $SNAP/server && exec env UPLOAD_LOCATION=$SNAP_COMMON/upload IMMICH_MEDIA_LOCATION=$SNAP_COMMON/upload NODE_ENV=production DB_HOSTNAME={DB_HOSTNAME} DB_PORT={DB_PORT} DB_USERNAME={DB_USERNAME} DB_PASSWORD={DB_PASSWORD} DB_DATABASE_NAME={DB_DATABASE_NAME} REDIS_HOSTNAME={REDIS_HOSTNAME} REDIS_PORT={REDIS_PORT} IMMICH_PORT={IMMICH_PORT} node dist/main"
 
+# Setup commands run by the configure hook (on: config-change) before launch.
+setup:
+  - command: "mkdir -p $SNAP_COMMON/upload"
+    on: config-change
 
 # Callbacks / Output
 output:
@@ -16,65 +31,74 @@ output:
   initial_event: "message_initial"
   periodic_event: "message"
 
-# Configuration Schema
+# Configuration Schema.
+#
+# Keys match the environment-variable names Immich expects so they can be
+# both set by Control Tower (`snap set all-dev-immich DB_HOSTNAME=...`) and
+# interpolated directly into the run command above. The ct-* integration
+# keys (ct-callback-url, ct-node-id, ct-deployment-id, ct-snap-name) are
+# handled automatically by ct-engine and must NOT be listed here.
 config:
 
-  example-param:
+  DB_HOSTNAME:
     visibility: user
     required: true
     type: string
+    default: "127.0.0.1"
+    description: "Hostname or IP of the PostgreSQL server."
 
-    default: "default-value"
-
-
-    description: "An example parameter"
-
-
-  port:
+  DB_PORT:
     visibility: user
     required: true
-    type: number
+    type: int
+    default: 5432
+    description: "PostgreSQL server port."
 
-    default: 8080
-
-
-    description: "The port the application listens on."
-
-
-  ct-callback-url:
-    visibility: ct
-    required: false
+  DB_USERNAME:
+    visibility: user
+    required: true
     type: string
+    default: "postgres"
+    description: "PostgreSQL username."
 
-
-    description: "CT engine callback URL"
-
-
-  ct-snap-name:
-    visibility: ct
-    required: false
+  DB_PASSWORD:
+    visibility: user
+    required: true
     type: string
+    default: "postgres"
+    description: "PostgreSQL password. Override in production."
 
-
-    description: "CT engine snap identifier"
-
-
-  ct-node-id:
-    visibility: ct
-    required: false
+  DB_DATABASE_NAME:
+    visibility: user
+    required: true
     type: string
+    default: "immich"
+    description: "PostgreSQL database name."
 
-
-    description: "CT node ID"
-
-
-  ct-deployment-id:
-    visibility: ct
-    required: false
+  REDIS_HOSTNAME:
+    visibility: user
+    required: true
     type: string
+    default: "127.0.0.1"
+    description: "Hostname or IP of the Redis server."
 
+  REDIS_PORT:
+    visibility: user
+    required: true
+    type: int
+    default: 6379
+    description: "Redis server port."
 
-    description: "CT deployment ID"
+  IMMICH_PORT:
+    visibility: user
+    required: false
+    type: int
+    default: 2283
+    description: "Port the Immich server listens on."
 
-
-
+  ml.enabled:
+    visibility: user
+    required: false
+    type: bool
+    default: "true"
+    description: "Whether machine-learning features are enabled. Note: the ML service is a separate process and is not launched by this snap's single daemon; this flag is informational here."
