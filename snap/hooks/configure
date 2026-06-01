@@ -10,4 +10,11 @@
 # non-zero, so a naive `set -e` script aborts before doing any work.
 # The engine handles missing/invalid config without failing the hook,
 # letting the daemon wait for a valid `snap set`.
+#
+# PATH: snap *hooks* (unlike apps) do not inherit the snapcraft-managed
+# PATH, so the staged python3 in $SNAP/usr/bin is not discoverable and the
+# ct-engine shebang (`/usr/bin/env python3`) fails to resolve — aborting the
+# hook with exit 127. Prepend the snap's own bin dirs so the interpreter
+# (and snapctl) are found.
+export PATH="$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
 exec "$SNAP/bin/ct-engine" hook-configure

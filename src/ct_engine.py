@@ -842,19 +842,30 @@ def cmd_hook_configure(plugin: Plugin) -> int:
     # Run setup commands that trigger on config-change
     run_setup_commands(plugin, config, trigger="config-change")
 
-    # Restart the daemon service so it picks up new config
+    # Restart the snap's services so they pick up new config.
+    #
+    # Restart by snap name (which restarts *all* of the snap's services)
+    # rather than guessing a "<snap>.<app>" name: plugin.app_name is the
+    # logical app name from plugin.yaml (e.g. "all-dev-immich"), which is
+    # NOT the snapcraft service name (e.g. "daemon"), so the old form
+    # produced a non-existent service and silently never restarted anything.
     snap_name = os.environ.get("SNAP_INSTANCE_NAME", os.environ.get("SNAP_NAME", plugin.app_name))
-    service_name = f"{snap_name}.{plugin.app_name}"
     try:
-        subprocess.run(
-            ["snapctl", "restart", service_name],
+        result = subprocess.run(
+            ["snapctl", "restart", snap_name],
             check=False,
             capture_output=True,
+            text=True,
         )
-    except Exception:
-        pass
+        if result.returncode != 0:
+            # Expected on first install (services not started yet); the daemon
+            # will read the freshly persisted config when it first launches.
+            log(f"snapctl restart {snap_name} returned {result.returncode} "
+                f"(expected on first install): {result.stderr.strip()}")
+    except Exception as exc:
+        log(f"snapctl restart {snap_name} raised: {exc}")
 
-    log("Configure hook completed. Daemon restarted.")
+    log("Configure hook completed.")
     return 0
 
 
