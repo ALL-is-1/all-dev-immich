@@ -195,7 +195,9 @@ apps:
     command: usr/bin/machine-learning.sh
 
     daemon: simple
-    install-mode: enable
+    # ML hardcoded off: do not auto-start the (heavy) ML service. The configure
+    # hook also disables it unless ml.enabled=true is explicitly set.
+    install-mode: disable
 
     restart-condition: always
 

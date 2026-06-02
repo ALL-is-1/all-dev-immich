@@ -46,7 +46,10 @@ export IMMICH_MICROSERVICES_METRICS_PORT="${_micrometricsport:-3005}"
 export NVIDIA_DRIVER_CAPABILITIES=all
 export NVIDIA_VISIBLE_DEVICES=all
 
-export IMMICH_MACHINE_LEARNING_ENABLED="${_mlon:-true}"
+# ML is hardcoded off: the ml service is install-mode disabled, so default the
+# server's ML flag to false too (otherwise immich logs the ML server as
+# "unhealthy" trying to reach a daemon that isn't running).
+export IMMICH_MACHINE_LEARNING_ENABLED="${_mlon:-false}"
 export MACHINE_LEARNING_CACHE_FOLDER="${_mlcache:-$SNAP_COMMON/cache}"
 export IMMICH_MACHINE_LEARNING_URL=http://127.0.0.1:3003
 

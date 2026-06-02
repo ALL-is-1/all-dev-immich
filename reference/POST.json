@@ -9,14 +9,6 @@
     {
       "snap": "all-dev-immich",
       "settings": {
-        "db-hostname": "127.0.0.1",
-        "db-port": "5433",
-        "db-username": "postgres",
-        "db-password": "postgres",
-        "db-database-name": "immich",
-        "redis-hostname": "127.0.0.1",
-        "redis-port": "6379",
-        "ml.enabled": "true",
         "ct-node-id": "<ALL_APP_NODE_ID>",
         "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
         "ct-deployment-id": "<ALL_APP_DEPLOYMENT_ID>"

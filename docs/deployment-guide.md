@@ -8,35 +8,33 @@
 
 ---
 
-> ## ⚠️ snapd config key naming (read this first)
+> ## Config is hardcoded — Tower only sends `ct-*` keys
 >
-> snapd config option names **must** be lowercase ASCII letters, digits and
-> hyphens, with dots delimiting nested levels — e.g. `db-port`, `redis-port`,
-> `ml.enabled`, `ct-node-id`.
+> All Immich app settings are **baked into the snap**, so Control Tower does
+> **not** push them via `snap set`:
 >
-> **UPPERCASE and UNDERSCORES are rejected** by snapd with
-> `invalid option name: "..."`, which fails the *entire* `snap set` and the
-> configure-hook change. Do **not** use Immich's raw env-var names (`DB_PORT`,
-> `DB_PASSWORD`, …) as snap config keys.
+> | Setting | Hardcoded value | Where |
+> |---------|-----------------|-------|
+> | DB host / port | `127.0.0.1` / `5433` | `snapcraft.yaml` `server.environment` |
+> | DB name / user / pass | `immich` / `postgres` / `postgres` | same |
+> | Redis host / port | `127.0.0.1` / `6379` | same |
+> | Machine learning | **off** | `ml` service install-mode `disable` + server wrapper |
+>
+> The deployment payload therefore sends **only** the automatic `ct-*` keys.
+>
+> **Why:** snapd config option names must be lowercase ASCII letters/digits/
+> hyphens (dots for nesting). Immich's env-var names (`DB_PORT`, `DB_PASSWORD`,
+> …) are uppercase/underscore and snapd rejects them with
+> `invalid option name`, which fails the whole `snap set` / configure-hook
+> change. Hardcoding avoids this entirely.
 
 ---
 
 ## Inputs
 
-### From User
+### From User / Dev / Admin
 
-No required inputs — the snap ships with working defaults for the bundled PostgreSQL and Redis.
-
-### From Dev
-
-1. **ml.enabled** (optional, default `true`) — enable/disable the machine-learning service.
-2. **db-* / redis-*** (optional) — only relevant when pointing Immich at an external database/cache instead of the bundled ones.
-
-### From Admin
-
-1. **ml.enabled** (optional)
-2. **db-hostname / db-port / db-username / db-password / db-database-name** (optional)
-3. **redis-hostname / redis-port** (optional)
+None. The snap is fully self-contained (bundled PostgreSQL + Redis, ML off).
 
 ### Auto-assigned from Control Tower
 
@@ -44,11 +42,11 @@ No required inputs — the snap ships with working defaults for the bundled Post
 2. `ct-deployment-id` — Unique deployment identifier
 3. `ct-node-id` — Node identifier in the cluster
 
-### Fixed Data for Users
+### Fixed (hardcoded) Data
 
-1. **DB (bundled)**: `127.0.0.1:5433`, db `immich`, user/pass `postgres`/`postgres`
-2. **Redis (bundled)**: `127.0.0.1:6379`
-3. **ML**: enabled by default
+1. **DB**: `127.0.0.1:5433`, db `immich`, user/pass `postgres`/`postgres`
+2. **Redis**: `127.0.0.1:6379`
+3. **ML**: disabled
 
 ---
 
@@ -67,62 +65,32 @@ No required inputs — the snap ships with working defaults for the bundled Post
 
 ## Input Configuration Schema
 
+The snap exposes **no user-settable app config** — everything is hardcoded.
+Only the automatic Control Tower keys are used:
+
 ```json
 {
   "type": "object",
   "title": "Immich Configuration",
   "required": [],
   "properties": {
-    "db-hostname": {
+    "ct-callback-url": {
       "type": "string",
-      "title": "Database Hostname",
-      "default": "127.0.0.1",
-      "description": "Hostname or IP of the PostgreSQL server (bundled: 127.0.0.1)"
+      "title": "Control Tower Callback URL",
+      "description": "Auto-assigned by Control Tower"
     },
-    "db-port": {
-      "type": "number",
-      "title": "Database Port",
-      "default": 5433,
-      "description": "PostgreSQL server port (bundled Postgres listens on 5433)"
-    },
-    "db-username": {
+    "ct-node-id": {
       "type": "string",
-      "title": "Database Username",
-      "default": "postgres",
-      "description": "PostgreSQL username"
+      "title": "Node ID",
+      "description": "Auto-assigned by Control Tower"
     },
-    "db-password": {
+    "ct-deployment-id": {
       "type": "string",
-      "title": "Database Password",
-      "default": "postgres",
-      "description": "PostgreSQL password"
-    },
-    "db-database-name": {
-      "type": "string",
-      "title": "Database Name",
-      "default": "immich",
-      "description": "PostgreSQL database name"
-    },
-    "redis-hostname": {
-      "type": "string",
-      "title": "Redis Hostname",
-      "default": "127.0.0.1",
-      "description": "Hostname or IP of the Redis server"
-    },
-    "redis-port": {
-      "type": "number",
-      "title": "Redis Port",
-      "default": 6379,
-      "description": "Redis server port"
-    },
-    "ml.enabled": {
-      "type": "boolean",
-      "title": "Machine Learning Enabled",
-      "default": true,
-      "description": "Enable the machine-learning service. When false the configure hook disables the ml daemon."
+      "title": "Deployment ID",
+      "description": "Auto-assigned by Control Tower"
     }
   },
-  "description": "Configure the Immich machine-learning toggle and (optionally) external database/cache endpoints. Keys are snapd-valid (lowercase/hyphen/dot)."
+  "description": "Immich app settings are hardcoded in the snap; Control Tower only supplies the ct-* integration keys."
 }
 ```
 
@@ -142,14 +110,6 @@ No required inputs — the snap ships with working defaults for the bundled Post
     {
       "snap": "all-dev-immich",
       "settings": {
-        "db-hostname": "127.0.0.1",
-        "db-port": "5433",
-        "db-username": "postgres",
-        "db-password": "postgres",
-        "db-database-name": "immich",
-        "redis-hostname": "127.0.0.1",
-        "redis-port": "6379",
-        "ml.enabled": "true",
         "ct-node-id": "<ALL_APP_NODE_ID>",
         "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
         "ct-deployment-id": "<ALL_APP_DEPLOYMENT_ID>"
@@ -196,71 +156,9 @@ No required inputs — the snap ships with working defaults for the bundled Post
 }
 ```
 
-> The configure hook fires automatically on every `snap set` (the `snap_config`
-> step). It applies the `ml.enabled` toggle and validates/persists config via
-> `ct-engine hook-configure`. The `post_service_actions` restart of
-> `all-dev-immich.server` ensures the web server picks up any changed config.
-
----
-
-## Usage Examples
-
-### User Deployment (Minimal — bundled DB/Redis, ML on)
-
-```json
-{
-  "snaps": [{"name": "all-dev-immich", "refresh": true}],
-  "snap_config": [{
-    "snap": "all-dev-immich",
-    "settings": {
-      "ct-node-id": "<ALL_APP_NODE_ID>",
-      "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
-      "ct-deployment-id": "<ALL_APP_DEPLOYMENT_ID>"
-    }
-  }]
-}
-```
-
-### Developer Deployment (ML disabled)
-
-```json
-{
-  "snaps": [{"name": "all-dev-immich", "refresh": true}],
-  "snap_config": [{
-    "snap": "all-dev-immich",
-    "settings": {
-      "ml.enabled": "false",
-      "ct-node-id": "<ALL_APP_NODE_ID>",
-      "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
-      "ct-deployment-id": "<ALL_APP_DEPLOYMENT_ID>"
-    }
-  }]
-}
-```
-
-### Admin Deployment (External Postgres/Redis)
-
-```json
-{
-  "snaps": [{"name": "all-dev-immich", "refresh": true}],
-  "snap_config": [{
-    "snap": "all-dev-immich",
-    "settings": {
-      "db-hostname": "10.0.0.5",
-      "db-port": "5432",
-      "db-username": "immich",
-      "db-password": "s3cret",
-      "db-database-name": "immich",
-      "redis-hostname": "10.0.0.6",
-      "redis-port": "6379",
-      "ml.enabled": "true",
-      "ct-node-id": "<ALL_APP_NODE_ID>",
-      "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
-      "ct-deployment-id": "<ALL_APP_DEPLOYMENT_ID>"
-    }
-  }]
-}
-```
+> ⚠️ Do **not** add `DB_*`/`REDIS_*` (or any uppercase/underscore) keys to
+> `settings` — snapd rejects them with `invalid option name` and the deploy
+> fails. Those values are hardcoded in the snap.
 
 ---
 
@@ -268,14 +166,6 @@ No required inputs — the snap ships with working defaults for the bundled Post
 
 | Parameter | Type | Required | Visibility | Default | Description |
 |-----------|------|----------|------------|---------|-------------|
-| `db-hostname` | string | No | user | `127.0.0.1` | PostgreSQL host |
-| `db-port` | int | No | user | `5433` | PostgreSQL port (bundled) |
-| `db-username` | string | No | user | `postgres` | PostgreSQL username |
-| `db-password` | string | No | user | `postgres` | PostgreSQL password |
-| `db-database-name` | string | No | user | `immich` | PostgreSQL database name |
-| `redis-hostname` | string | No | user | `127.0.0.1` | Redis host |
-| `redis-port` | int | No | user | `6379` | Redis port |
-| `ml.enabled` | bool | No | user | `true` | Enable the ML service |
 | `ct-callback-url` | url | No | ct | - | Control Tower callback URL |
 | `ct-deployment-id` | string | No | ct | - | Deployment identifier |
 | `ct-node-id` | string | No | ct | - | Node identifier |
@@ -284,16 +174,16 @@ No required inputs — the snap ships with working defaults for the bundled Post
 
 ## Notes
 
-- **Config key names must be snapd-valid** (lowercase / hyphen / dot). Sending
-  `DB_PORT`, `DB_PASSWORD`, etc. fails the deploy with `invalid option name`.
+- **All Immich app config is hardcoded** in the snap (DB/Redis in
+  `snapcraft.yaml` `server.environment`; ML disabled). Tower supplies only the
+  `ct-*` keys.
+- **Never send uppercase/underscore config keys** — snapd rejects them
+  (`invalid option name`), failing the deploy. snap config keys must be
+  lowercase / hyphen / dot.
 - Immich runs its own snapd services: `postgresql`, `redis`, `server`,
-  `createdb`, `ml`. The `ct-engine` sidecar reports status to Control Tower
-  and persists config; it does not launch or supervise those services.
-- `db-*`/`redis-*` are bundled by default. They are validated and persisted by
-  the engine, but the bundled `server` consumes its hardcoded values from
-  `snapcraft.yaml` — wire `immich-server.sh` to read these keys if you need CT
-  to drive an external DB/cache.
-- `ml.enabled=false` disables the ML daemon via the configure hook.
-- Settings are sent as strings via snapd's config API (`snap set`); `int`/`bool`
-  values are quoted accordingly (e.g. `"5433"`, `"true"`).
+  `createdb` (and `ml`, which is install-mode disabled). The `ct-engine`
+  sidecar reports status to Control Tower; it does not manage those services.
+- To run an external DB/cache or enable ML, change the hardcoded values in
+  `snapcraft.yaml` / `src/immich-server.sh` and rebuild — it is not
+  Tower-configurable by design.
 - Logs/status are sent to Control Tower every 5 minutes (`output.interval`).
