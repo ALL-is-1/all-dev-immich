@@ -18,7 +18,7 @@
 > | DB host / port | `127.0.0.1` / `5433` | `snapcraft.yaml` `server.environment` |
 > | DB name / user / pass | `immich` / `postgres` / `postgres` | same |
 > | Redis host / port | `127.0.0.1` / `6379` | same |
-> | Machine learning | **off** | `ml` service install-mode `disable` + server wrapper |
+> | Machine learning | **on** | `ml` service install-mode `enable` |
 >
 > The deployment payload therefore sends **only** the automatic `ct-*` keys.
 >
@@ -34,7 +34,7 @@
 
 ### From User / Dev / Admin
 
-None. The snap is fully self-contained (bundled PostgreSQL + Redis, ML off).
+None. The snap is fully self-contained (bundled PostgreSQL + Redis, ML enabled).
 
 ### Auto-assigned from Control Tower
 
@@ -46,7 +46,7 @@ None. The snap is fully self-contained (bundled PostgreSQL + Redis, ML off).
 
 1. **DB**: `127.0.0.1:5433`, db `immich`, user/pass `postgres`/`postgres`
 2. **Redis**: `127.0.0.1:6379`
-3. **ML**: disabled
+3. **ML**: enabled
 
 ---
 
@@ -175,15 +175,15 @@ Only the automatic Control Tower keys are used:
 ## Notes
 
 - **All Immich app config is hardcoded** in the snap (DB/Redis in
-  `snapcraft.yaml` `server.environment`; ML disabled). Tower supplies only the
+  `snapcraft.yaml` `server.environment`; ML enabled). Tower supplies only the
   `ct-*` keys.
 - **Never send uppercase/underscore config keys** — snapd rejects them
   (`invalid option name`), failing the deploy. snap config keys must be
   lowercase / hyphen / dot.
 - Immich runs its own snapd services: `postgresql`, `redis`, `server`,
-  `createdb` (and `ml`, which is install-mode disabled). The `ct-engine`
-  sidecar reports status to Control Tower; it does not manage those services.
-- To run an external DB/cache or enable ML, change the hardcoded values in
+  `createdb`, `ml`. The `ct-engine` sidecar reports status to Control Tower;
+  it does not manage those services.
+- To run an external DB/cache or disable ML, change the hardcoded values in
   `snapcraft.yaml` / `src/immich-server.sh` and rebuild — it is not
   Tower-configurable by design.
 - Logs/status are sent to Control Tower every 5 minutes (`output.interval`).

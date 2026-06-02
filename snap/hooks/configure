@@ -1,23 +1,15 @@
 #!/bin/sh
 # Configure hook.
 #
-# Deliberately NO `set -e`: `snapctl get` of an unset key exits non-zero, and
-# the optional Control Tower engine must never abort the hook — aborting fails
-# the whole deploy. Every step below is best-effort.
+# Deliberately NO `set -e`: best-effort only; the hook must never abort and
+# fail the deploy.
+#
+# All Immich app settings (DB/Redis/ML) are hardcoded in the snap, so there is
+# no per-app config to apply here — Control Tower only supplies the automatic
+# ct-* keys. This hook just hands them to the engine to validate/persist.
 
 export PATH="$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
 
-# Disable the machine-learning service unless explicitly enabled.
-_ml="$(snapctl get ml.enabled 2>/dev/null || true)"
-if [ "$_ml" != "true" ]; then
-    snapctl stop --disable "${SNAP_INSTANCE_NAME}.ml" 2>/dev/null || true
-fi
-
-# Best-effort Control Tower config validation/persistence. The ct-engine
-# sidecar reads the persisted config when it (re)starts; we intentionally do
-# NOT `snapctl restart` it from here — a restart of an unhealthy service
-# enqueues a task that fails the configure-hook change regardless of this
-# script's exit code.
 if [ -x "$SNAP/bin/ct-engine-run" ]; then
     "$SNAP/bin/ct-engine-run" hook-configure || true
 fi
