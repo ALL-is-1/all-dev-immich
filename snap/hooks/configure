@@ -1,17 +1,25 @@
-#!/bin/sh -eu
+#!/bin/sh
+# Configure hook.
+#
+# Deliberately NO `set -e`: `snapctl get` of an unset key exits non-zero, and
+# the optional Control Tower engine must never abort the hook — aborting fails
+# the whole deploy. Every step below is best-effort.
 
-# Snap *hooks* (unlike apps) do not inherit the snapcraft-managed PATH, so the
-# staged python3 used by ct-engine's `#!/usr/bin/env python3` shebang — and
-# snapctl — are not discoverable. Expose the snap's own bin dirs first.
 export PATH="$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
 
 # Disable the machine-learning service unless explicitly enabled.
-_ml="$(snapctl get ml.enabled || true)"
-[ "$_ml" = "true" ] || snapctl stop --disable "${SNAP_INSTANCE_NAME}.ml"
+_ml="$(snapctl get ml.enabled 2>/dev/null || true)"
+if [ "$_ml" != "true" ]; then
+    snapctl stop --disable "${SNAP_INSTANCE_NAME}.ml" 2>/dev/null || true
+fi
 
-# Control Tower integration: validate + persist the config CT pushed via
-# `snap set` to $SNAP_COMMON/config.yaml. The engine deliberately does not
-# manage Immich's own services; restart only the reporting sidecar so it
-# re-reads the new config / callback URL (no-op on first install).
-"$SNAP/bin/ct-engine" hook-configure
-snapctl restart "${SNAP_INSTANCE_NAME}.ct-engine" 2>/dev/null || true
+# Best-effort Control Tower config validation/persistence. The ct-engine
+# sidecar reads the persisted config when it (re)starts; we intentionally do
+# NOT `snapctl restart` it from here — a restart of an unhealthy service
+# enqueues a task that fails the configure-hook change regardless of this
+# script's exit code.
+if [ -x "$SNAP/bin/ct-engine-run" ]; then
+    "$SNAP/bin/ct-engine-run" hook-configure || true
+fi
+
+exit 0

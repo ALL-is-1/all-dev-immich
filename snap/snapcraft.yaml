@@ -218,7 +218,7 @@ apps:
   # `snap set` and streams status callbacks to ct-callback-url. Driven by
   # ct-engine/plugin.yaml (sidecar mode).
   ct-engine:
-    command: bin/ct-engine run
+    command: bin/ct-engine-run run
 
     daemon: simple
     install-mode: enable
@@ -580,9 +580,11 @@ parts:
     source: ct-engine/
     organize:
       ct_engine.py: bin/ct-engine
+      ct-engine-run: bin/ct-engine-run
       plugin.yaml: plugin.yaml
     stage:
       - bin/ct-engine
+      - bin/ct-engine-run
       - plugin.yaml
 
   # CA certificates so the engine's HTTPS callbacks to ct-callback-url verify.
