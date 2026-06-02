@@ -28,54 +28,60 @@ output:
 # ct-snap-name) are handled automatically by ct-engine and must NOT be listed.
 #
 # All keys are optional: the bundled snap already carries working defaults
-# (DB_*/REDIS_* are hardcoded in snapcraft.yaml's `server` app environment,
-# and ml.enabled is consumed by the configure hook + server wrapper). They
-# are declared here so CT knows the schema and the engine validates them.
+# (the db-*/redis-* values are hardcoded in snapcraft.yaml's `server` app
+# environment, and ml.enabled is consumed by the configure hook). They are
+# declared here so CT knows the schema and the engine validates them.
+#
+# IMPORTANT — snapd config option naming: keys MUST be lowercase ASCII
+# letters/digits/hyphens (dots delimit nested levels). UPPERCASE and
+# UNDERSCORES are rejected by snapd ("invalid option name"), which fails the
+# whole `snap set` / configure-hook change. So these are db-port / db-password
+# (hyphenated), NOT DB_PORT / DB_PASSWORD.
 config:
 
-  DB_HOSTNAME:
+  db-hostname:
     visibility: user
     required: false
     type: string
     default: "127.0.0.1"
     description: "Hostname or IP of the PostgreSQL server (bundled: 127.0.0.1)."
 
-  DB_PORT:
+  db-port:
     visibility: user
     required: false
     type: int
     default: 5433
     description: "PostgreSQL server port (bundled Postgres listens on 5433)."
 
-  DB_USERNAME:
+  db-username:
     visibility: user
     required: false
     type: string
     default: "postgres"
     description: "PostgreSQL username."
 
-  DB_PASSWORD:
+  db-password:
     visibility: user
     required: false
     type: string
     default: "postgres"
     description: "PostgreSQL password."
 
-  DB_DATABASE_NAME:
+  db-database-name:
     visibility: user
     required: false
     type: string
     default: "immich"
     description: "PostgreSQL database name."
 
-  REDIS_HOSTNAME:
+  redis-hostname:
     visibility: user
     required: false
     type: string
     default: "127.0.0.1"
     description: "Hostname or IP of the Redis server."
 
-  REDIS_PORT:
+  redis-port:
     visibility: user
     required: false
     type: int

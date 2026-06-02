@@ -8,6 +8,19 @@
 
 ---
 
+> ## ⚠️ snapd config key naming (read this first)
+>
+> snapd config option names **must** be lowercase ASCII letters, digits and
+> hyphens, with dots delimiting nested levels — e.g. `db-port`, `redis-port`,
+> `ml.enabled`, `ct-node-id`.
+>
+> **UPPERCASE and UNDERSCORES are rejected** by snapd with
+> `invalid option name: "..."`, which fails the *entire* `snap set` and the
+> configure-hook change. Do **not** use Immich's raw env-var names (`DB_PORT`,
+> `DB_PASSWORD`, …) as snap config keys.
+
+---
+
 ## Inputs
 
 ### From User
@@ -17,13 +30,13 @@ No required inputs — the snap ships with working defaults for the bundled Post
 ### From Dev
 
 1. **ml.enabled** (optional, default `true`) — enable/disable the machine-learning service.
-2. **DB_* / REDIS_*** (optional) — only relevant when pointing Immich at an external database/cache instead of the bundled ones.
+2. **db-* / redis-*** (optional) — only relevant when pointing Immich at an external database/cache instead of the bundled ones.
 
 ### From Admin
 
 1. **ml.enabled** (optional)
-2. **DB_HOSTNAME / DB_PORT / DB_USERNAME / DB_PASSWORD / DB_DATABASE_NAME** (optional)
-3. **REDIS_HOSTNAME / REDIS_PORT** (optional)
+2. **db-hostname / db-port / db-username / db-password / db-database-name** (optional)
+3. **redis-hostname / redis-port** (optional)
 
 ### Auto-assigned from Control Tower
 
@@ -43,8 +56,8 @@ No required inputs — the snap ships with working defaults for the bundled Post
 
 | Message Type | Description | Example |
 |--------------|-------------|---------|
-| `message_initial` | Initial status on installation | "Immich: http://192.168.1.108:3001" |
-| `message` | Periodic status updates | "Immich: http://192.168.1.108:3001" |
+| `message_initial` | Initial status on installation | "Immich: http://192.168.1.10:3001" |
+| `message` | Periodic status updates | "Immich: http://192.168.1.10:3001" |
 | `deployment_stop` | Shutdown notification | "all-dev-immich stopped." |
 
 **Output Mode**: `logs`
@@ -60,43 +73,43 @@ No required inputs — the snap ships with working defaults for the bundled Post
   "title": "Immich Configuration",
   "required": [],
   "properties": {
-    "DB_HOSTNAME": {
+    "db-hostname": {
       "type": "string",
       "title": "Database Hostname",
       "default": "127.0.0.1",
       "description": "Hostname or IP of the PostgreSQL server (bundled: 127.0.0.1)"
     },
-    "DB_PORT": {
+    "db-port": {
       "type": "number",
       "title": "Database Port",
       "default": 5433,
       "description": "PostgreSQL server port (bundled Postgres listens on 5433)"
     },
-    "DB_USERNAME": {
+    "db-username": {
       "type": "string",
       "title": "Database Username",
       "default": "postgres",
       "description": "PostgreSQL username"
     },
-    "DB_PASSWORD": {
+    "db-password": {
       "type": "string",
       "title": "Database Password",
       "default": "postgres",
       "description": "PostgreSQL password"
     },
-    "DB_DATABASE_NAME": {
+    "db-database-name": {
       "type": "string",
       "title": "Database Name",
       "default": "immich",
       "description": "PostgreSQL database name"
     },
-    "REDIS_HOSTNAME": {
+    "redis-hostname": {
       "type": "string",
       "title": "Redis Hostname",
       "default": "127.0.0.1",
       "description": "Hostname or IP of the Redis server"
     },
-    "REDIS_PORT": {
+    "redis-port": {
       "type": "number",
       "title": "Redis Port",
       "default": 6379,
@@ -109,7 +122,7 @@ No required inputs — the snap ships with working defaults for the bundled Post
       "description": "Enable the machine-learning service. When false the configure hook disables the ml daemon."
     }
   },
-  "description": "Configure the Immich machine-learning toggle and (optionally) external database/cache endpoints."
+  "description": "Configure the Immich machine-learning toggle and (optionally) external database/cache endpoints. Keys are snapd-valid (lowercase/hyphen/dot)."
 }
 ```
 
@@ -129,13 +142,13 @@ No required inputs — the snap ships with working defaults for the bundled Post
     {
       "snap": "all-dev-immich",
       "settings": {
-        "DB_HOSTNAME": "127.0.0.1",
-        "DB_PORT": "5433",
-        "DB_USERNAME": "postgres",
-        "DB_PASSWORD": "postgres",
-        "DB_DATABASE_NAME": "immich",
-        "REDIS_HOSTNAME": "127.0.0.1",
-        "REDIS_PORT": "6379",
+        "db-hostname": "127.0.0.1",
+        "db-port": "5433",
+        "db-username": "postgres",
+        "db-password": "postgres",
+        "db-database-name": "immich",
+        "redis-hostname": "127.0.0.1",
+        "redis-port": "6379",
         "ml.enabled": "true",
         "ct-node-id": "<ALL_APP_NODE_ID>",
         "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
@@ -184,10 +197,9 @@ No required inputs — the snap ships with working defaults for the bundled Post
 ```
 
 > The configure hook fires automatically on every `snap set` (the `snap_config`
-> step). It applies the `ml.enabled` toggle, validates/persists config via
-> `ct-engine hook-configure`, and restarts the `ct-engine` sidecar. The
-> `post_service_actions` restart of `all-dev-immich.server` ensures the web
-> server picks up any changed config.
+> step). It applies the `ml.enabled` toggle and validates/persists config via
+> `ct-engine hook-configure`. The `post_service_actions` restart of
+> `all-dev-immich.server` ensures the web server picks up any changed config.
 
 ---
 
@@ -234,13 +246,13 @@ No required inputs — the snap ships with working defaults for the bundled Post
   "snap_config": [{
     "snap": "all-dev-immich",
     "settings": {
-      "DB_HOSTNAME": "10.0.0.5",
-      "DB_PORT": "5432",
-      "DB_USERNAME": "immich",
-      "DB_PASSWORD": "s3cret",
-      "DB_DATABASE_NAME": "immich",
-      "REDIS_HOSTNAME": "10.0.0.6",
-      "REDIS_PORT": "6379",
+      "db-hostname": "10.0.0.5",
+      "db-port": "5432",
+      "db-username": "immich",
+      "db-password": "s3cret",
+      "db-database-name": "immich",
+      "redis-hostname": "10.0.0.6",
+      "redis-port": "6379",
       "ml.enabled": "true",
       "ct-node-id": "<ALL_APP_NODE_ID>",
       "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
@@ -256,13 +268,13 @@ No required inputs — the snap ships with working defaults for the bundled Post
 
 | Parameter | Type | Required | Visibility | Default | Description |
 |-----------|------|----------|------------|---------|-------------|
-| `DB_HOSTNAME` | string | No | user | `127.0.0.1` | PostgreSQL host |
-| `DB_PORT` | int | No | user | `5433` | PostgreSQL port (bundled) |
-| `DB_USERNAME` | string | No | user | `postgres` | PostgreSQL username |
-| `DB_PASSWORD` | string | No | user | `postgres` | PostgreSQL password |
-| `DB_DATABASE_NAME` | string | No | user | `immich` | PostgreSQL database name |
-| `REDIS_HOSTNAME` | string | No | user | `127.0.0.1` | Redis host |
-| `REDIS_PORT` | int | No | user | `6379` | Redis port |
+| `db-hostname` | string | No | user | `127.0.0.1` | PostgreSQL host |
+| `db-port` | int | No | user | `5433` | PostgreSQL port (bundled) |
+| `db-username` | string | No | user | `postgres` | PostgreSQL username |
+| `db-password` | string | No | user | `postgres` | PostgreSQL password |
+| `db-database-name` | string | No | user | `immich` | PostgreSQL database name |
+| `redis-hostname` | string | No | user | `127.0.0.1` | Redis host |
+| `redis-port` | int | No | user | `6379` | Redis port |
 | `ml.enabled` | bool | No | user | `true` | Enable the ML service |
 | `ct-callback-url` | url | No | ct | - | Control Tower callback URL |
 | `ct-deployment-id` | string | No | ct | - | Deployment identifier |
@@ -272,10 +284,12 @@ No required inputs — the snap ships with working defaults for the bundled Post
 
 ## Notes
 
+- **Config key names must be snapd-valid** (lowercase / hyphen / dot). Sending
+  `DB_PORT`, `DB_PASSWORD`, etc. fails the deploy with `invalid option name`.
 - Immich runs its own snapd services: `postgresql`, `redis`, `server`,
   `createdb`, `ml`. The `ct-engine` sidecar reports status to Control Tower
   and persists config; it does not launch or supervise those services.
-- `DB_*`/`REDIS_*` are bundled by default. They are validated and persisted by
+- `db-*`/`redis-*` are bundled by default. They are validated and persisted by
   the engine, but the bundled `server` consumes its hardcoded values from
   `snapcraft.yaml` — wire `immich-server.sh` to read these keys if you need CT
   to drive an external DB/cache.
