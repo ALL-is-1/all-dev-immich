@@ -827,7 +827,10 @@ def cmd_run(plugin: Plugin) -> int:
 # ---------------------------------------------------------------------------
 
 def cmd_hook_configure(plugin: Plugin) -> int:
-    """Handle the snap configure hook: validate, persist, restart daemon."""
+    """Handle the snap configure hook: validate and persist config.
+
+    Does NOT restart services — see the note below.
+    """
     config = load_config(plugin)
     errors = validate_config(plugin, config)
 
@@ -842,19 +845,17 @@ def cmd_hook_configure(plugin: Plugin) -> int:
     # Run setup commands that trigger on config-change
     run_setup_commands(plugin, config, trigger="config-change")
 
-    # Restart the daemon service so it picks up new config
-    snap_name = os.environ.get("SNAP_INSTANCE_NAME", os.environ.get("SNAP_NAME", plugin.app_name))
-    service_name = f"{snap_name}.{plugin.app_name}"
-    try:
-        subprocess.run(
-            ["snapctl", "restart", service_name],
-            check=False,
-            capture_output=True,
-        )
-    except Exception:
-        pass
-
-    log("Configure hook completed. Daemon restarted.")
+    # NOTE: deliberately NO `snapctl restart` here.
+    #
+    # When a configure hook calls `snapctl restart`, snapd defers that restart
+    # into the configure-hook's change and an invalid/unhealthy target FAILS
+    # THE WHOLE CHANGE — regardless of check=False or the hook's exit code.
+    # The reference engine restarted "<snap>.<app.name>", which for this snap
+    # is the non-existent "all-dev-immich.all-dev-immich" and was failing the
+    # configure hook. Service (re)starts are left to snapd's normal lifecycle
+    # and the deployment plan's post_service_actions; the sidecar reads the
+    # freshly persisted config when it next starts.
+    log("Configure hook completed.")
     return 0
 
 
