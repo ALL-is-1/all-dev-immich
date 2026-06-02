@@ -1,0 +1,63 @@
+{
+  "snaps": [
+    {
+      "name": "all-dev-immich",
+      "refresh": true
+    }
+  ],
+  "snap_config": [
+    {
+      "snap": "all-dev-immich",
+      "settings": {
+        "DB_HOSTNAME": "127.0.0.1",
+        "DB_PORT": "5433",
+        "DB_USERNAME": "postgres",
+        "DB_PASSWORD": "postgres",
+        "DB_DATABASE_NAME": "immich",
+        "REDIS_HOSTNAME": "127.0.0.1",
+        "REDIS_PORT": "6379",
+        "ml.enabled": "true",
+        "ct-node-id": "<ALL_APP_NODE_ID>",
+        "ct-callback-url": "<ALL_APP_CALLBACK_URL>",
+        "ct-deployment-id": "<ALL_APP_DEPLOYMENT_ID>"
+      }
+    }
+  ],
+  "ignore_failures": false,
+  "pre_service_actions": [],
+  "post_service_actions": [
+    {
+      "names": [
+        "all-dev-immich.server"
+      ],
+      "action": "restart"
+    }
+  ],
+  "interface_connections": [
+    {
+      "plug": "all-dev-immich:network",
+      "slot": ":network",
+      "action": "connect"
+    },
+    {
+      "plug": "all-dev-immich:network-bind",
+      "slot": ":network-bind",
+      "action": "connect"
+    },
+    {
+      "plug": "all-dev-immich:opengl",
+      "slot": ":opengl",
+      "action": "connect"
+    },
+    {
+      "plug": "all-dev-immich:mount-observe",
+      "slot": ":mount-observe",
+      "action": "connect"
+    },
+    {
+      "plug": "all-dev-immich:removable-media",
+      "slot": ":removable-media",
+      "action": "connect"
+    }
+  ]
+}
