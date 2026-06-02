@@ -559,10 +559,6 @@ parts:
     organize:
       "*": usr/bin/
 
-    stage:
-      - -usr/bin/graphics-core22-wrapper
-      - -usr/bin/gpu-2404-wrapper
-
     override-prime: |
       craftctl default
 
