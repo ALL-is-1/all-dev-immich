@@ -6,7 +6,10 @@ base: core24
 
 grade: stable
 confinement: strict
-compression: lzo
+# xz (the snapcraft default) compresses ~2x better than lzo, roughly halving
+# the download. Trade-off: slightly slower first decompression at mount/start,
+# which is fine for a long-running server snap.
+compression: xz
 
 icon: snap/gui/icon.png
 
@@ -570,6 +573,26 @@ parts:
       # (GLIBCXX_3.4.32). Drop it so the runtime falls back to core24's,
       # which is in sync with the build environment.
       rm -f "${CRAFT_PRIME}/usr/lib/"*"-linux-gnu/libstdc++.so."*
+
+      # ---- Size reduction: strip build/dev artifacts not used at runtime ----
+      # Runs in the assembled prime tree (this part is `after` the parts that
+      # produce the bulk), so these removals slim the final snap.
+
+      # C/C++ dev headers (node-gyp / python) — ~60MB, never needed at runtime.
+      rm -rf "${CRAFT_PRIME}/include"
+
+      # Python bytecode caches — ~170MB. Regenerated on demand; the ml service
+      # sets PYTHONDONTWRITEBYTECODE anyway.
+      find "${CRAFT_PRIME}" -type d -name '__pycache__' -prune -exec rm -rf {} +
+      find "${CRAFT_PRIME}" -type f -name '*.pyc' -delete
+
+      # Bundled test suites inside the ML site-packages — ~15MB. Scoped to
+      # top-level tests/ dirs so we don't touch runtime modules like
+      # numpy/testing.
+      if [ -d "${CRAFT_PRIME}/lib/python3.12/site-packages" ]; then
+        find "${CRAFT_PRIME}/lib/python3.12/site-packages" -maxdepth 2 -type d \
+          \( -name tests -o -name test \) -prune -exec rm -rf {} +
+      fi
 
   # Control Tower engine: the ct-engine binary plus its plugin.yaml manifest.
   # python3 is already provided by the `immich` part's stage-packages, so this
