@@ -20,6 +20,7 @@
   "post_service_actions": [
     {
       "names": [
+        "all-dev-immich.ct-engine",
         "all-dev-immich.server"
       ],
       "action": "restart"
