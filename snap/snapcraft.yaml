@@ -109,7 +109,6 @@ apps:
     plugs:
       - network
       - network-bind
-
   server:
     after:
       - postgresql
@@ -129,7 +128,6 @@ apps:
       - mount-observe
       - opengl
       - removable-media
-
     environment:
       DB_PORT: "5433"
       DB_HOSTNAME: 127.0.0.1
@@ -165,10 +163,9 @@ apps:
 
     restart-condition: always
 
-    plugs: &_pgplugs
+    plugs:
       - network
       - network-bind
-
     environment: &_pgenv
       PGDATA: ${SNAP_COMMON}/postgresql/database
       PGPASSFILE: ${SNAP_COMMON}/postgresql/.pgpass
@@ -184,7 +181,9 @@ apps:
     daemon: oneshot
     install-mode: enable
 
-    plugs: *_pgplugs
+    plugs:
+      - network
+      - network-bind
 
     environment: *_pgenv
 
@@ -203,7 +202,6 @@ apps:
       - network
       - network-bind
       - opengl
-
     environment:
       LD_PRELOAD: "${SNAP}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libmimalloc.so.2"
 
@@ -215,15 +213,6 @@ apps:
       IMMICH_BUILD_DATA: "$SNAP/usr/lib/immich/build"
 
       TRANSFORMERS_CACHE: ${SNAP_COMMON}/cache
-
-  # (it does not manage them): validates/persists the config CT pushes via
-  # `snap set` and streams status callbacks to ct-callback-url. Driven by
-  pre-refresh:
-    plugs: [network]
-  post-refresh:
-    plugs: [network]
-  remove:
-    plugs: [network]
 
 parts:
   immich:
@@ -446,6 +435,7 @@ parts:
     after:
       - immich
 
+    plugin: nil
 
     source: https://github.com/immich-app/base-images
     source-type: git
@@ -469,6 +459,7 @@ parts:
         "${CRAFT_PRIME}/usr/lib/immich/build/build-lock.json"
 
   geonames:
+    plugin: nil
 
     source: https://download.geonames.org/export/dump/cities500.zip
 
@@ -501,6 +492,7 @@ parts:
         > "${CRAFT_PART_INSTALL}/usr/lib/immich/build/geodata/geodata-date.txt"
 
   postgresql:
+    plugin: nil
 
     stage-packages:
       - postgresql-16:${CRAFT_ARCH_BUILD_FOR}
@@ -512,6 +504,7 @@ parts:
       - -usr/bin/pg_dumpall
 
   vchord:
+    plugin: nil
 
     build-packages:
       - curl
@@ -579,7 +572,3 @@ parts:
           \( -name tests -o -name test \) -prune -exec rm -rf {} +
       fi
 
-  # python3 is already provided by the `immich` part's stage-packages, so this
-  # only needs to place the engine at bin/ct-engine and the manifest at the
-  # snap root (where ct-engine looks for $SNAP/plugin.yaml).
-    stage-packages:
